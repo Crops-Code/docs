@@ -1,0 +1,50 @@
+---
+title: cropscode worker
+description: Register and start a CropsCode worker on this machine.
+---
+
+## Usage
+
+```bash
+# Register this machine (one-time)
+cropscode worker --register
+
+# Start the worker daemon
+cropscode worker
+```
+
+## Description
+
+The `worker` command manages the worker lifecycle on this machine:
+
+- **`--register`** — one-time registration that associates this machine with your tenant and stores a worker token
+- **Without flags** — starts the worker daemon that connects to the orchestrator and begins accepting container commands
+
+If the machine is not registered, running `cropscode worker` without `--register` will prompt you to register first.
+
+## Options
+
+| Flag | Description |
+|------|-------------|
+| `--register` | Register this machine as a worker (one-time setup) |
+
+## What Happens on Start
+
+1. Reads worker token from `~/.cropscode/worker.json`
+2. Connects outbound to the orchestrator via WebSocket
+3. Reports system info (hostname, CPU, RAM)
+4. Begins sending heartbeats every 10 seconds
+5. Listens for container commands (create, stop, terminal)
+
+## Connection
+
+The worker connects **outbound** — no inbound ports, no firewall rules, works behind NAT. If the connection drops, it reconnects with exponential backoff (1s → 2s → 4s → ... up to 30s).
+
+## Registration
+
+Registration stores:
+- Worker ID (unique identifier)
+- Authentication token
+- Tenant assignment
+
+These are saved in `~/.cropscode/worker.json`.

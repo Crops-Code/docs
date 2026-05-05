@@ -1,0 +1,44 @@
+---
+title: cropscode config
+description: Manage CLI configuration.
+---
+
+## Usage
+
+```bash
+cropscode config set <key> <value>
+```
+
+## Description
+
+Reads and writes values in `~/.cropscode/config.json`.
+
+## Available Keys
+
+| Key | Description | Example |
+|-----|-------------|---------|
+| `orchestrator.url` | Orchestrator WebSocket URL | `wss://console.cropscode.io/ws/worker` |
+| `container.image` | Default container image | `localhost/claude-code-terminal:latest` |
+
+## Examples
+
+Set the orchestrator URL:
+
+```bash
+cropscode config set orchestrator.url wss://console.cropscode.io/ws/worker
+```
+
+## Configuration File
+
+Location: `~/.cropscode/config.json`
+
+```json
+{
+  "orchestrator": {
+    "url": "wss://console.cropscode.io/ws/worker"
+  },
+  "container": {
+    "image": "localhost/claude-code-terminal:latest"
+  }
+}
+```

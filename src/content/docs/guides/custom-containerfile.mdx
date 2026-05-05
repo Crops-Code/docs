@@ -1,0 +1,63 @@
+---
+title: Custom Containerfile
+description: Build custom container images for specialized development environments.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+The default CropsCode container image covers general development. For specialized needs, build your own.
+
+<Aside type="note">
+  Custom images (BYOI) require a Pro or Enterprise plan.
+</Aside>
+
+## Base image
+
+Start from the CropsCode base image to get all default tools:
+
+```dockerfile
+FROM localhost/claude-code-terminal:latest
+
+# Add your customizations
+RUN npm install -g typescript @angular/cli
+```
+
+## Example: Python data science environment
+
+```dockerfile
+FROM localhost/claude-code-terminal:latest
+
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv \
+    && pip3 install pandas numpy scikit-learn jupyter \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+```
+
+## Example: Rust development
+
+```dockerfile
+FROM localhost/claude-code-terminal:latest
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
+    && . $HOME/.cargo/env \
+    && rustup component add clippy rustfmt
+```
+
+## Building
+
+Build on your worker machine:
+
+```bash
+podman build -t localhost/my-custom-image:latest -f Containerfile .
+```
+
+Or trigger a build from the orchestrator dashboard / CropPilot:
+
+> "Build my-custom-image from ./Containerfile"
+
+## Using your image
+
+When launching a container, select your custom image from the runtime dropdown. Or set it as the default in your worker configuration:
+
+```bash
+cropscode config set container.image localhost/my-custom-image:latest
+```

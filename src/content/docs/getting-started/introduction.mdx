@@ -1,0 +1,49 @@
+---
+title: What is CropsCode?
+description: A self-hosted platform for orchestrating agentic AI development containers across multiple machines.
+---
+
+CropsCode is a **self-hosted platform** for orchestrating agentic development containers across multiple machines. It provides a centralized dashboard to launch, monitor, and interact with AI coding agents running inside containers on your worker machines.
+
+## The Farm
+
+Think of CropsCode as a farm where code grows:
+
+- **Workers** are your fields — machines with Podman installed that run containers
+- **Containers** are your crops — isolated dev environments where AI agents work on tickets
+- **Planting** is launching — paste a ticket URL and a container spins up to work on it
+- **Harvesting** is the output — a draft PR, a passing test suite, a working branch
+
+You provide the machines. CropsCode orchestrates the work.
+
+## What It Does
+
+- **Launch dev containers from tickets** — paste a GitHub issue, Azure DevOps work item, Jira ticket, or Linear issue, and CropsCode spins up a container with an AI agent ready to work on it
+- **Manage multiple workers** — connect any number of machines as worker agents; they phone home to the orchestrator over WebSocket
+- **Live terminal access** — open a web-based terminal to any running container directly from the dashboard
+- **Monitor resources** — see CPU, memory, and disk usage per container in real time
+- **Build container images** — trigger and monitor image builds on your workers from the UI
+- **Schedule cron workflows** — automate recurring tasks: wake up to draft PRs every morning
+
+## Architecture
+
+```
+Browser (dashboard)
+    │  HTTPS + WebSocket
+    ▼
+Orchestrator (Next.js + WS server)
+    │  WebSocket (outbound phone-home)
+    ▼
+Worker Agents (one per machine)
+    │  child_process
+    ▼
+Podman Containers (Claude Code, Copilot, Codex)
+```
+
+Workers connect **outbound** to the orchestrator — they work behind NAT and firewalls with zero port forwarding. All communication happens over WebSocket.
+
+## Next Steps
+
+- [Quickstart](/getting-started/quickstart) — get running in 5 minutes
+- [Concepts: Workers](/concepts/workers) — understand self-hosted vs Greenhouse
+- [CLI Reference](/cli/overview) — all commands at a glance

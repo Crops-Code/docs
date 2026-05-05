@@ -1,0 +1,41 @@
+---
+title: Environment Variables
+description: All environment variables for the CropsCode orchestrator and worker agent.
+---
+
+## Orchestrator
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PORT` | `3000` | HTTP/WebSocket server port |
+| `HOST` | `0.0.0.0` | Bind address |
+
+## Worker Agent
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `ORCHESTRATOR_URL` | `ws://localhost:3000/ws/worker` | WebSocket URL of the orchestrator |
+| `WORKER_TOKEN` | _(none)_ | Worker authentication token (from registration) |
+| `WORKER_NAME` | System hostname | Display name for this worker |
+| `CONTAINER_IMAGE` | `localhost/claude-code-terminal:latest` | Default Podman image for containers |
+
+## Ticket Providers
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `GITHUB_TOKEN` | _(none)_ | GitHub PAT — increases rate limit from 60 to 5,000 req/hr |
+
+## AI Agent Credentials
+
+| Variable | Agent | Description |
+|----------|-------|-------------|
+| `ANTHROPIC_API_KEY` | Claude Code | Anthropic API key (or use platform credits) |
+| `OPENAI_API_KEY` | Codex | OpenAI API key |
+| `COPILOT_GITHUB_TOKEN` | GitHub Copilot | Copilot authentication token |
+| `GH_TOKEN` | GitHub Copilot | GitHub token for CLI operations |
+
+## CLI Configuration
+
+The CLI reads configuration from `~/.cropscode/config.json`, not environment variables. Use `cropscode config set` to manage CLI settings.
+
+See [CLI: config](/cli/config) for details.

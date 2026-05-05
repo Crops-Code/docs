@@ -1,0 +1,107 @@
+---
+title: Troubleshooting
+description: Common issues and solutions for CropsCode workers.
+---
+
+## Diagnostics
+
+Always start with:
+
+```bash
+cropscode doctor
+```
+
+This identifies most common issues and offers to fix them.
+
+## Common Issues
+
+### Worker shows "offline" in dashboard
+
+**Cause:** WebSocket connection lost or never established.
+
+**Fix:**
+1. Check the worker is running: `cropscode status`
+2. Verify network access: can you reach the orchestrator URL from this machine?
+3. Check firewall rules — outbound WSS (port 443) must be allowed
+4. Restart the worker: `cropscode worker`
+
+### "Cannot connect to container runtime"
+
+**Cause:** Podman (or Docker) is not running or not installed.
+
+**Fix (macOS):**
+```bash
+podman machine start
+```
+
+**Fix (Windows):**
+```powershell
+podman machine start
+```
+
+**Fix (Linux):**
+```bash
+systemctl --user start podman.socket
+```
+
+### Container launch fails with "image not found"
+
+**Cause:** The container image hasn't been built on this worker.
+
+**Fix:**
+```bash
+podman build -t localhost/claude-code-terminal:latest \
+  -f apps/orchestrator/containers/claude-code-terminal/Containerfile .
+```
+
+Or pull from the registry if available.
+
+### "Insufficient disk space"
+
+**Cause:** Container images and layers consume significant disk.
+
+**Fix:**
+```bash
+# Remove unused images
+podman image prune -a
+
+# Remove stopped containers
+podman container prune
+
+# Check current usage
+podman system df
+```
+
+### Worker heartbeat timeout
+
+**Cause:** Network interruption lasting more than the heartbeat timeout (30s).
+
+The worker auto-reconnects with exponential backoff. If it doesn't recover:
+1. Check network connectivity
+2. Restart the worker: `cropscode worker`
+
+### WSL issues (Windows)
+
+**Cause:** WSL2 not installed or not running.
+
+**Fix:**
+```powershell
+wsl --install
+# Restart your machine after installation
+```
+
+Verify: `wsl --status` should show WSL2 as default.
+
+## Logs
+
+The worker agent logs to stdout. To capture logs:
+
+```bash
+cropscode worker 2>&1 | tee ~/.cropscode/worker.log
+```
+
+## Still stuck?
+
+- Run `cropscode doctor --json` and share the output
+- Join [Discord](https://discord.gg/BRPt2DXM) for community support
+- Check [GitHub Issues](https://github.com/Crops-Code/docs/issues) for known issues

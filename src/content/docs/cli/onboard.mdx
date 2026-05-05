@@ -1,0 +1,40 @@
+---
+title: cropscode onboard
+description: Guided setup wizard that handles everything automatically.
+---
+
+## Usage
+
+```bash
+cropscode onboard
+```
+
+## Description
+
+An interactive wizard that walks you through the complete setup:
+
+1. Checks authentication (runs `login` if needed)
+2. Checks worker registration (runs `worker --register` if needed)
+3. Verifies orchestrator connectivity
+4. Checks container runtime (Podman/Docker)
+5. Checks WSL status (Windows only)
+6. Verifies disk space and memory
+
+For each failed check, `onboard` offers to fix it automatically.
+
+## When to Use
+
+- First-time setup on a new machine
+- After `doctor` reports failures
+- When you want a one-command setup instead of running individual commands
+
+## Difference from `doctor`
+
+| | `doctor` | `onboard` |
+|---|---|---|
+| Checks health | ✓ | ✓ |
+| Fixes issues | Offers to run `onboard` | Fixes directly |
+| Interactive | No | Yes |
+| Idempotent | Yes | Yes |
+
+Both are safe to run multiple times. `onboard` is the fix; `doctor` is the diagnosis.

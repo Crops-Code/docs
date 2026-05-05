@@ -1,0 +1,52 @@
+---
+title: Install CLI
+description: Install the CropsCode CLI to manage workers and connect to your orchestrator.
+---
+
+The `cropscode` CLI is the primary way to bootstrap workers and manage your connection to the orchestrator.
+
+## Prerequisites
+
+- **Node.js 22+** and npm 10+
+- macOS, Windows, or Linux
+
+## Install
+
+```bash
+npm install -g @crops-code/cli
+```
+
+## Verify
+
+```bash
+cropscode --version
+```
+
+## What it does
+
+The CLI handles:
+
+| Command | Purpose |
+|---------|---------|
+| `cropscode login` | Authenticate via browser OAuth |
+| `cropscode worker --register` | Register this machine as a worker |
+| `cropscode worker` | Start the worker daemon |
+| `cropscode doctor` | Check system health |
+| `cropscode onboard` | Guided setup wizard |
+| `cropscode config` | Manage CLI configuration |
+| `cropscode status` | Show current state |
+
+## Configuration directory
+
+The CLI stores files in `~/.cropscode/`:
+
+| File | Purpose |
+|------|---------|
+| `credentials.json` | API key from authentication |
+| `worker.json` | Worker ID, token, and tenant assignment |
+| `config.json` | Orchestrator URL and preferences |
+
+## Next steps
+
+- [Register a worker](/getting-started/register-worker) — connect this machine
+- [CLI reference](/cli/overview) — full command documentation

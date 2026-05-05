@@ -1,0 +1,47 @@
+---
+title: Containers
+description: Understand CropsCode container lifecycle — from planting to harvest.
+---
+
+A **container** in CropsCode is an isolated development environment where an AI agent works on a task. Each container gets its own filesystem, network, and runtime — like giving every ticket its own machine.
+
+## Lifecycle
+
+| Phase | Farm Term | What Happens |
+|-------|-----------|-------------|
+| Launch | Planting | Container created from image, repo cloned, agent starts |
+| Running | Growing | AI agent works on the task, you can watch via terminal |
+| Complete | Harvest | Work is done — PR drafted, branch pushed, tests passing |
+| Stopped | Cleared | Container removed, resources freed |
+
+## What's Inside a Container
+
+Every container includes:
+- An AI coding agent (Claude Code, GitHub Copilot, or Codex)
+- Git, GitHub CLI, tmux, neovim
+- The cloned repository with ticket context
+- A generated `CLAUDE.md` with task instructions
+- Network access for package installs and API calls
+
+## Runtime Images
+
+CropsCode uses Podman container images to define what's inside each container. The default image (`claude-code-terminal`) includes everything needed for general development.
+
+You can build custom images for specialized environments. See [Custom Containerfile](/guides/custom-containerfile).
+
+## Container Limits by Plan
+
+| Plan | Concurrent Containers (Self-Hosted) | Concurrent Containers (Greenhouse) | History |
+|------|--------------------------------------|-------------------------------------|---------|
+| Starter | 5 | Unlimited | 14 days |
+| Pro | 15 | Unlimited | 90 days |
+| Enterprise | Unlimited | Unlimited | 365 days |
+
+## Interacting with Containers
+
+From the orchestrator dashboard:
+- **Live terminal** — web-based terminal (xterm.js) connected directly to the container
+- **Resource monitoring** — CPU, memory, disk usage in real time
+- **VS Code** — attach VS Code to a running container for full IDE access
+
+See [VS Code Extension](/guides/vscode-extension) for IDE setup.

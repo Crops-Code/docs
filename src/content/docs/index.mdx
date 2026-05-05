@@ -1,0 +1,40 @@
+---
+title: Welcome to CropsCode
+description: Plant a ticket. Harvest a PR.
+template: splash
+hero:
+  tagline: Plant a ticket. Harvest a PR. CropsCode turns your machines into an AI development farm.
+  actions:
+    - text: Get Started
+      link: /getting-started/quickstart
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/Crops-Code
+      icon: external
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+  <Card title="Install the CLI" icon="terminal">
+    Get up and running in under 5 minutes with `npm install -g @crops-code/cli`.
+
+    [Install CLI →](/getting-started/install-cli)
+  </Card>
+  <Card title="Register a Worker" icon="laptop">
+    Connect your machine as a worker and start running AI containers.
+
+    [Register →](/getting-started/register-worker)
+  </Card>
+  <Card title="Launch from a Ticket" icon="rocket">
+    Paste a GitHub issue URL and watch CropsCode spin up a container to work on it.
+
+    [Launch guide →](/guides/launch-from-ticket)
+  </Card>
+  <Card title="CLI Reference" icon="open-book">
+    Full reference for every `cropscode` command.
+
+    [CLI docs →](/cli/overview)
+  </Card>
+</CardGrid>

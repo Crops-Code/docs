@@ -1,0 +1,52 @@
+---
+title: cropscode doctor
+description: Check system health — auth, connectivity, container runtime, resources.
+---
+
+## Usage
+
+```bash
+cropscode doctor
+```
+
+## Description
+
+Runs a comprehensive health check on this machine's CropsCode setup. Checks:
+
+- **Authentication** — valid credentials in `~/.cropscode/credentials.json`
+- **Worker registration** — machine registered with a tenant
+- **Orchestrator connectivity** — can reach the WebSocket endpoint
+- **Container runtime** — Podman (or Docker) installed and running
+- **Disk space** — sufficient free space for container images
+- **Memory** — enough RAM for container workloads
+
+## Options
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Machine-readable JSON output (for CI/automation) |
+
+## Output
+
+Each check shows a pass/fail status:
+
+```
+✓ Authentication        Valid credentials found
+✓ Worker registration   Registered as worker-abc123
+✓ Orchestrator          Connected to console.cropscode.io
+✓ Container runtime     Podman 5.x detected
+✓ Disk space            42 GB available
+✗ Memory                1.2 GB free (recommend 4 GB+)
+```
+
+## Auto-Fix
+
+On failures, `doctor` offers to run `cropscode onboard` to fix issues automatically.
+
+## CI Usage
+
+```bash
+cropscode doctor --json
+```
+
+Returns a JSON object with each check's status — useful for health monitoring scripts.

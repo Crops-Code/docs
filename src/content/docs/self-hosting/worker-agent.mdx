@@ -1,0 +1,69 @@
+---
+title: Worker Agent
+description: How the CropsCode worker agent works internally.
+---
+
+The worker agent is a lightweight Node.js daemon that runs on each machine and bridges the orchestrator to local Podman containers.
+
+## Architecture
+
+```
+Orchestrator (cloud)
+    ▲
+    │  WebSocket (outbound from worker)
+    │
+Worker Agent (your machine)
+    │
+    │  child_process / Podman API
+    │
+    ▼
+Podman Containers
+```
+
+## Lifecycle
+
+1. **Connects** to the orchestrator via WebSocket (outbound, authenticated with worker token)
+2. **Registers** itself with system info (hostname, CPU count, RAM, OS)
+3. **Sends heartbeats** every 10 seconds (CPU usage, free memory, container count)
+4. **Receives commands** from the orchestrator
+5. **Executes** container operations locally via Podman
+
+## Commands
+
+| Command | Action |
+|---------|--------|
+| `container.create` | Runs `podman run` to start a new container |
+| `container.stop` | Stops and removes a container |
+| `terminal.open` | Starts an interactive shell via `podman exec -it` |
+| `terminal.input` | Forwards keystrokes to the shell |
+| `terminal.resize` | Resizes the terminal dimensions |
+
+## Terminal Streaming
+
+Terminal output from containers is streamed back through the worker agent to the orchestrator, which relays it to the browser via WebSocket. This gives you a live web terminal with full xterm.js rendering.
+
+## Reconnection
+
+If the WebSocket connection drops, the agent reconnects automatically with exponential backoff:
+
+```
+1s → 2s → 4s → 8s → 16s → 30s (max)
+```
+
+Containers continue running during disconnection — they're not affected by the agent's connection state.
+
+## Process Management
+
+The worker agent runs as a foreground process. To run it as a background service:
+
+**Linux (systemd):**
+```bash
+cropscode worker
+```
+
+**macOS (launchd):**
+```bash
+cropscode worker
+```
+
+The agent is designed to be restarted safely — it picks up existing containers on reconnection.

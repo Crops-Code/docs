@@ -1,0 +1,38 @@
+---
+title: CLI Overview
+description: All cropscode commands at a glance.
+---
+
+The `cropscode` CLI manages workers, authentication, and configuration from your terminal.
+
+## Install
+
+```bash
+npm install -g @crops-code/cli
+```
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| [`cropscode login`](/cli/login) | Authenticate via browser OAuth |
+| [`cropscode worker`](/cli/worker) | Register and start a worker |
+| [`cropscode doctor`](/cli/doctor) | Check system health |
+| [`cropscode onboard`](/cli/onboard) | Guided setup wizard |
+| [`cropscode config`](/cli/config) | Manage CLI configuration |
+| [`cropscode status`](/cli/status) | Show current state |
+
+## Global Behavior
+
+- All commands read configuration from `~/.cropscode/config.json`
+- Credentials are stored in `~/.cropscode/credentials.json`
+- Worker identity is stored in `~/.cropscode/worker.json`
+
+## Configuration Directory
+
+```
+~/.cropscode/
+├── credentials.json    # API key from login
+├── worker.json         # Worker ID, token, tenant
+└── config.json         # Orchestrator URL, preferences
+```

@@ -1,0 +1,43 @@
+---
+title: CropPilot
+description: The in-platform AI assistant that manages your farm.
+---
+
+**CropPilot** is CropsCode's built-in AI assistant. It lives in the orchestrator dashboard and helps you manage workers, launch containers, execute commands, and monitor your farm — all through natural conversation.
+
+## What CropPilot Can Do
+
+- **Launch containers from tickets** — "Launch a container for github.com/org/repo/issues/42"
+- **Execute commands** — "Run npm start in container X"
+- **Open terminals** — "Open a terminal on container X"
+- **Build images** — "Build the claude-code-terminal image"
+- **Monitor status** — "What's running on worker-1?"
+- **Run shell commands** — "Check disk space on the host"
+
+## How It Works
+
+CropPilot is an AI agent with access to MCP (Model Context Protocol) tools that control the orchestrator. When you ask it to do something, it:
+
+1. Interprets your request
+2. Calls the appropriate MCP tools (container.create, terminal.open, etc.)
+3. Confirms the action with you before executing (for destructive operations)
+4. Reports the result
+
+## Budget
+
+CropPilot sessions use AI credits from your plan allowance:
+
+| Plan | Monthly AI Allowance |
+|------|---------------------|
+| Starter | $2/mo |
+| Pro | $6/mo |
+| Enterprise | $10/user/mo |
+
+You can also bring your own API key (BYOK) to use your own AI provider credentials. See [AI Credits](/guides/ai-credits).
+
+## Tips
+
+- Ask CropPilot to launch a container from a GitHub issue or Azure DevOps ticket
+- Enable host networking when launching to test from your phone at host-ip:port
+- Try: "Open a terminal on container X" to get a live shell
+- CropPilot will confirm launch details with you before creating a container

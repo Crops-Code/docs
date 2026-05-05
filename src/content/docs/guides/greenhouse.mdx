@@ -1,0 +1,50 @@
+---
+title: Greenhouse
+description: Managed compute workers — no hardware required.
+---
+
+Greenhouse is CropsCode's managed compute service. Instead of providing your own machines, Greenhouse runs workers in the cloud on your behalf.
+
+## Self-Hosted vs Greenhouse
+
+| | Self-Hosted | Greenhouse |
+|---|---|---|
+| Hardware | You provide | CropsCode provides |
+| Maintenance | You manage | Zero maintenance |
+| Cost | Your electricity + hardware | Included compute allowance + top-ups |
+| Control | Full | Managed |
+| Availability | Depends on your machines | Always-on |
+| Windows support | Requires Windows host | Built-in |
+
+## When to Use Greenhouse
+
+- You don't have spare machines or don't want to manage them
+- You need Windows containers for .NET or desktop testing
+- You want workers in specific geographic regions
+- You need burst capacity beyond your physical hardware
+
+## Getting Started
+
+Greenhouse workers appear automatically in your dashboard. No CLI setup, no registration — they're always connected and ready.
+
+1. Open the orchestrator dashboard
+2. When launching a container, select a Greenhouse worker
+3. Containers run on managed infrastructure
+
+## Compute Allowance
+
+Each plan includes a monthly compute allowance:
+
+| Plan | Compute Allowance |
+|------|------------------|
+| Starter | $2/mo |
+| Pro | $4/mo |
+| Enterprise | Contact sales |
+
+Top-ups available on Pro and Enterprise plans when you exceed your allowance.
+
+## Supported Container Types
+
+Greenhouse workers support:
+- **Linux containers** — all standard CropsCode runtimes
+- **Windows containers** — .NET, desktop apps, Visual Studio workflows

@@ -1,0 +1,38 @@
+---
+title: cropscode login
+description: Authenticate with your CropsCode account.
+---
+
+## Usage
+
+```bash
+cropscode login
+```
+
+## Description
+
+Opens your default browser for a secure OAuth sign-in. After authenticating, the CLI stores your API key in `~/.cropscode/credentials.json`.
+
+## Options
+
+| Flag | Description |
+|------|-------------|
+| `--no-browser` | Headless mode — prints a URL to copy instead of opening the browser |
+
+## Headless Authentication
+
+For servers or environments without a browser:
+
+```bash
+cropscode login --no-browser
+```
+
+This prints a URL. Open it on any device, complete sign-in, and the CLI receives the token.
+
+## Verify
+
+```bash
+cropscode status
+```
+
+Shows your authenticated email and connection state.
