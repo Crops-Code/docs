@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
 
 :root {
   --sl-font: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
@@ -7,6 +7,10 @@
   --sl-sidebar-width: 240px;
   --sl-content-width: 864px;
   --sl-nav-pad-x: 1rem;
+  --docs-green: #10c0f0;
+  --docs-border2: #3c3c3c;
+  --docs-surface: #252526;
+  --docs-muted: #808080;
 }
 
 /* Dark theme — matches portal/orchestrator dark mode */
@@ -29,6 +33,10 @@
   --sl-color-accent-high: #a0e8ff;
   --sl-color-text: #cccccc;
   --sl-color-text-accent: #10c0f0;
+  --docs-green: #10c0f0;
+  --docs-border2: #3c3c3c;
+  --docs-surface: #252526;
+  --docs-muted: #808080;
 }
 
 /* Light theme — matches portal/orchestrator light mode */
@@ -51,6 +59,10 @@
   --sl-color-accent-high: #044e66;
   --sl-color-text: #333333;
   --sl-color-text-accent: #0890b8;
+  --docs-green: #0890b8;
+  --docs-border2: #cecece;
+  --docs-surface: #ffffff;
+  --docs-muted: #616161;
 }
 
 /* Code blocks — match VS Code dark editor */
@@ -69,6 +81,36 @@
   :root:not([data-theme='light']) {
     color-scheme: dark;
   }
+}
+
+/* ============================================================
+   SCROLLBAR — matches portal/orchestrator thin scrollbar
+   ============================================================ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--docs-border2) var(--sl-color-bg);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--sl-color-bg);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--docs-border2);
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--docs-muted);
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--sl-color-bg);
 }
 
 /* ============================================================
@@ -97,7 +139,7 @@ nav.sidebar {
   width: var(--sl-sidebar-width);
 }
 
-/* Sidebar nav items — 40px height, match portal 48px items scaled for docs density */
+/* Sidebar nav items */
 starlight-menu-button + nav a,
 nav.sidebar a {
   font-size: 0.8125rem;
@@ -137,6 +179,8 @@ nav.sidebar .top-level > li > details > summary span,
    ============================================================ */
 starlight-theme-select {
   --sl-icon-size: 1.25rem;
+  display: flex !important;
+  align-items: center;
 }
 
 starlight-theme-select button {
@@ -159,9 +203,17 @@ starlight-theme-select button:hover {
   background-color: var(--sl-color-hairline-light);
 }
 
-/* Hide the label text, show only the icon (matches portal) */
 starlight-theme-select button span {
   display: none;
+}
+
+starlight-theme-select .theme-toggle {
+  display: flex !important;
+}
+
+starlight-theme-select select,
+starlight-theme-select label {
+  display: none !important;
 }
 
 /* ============================================================
@@ -200,12 +252,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Headings — slightly heavier */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-/* Links — use accent color */
 a:not([class]) {
   color: var(--sl-color-accent);
   text-decoration: none;
@@ -217,7 +267,6 @@ a:not([class]):hover {
   text-decoration: underline;
 }
 
-/* Inline code — subtle background */
 :not(pre) > code {
   background: var(--sl-color-accent-low);
   padding: 0.125rem 0.375rem;
@@ -275,20 +324,109 @@ a:not([class]):hover {
 }
 
 /* ============================================================
-   THEME SELECT — hide Starlight's default <select>, show toggle button
+   SPLASH / HOME PAGE — match marketing portal hero styling
    ============================================================ */
-starlight-theme-select select,
-starlight-theme-select label {
-  display: none !important;
+
+/* Remove double header on splash pages */
+[data-page-type='splash'] header.header ~ header.header {
+  display: none;
 }
 
-starlight-theme-select {
-  display: flex !important;
+/* Hero section — centered, constrained width like marketing portal */
+.hero {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem 2rem;
+}
+
+/* Hero title — match marketing portal hero font (Inter, heavy, large) */
+.hero h1 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  background: linear-gradient(90deg, #10c0f0, #0080e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+:root[data-theme='light'] .hero h1 {
+  background: linear-gradient(90deg, #0890b8, #0060a0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hero tagline — match marketing portal subheadline */
+.hero .tagline {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--sl-color-gray-2);
+  max-width: 520px;
+  margin: 0 auto 2rem;
+}
+
+/* Hero action buttons — square (rounded-lg), match portal CTA style */
+.hero .action {
+  display: inline-flex;
   align-items: center;
+  gap: 0.375rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: opacity 200ms ease;
 }
 
-starlight-theme-select .theme-toggle {
-  display: flex !important;
+.hero .action:hover {
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+/* Primary CTA — cyan/green button matching portal */
+.hero a.action.primary {
+  background: var(--docs-green);
+  color: #000;
+  border: none;
+}
+
+/* Secondary CTA — outlined button */
+.hero a.action:not(.primary) {
+  background: transparent;
+  color: var(--sl-color-text);
+  border: 1px solid var(--sl-color-hairline);
+}
+
+.hero a.action:not(.primary):hover {
+  border-color: var(--docs-green);
+}
+
+/* Cards on splash — match portal card styling */
+.card-grid {
+  max-width: 864px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+
+.card {
+  border-color: var(--sl-color-hairline) !important;
+  border-radius: 0.5rem !important;
+  transition: border-color 150ms ease;
+}
+
+.card:hover {
+  border-color: var(--sl-color-accent) !important;
+}
+
+.card .card-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* ============================================================
@@ -297,5 +435,14 @@ starlight-theme-select .theme-toggle {
 @media (max-width: 50rem) {
   :root {
     --sl-nav-height: 3.5rem;
+  }
+
+  .hero {
+    padding-top: 3rem;
+  }
+
+  .hero .action {
+    font-size: 0.875rem;
+    padding: 0.625rem 1.25rem;
   }
 }
