@@ -5,7 +5,8 @@ export default defineConfig({
   site: 'https://docs.cropscode.io',
   integrations: [
     starlight({
-      title: 'CropsCode Docs',
+      title: 'CropsCode | Docs',
+      favicon: '/favicon.png',
       logo: {
         dark: './src/assets/logo-dark.png',
         light: './src/assets/logo-light.png',
@@ -20,9 +21,6 @@ export default defineConfig({
         { icon: 'discord', label: 'Discord', href: 'https://discord.gg/BRPt2DXM' },
         { icon: 'x.com', label: 'X', href: 'https://x.com/cropscode' },
       ],
-      editLink: {
-        baseUrl: 'https://github.com/Crops-Code/docs/edit/main/',
-      },
       customCss: ['./src/styles/custom.css'],
       sidebar: [
         {
