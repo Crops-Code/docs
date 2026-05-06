@@ -5,7 +5,7 @@ import Search from '@astrojs/starlight/components/Search.astro';
 <div class="header sl-flex">
   <div class="sl-flex header-start">
     <a href="/" class="site-title-link">
-      <img src="/logo-docs.png" alt="CropsCode Docs" class="header-logo" />
+      <img src="/logo-small-docs.png" alt="CropsCode Docs" class="header-logo" />
     </a>
   </div>
   <div class="sl-flex header-end">
@@ -61,6 +61,25 @@ import Search from '@astrojs/starlight/components/Search.astro';
       updateIcons();
     });
     matchMedia('(prefers-color-scheme: light)').addEventListener('change', updateIcons);
+
+    function splitHeroTitle() {
+      var h1 = document.querySelector('.hero h1');
+      if (h1 && !h1.dataset.split) {
+        h1.dataset.split = '1';
+        var text = h1.textContent || '';
+        var idx = text.indexOf('CropsCode');
+        if (idx >= 0) {
+          var before = text.slice(0, idx);
+          var brand = text.slice(idx, idx + 9);
+          h1.innerHTML = '<span class="hero-line1">' + before + '</span><span class="hero-line2">' + brand + '</span>';
+        }
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', splitHeroTitle);
+    } else {
+      splitHeroTitle();
+    }
   })();
 </script>
 
@@ -91,7 +110,7 @@ import Search from '@astrojs/starlight/components/Search.astro';
   }
 
   .header-logo {
-    height: 36px;
+    height: 38px;
     width: auto;
     object-fit: contain;
   }
