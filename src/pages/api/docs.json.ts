@@ -28,24 +28,34 @@ function parseFrontmatter(raw: string): { title: string; description: string; bo
 
 export const GET: APIRoute = async () => {
   const docsDir = join(process.cwd(), 'src', 'content', 'docs');
-  const files = await collectMdx(docsDir);
+  try {
+    const files = await collectMdx(docsDir);
 
-  const pages = await Promise.all(
-    files.map(async (filePath) => {
-      const raw = await readFile(filePath, 'utf-8');
-      const rel = relative(docsDir, filePath).replace(/\\/g, '/');
-      const slug = rel.replace(/\.(mdx|md)$/, '').replace(/\/index$/, '');
-      const { title, description, body } = parseFrontmatter(raw);
-      return { slug, title, description, content: body.trim() };
-    }),
-  );
+    const pages = await Promise.all(
+      files.map(async (filePath) => {
+        const raw = await readFile(filePath, 'utf-8');
+        const rel = relative(docsDir, filePath).replace(/\\/g, '/');
+        const slug = rel.replace(/\.(mdx|md)$/, '').replace(/\/index$/, '');
+        const { title, description, body } = parseFrontmatter(raw);
+        return { slug, title, description, content: body.trim() };
+      }),
+    );
 
-  pages.sort((a, b) => a.slug.localeCompare(b.slug));
+    pages.sort((a, b) => a.slug.localeCompare(b.slug));
 
-  return new Response(JSON.stringify({ pages }, null, 2), {
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    },
-  });
+    return new Response(JSON.stringify({ pages }, null, 2), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+  } catch {
+    return new Response(JSON.stringify({ pages: [] }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+  }
 };
