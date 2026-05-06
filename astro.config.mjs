@@ -5,11 +5,15 @@ export default defineConfig({
   site: 'https://docs.cropscode.io',
   integrations: [
     starlight({
-      title: 'CropsCode',
+      title: 'CropsCode Docs',
       logo: {
         dark: './src/assets/logo-dark.png',
         light: './src/assets/logo-light.png',
         replacesTitle: true,
+      },
+      components: {
+        Header: './src/components/Header.astro',
+        ThemeSelect: './src/components/ThemeSelect.astro',
       },
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/Crops-Code' },
