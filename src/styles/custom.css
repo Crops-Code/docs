@@ -1,35 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
 :root {
   --sl-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --sl-font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
 }
 
-/* Dark mode as default — match console.cropscode.io */
+/* Dark theme — matches portal/orchestrator dark mode */
 :root[data-theme='dark'] {
   --sl-color-bg: #1e1e1e;
-  --sl-color-bg-nav: #181818;
-  --sl-color-bg-sidebar: #1a1a1a;
+  --sl-color-bg-nav: #252526;
+  --sl-color-bg-sidebar: #252526;
   --sl-color-hairline-light: #2d2d2d;
   --sl-color-hairline: #3c3c3c;
-  --sl-color-white: #e0e0e0;
+  --sl-color-white: #d4d4d4;
   --sl-color-gray-1: #cccccc;
-  --sl-color-gray-2: #a0a0a0;
-  --sl-color-gray-3: #6b6b6b;
-  --sl-color-accent-low: #1a3a2a;
-  --sl-color-accent: #4ade80;
-  --sl-color-accent-high: #a7f3d0;
-  --sl-color-text: #e0e0e0;
-  --sl-color-text-accent: #4ade80;
+  --sl-color-gray-2: #808080;
+  --sl-color-gray-3: #616161;
+  --sl-color-gray-4: #3c3c3c;
+  --sl-color-gray-5: #252526;
+  --sl-color-gray-6: #1e1e1e;
+  --sl-color-black: #181818;
+  --sl-color-accent-low: rgba(16, 192, 240, 0.1);
+  --sl-color-accent: #10c0f0;
+  --sl-color-accent-high: #a0e8ff;
+  --sl-color-text: #cccccc;
+  --sl-color-text-accent: #10c0f0;
 }
 
+/* Light theme — matches portal/orchestrator light mode */
 :root[data-theme='light'] {
-  --sl-color-accent-low: #e6f9ef;
-  --sl-color-accent: #16a34a;
-  --sl-color-accent-high: #052e16;
+  --sl-color-bg: #f3f3f3;
+  --sl-color-bg-nav: #ffffff;
+  --sl-color-bg-sidebar: #f3f3f3;
+  --sl-color-hairline-light: #e8e8e8;
+  --sl-color-hairline: #cecece;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #333333;
+  --sl-color-gray-2: #616161;
+  --sl-color-gray-3: #767676;
+  --sl-color-gray-4: #cecece;
+  --sl-color-gray-5: #e8e8e8;
+  --sl-color-gray-6: #f3f3f3;
+  --sl-color-black: #333333;
+  --sl-color-accent-low: rgba(8, 144, 184, 0.08);
+  --sl-color-accent: #0890b8;
+  --sl-color-accent-high: #044e66;
+  --sl-color-text: #333333;
+  --sl-color-text-accent: #0890b8;
 }
 
-/* Starlight defaults to light; override preference */
+/* Code blocks — match VS Code dark editor */
+:root[data-theme='dark'] .expressive-code {
+  --ec-codeBg: #252526;
+  --ec-codeBorder: #3c3c3c;
+}
+
+:root[data-theme='light'] .expressive-code {
+  --ec-codeBg: #ffffff;
+  --ec-codeBorder: #cecece;
+}
+
+/* Starlight defaults to light; override to prefer dark */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
   }
+}
+
+/* Sidebar and nav styling to match portal */
+nav.sidebar {
+  border-right-color: var(--sl-color-hairline);
+}
+
+header.header {
+  border-bottom-color: var(--sl-color-hairline);
 }
