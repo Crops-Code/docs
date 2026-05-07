@@ -39,21 +39,24 @@
   --docs-muted: #808080;
 }
 
-/* Light theme — matches portal/orchestrator light mode */
+/* Light theme — matches portal/orchestrator light mode
+   NOTE: Starlight uses --sl-color-white for headings (most prominent)
+   and --sl-color-black for backgrounds (least prominent). In light mode
+   these are inverted: "white" = darkest text, "black" = lightest bg. */
 :root[data-theme='light'] {
   --sl-color-bg: #f3f3f3;
   --sl-color-bg-nav: #ffffff;
   --sl-color-bg-sidebar: #f3f3f3;
   --sl-color-hairline-light: #e8e8e8;
   --sl-color-hairline: #cecece;
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #333333;
+  --sl-color-white: #333333;
+  --sl-color-gray-1: #3b3b3b;
   --sl-color-gray-2: #616161;
   --sl-color-gray-3: #767676;
   --sl-color-gray-4: #cecece;
   --sl-color-gray-5: #e8e8e8;
   --sl-color-gray-6: #f3f3f3;
-  --sl-color-black: #333333;
+  --sl-color-black: #ffffff;
   --sl-color-accent-low: rgba(8, 144, 184, 0.08);
   --sl-color-accent: #0890b8;
   --sl-color-accent-high: #044e66;
