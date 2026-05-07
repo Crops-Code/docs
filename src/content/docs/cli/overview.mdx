@@ -7,7 +7,10 @@ The `cropscode` CLI manages workers, authentication, and configuration from your
 
 ## Install
 
+The CLI is published to the GitHub Package Registry. Configure the scope, then install:
+
 ```bash
+npm config set @crops-code:registry https://npm.pkg.github.com
 npm install -g @crops-code/cli
 ```
 
@@ -15,8 +18,8 @@ npm install -g @crops-code/cli
 
 | Command | Description |
 |---------|-------------|
-| [`cropscode login`](/cli/login) | Authenticate via browser OAuth |
-| [`cropscode worker`](/cli/worker) | Register and start a worker |
+| [`cropscode login`](/cli/login) | Authenticate via browser OAuth or API token |
+| [`cropscode worker`](/cli/worker) | Configure tenant and start the worker |
 | [`cropscode doctor`](/cli/doctor) | Check system health |
 | [`cropscode onboard`](/cli/onboard) | Guided setup wizard |
 | [`cropscode config`](/cli/config) | Manage CLI configuration |
@@ -32,7 +35,7 @@ npm install -g @crops-code/cli
 
 ```
 ~/.cropscode/
-├── credentials.json    # API key from login
-├── worker.json         # Worker ID, token, tenant
-└── config.json         # Orchestrator URL, preferences
+├── credentials.json    # API key + email from login
+├── worker.json         # Worker ID, tenant, orchestrator URL
+└── config.json         # User preferences (e.g. WORKER_NAME)
 ```

@@ -12,7 +12,10 @@ The `cropscode` CLI is the primary way to bootstrap workers and manage your conn
 
 ## Install
 
+The CLI is published to the GitHub Package Registry. Configure the scope, then install:
+
 ```bash
+npm config set @crops-code:registry https://npm.pkg.github.com
 npm install -g @crops-code/cli
 ```
 
@@ -28,9 +31,8 @@ The CLI handles:
 
 | Command | Purpose |
 |---------|---------|
-| `cropscode login` | Authenticate via browser OAuth |
-| `cropscode worker --register` | Register this machine as a worker |
-| `cropscode worker` | Start the worker daemon |
+| `cropscode login` | Authenticate via browser OAuth or API token |
+| `cropscode worker` | Configure tenant and start the worker |
 | `cropscode doctor` | Check system health |
 | `cropscode onboard` | Guided setup wizard |
 | `cropscode config` | Manage CLI configuration |
@@ -42,9 +44,9 @@ The CLI stores files in `~/.cropscode/`:
 
 | File | Purpose |
 |------|---------|
-| `credentials.json` | API key from authentication |
-| `worker.json` | Worker ID, token, and tenant assignment |
-| `config.json` | Orchestrator URL and preferences |
+| `credentials.json` | API key + email from authentication |
+| `worker.json` | Worker ID, tenant, and orchestrator URL |
+| `config.json` | User preferences (e.g. WORKER_NAME) |
 
 ## Next steps
 

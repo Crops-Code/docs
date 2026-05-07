@@ -3,12 +3,12 @@ title: Register a Worker
 description: Connect a machine to your CropsCode orchestrator as a worker.
 ---
 
-A worker is a machine running Podman that executes containers on behalf of the orchestrator. Registration is a one-time step that gives the machine a token to authenticate its WebSocket connection.
+A worker is a machine running Podman (or Docker) that executes containers on behalf of the orchestrator. Registration is a one-time step where the CLI selects a tenant and generates a worker identity.
 
 ## Prerequisites
 
 - [CLI installed](/getting-started/install-cli) and authenticated (`cropscode login`)
-- **Podman** installed and running on this machine
+- **Podman** (or Docker) installed and running on this machine
 - Network access to the orchestrator (outbound only — no inbound ports needed)
 
 ## Quick path
@@ -17,28 +17,24 @@ A worker is a machine running Podman that executes containers on behalf of the o
 cropscode onboard
 ```
 
-The onboard wizard checks everything (auth, worker registration, orchestrator reachability, container runtime, disk/memory) and fixes issues automatically.
+The onboard wizard checks everything (auth, tenant selection, orchestrator reachability, container runtime, disk/memory) and fixes issues automatically.
 
 ## Manual path
 
-### Register
-
-```bash
-cropscode worker --register
-```
-
-This:
-1. Registers the machine with the orchestrator
-2. Stores a worker token in `~/.cropscode/worker.json`
-3. Associates the worker with your tenant
-
-### Start
+### Start the worker
 
 ```bash
 cropscode worker
 ```
 
-The worker connects outbound to the orchestrator via WebSocket and begins accepting container commands.
+On first run, the CLI:
+1. Checks your authentication
+2. Fetches available tenants from the orchestrator
+3. Lets you pick a tenant (or auto-selects if there's only one)
+4. Saves the worker config to `~/.cropscode/worker.json`
+5. Starts the worker daemon
+
+On subsequent runs, it reads the saved config and starts immediately.
 
 ### Verify
 
@@ -49,10 +45,11 @@ cropscode status
 You should see:
 
 ```
-User:         you@example.com
-Worker:       registered (online)
-Tenant:       your-tenant
-Orchestrator: connected
+  User:          you@example.com
+  Worker:        a1b2c3d4
+  Tenant:        your-tenant
+  Orchestrator:  console.cropscode.io
+  Connection:    Connected
 ```
 
 The worker also appears in the orchestrator dashboard under the Workers panel.
@@ -65,7 +62,7 @@ Run `cropscode doctor` at any time to verify the worker's health:
 cropscode doctor
 ```
 
-It checks: authentication, worker registration, orchestrator connectivity, container runtime (Podman), disk space, and available memory.
+It checks: authentication, worker registration, orchestrator connectivity, WSL2 (Windows only), container runtime (Podman/Docker), disk space, and available memory.
 
 ## Multi-machine setup
 

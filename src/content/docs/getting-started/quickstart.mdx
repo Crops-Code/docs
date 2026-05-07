@@ -8,6 +8,7 @@ Everything you need to go from zero to running AI containers on your own hardwar
 ## 1. Install the CLI
 
 ```bash
+npm config set @crops-code:registry https://npm.pkg.github.com
 npm install -g @crops-code/cli
 cropscode --version
 ```
@@ -22,19 +23,15 @@ cropscode login
 
 This opens your browser for a secure OAuth sign-in with your CropsCode account.
 
-## 3. Register & start a worker
+## 3. Start a worker
 
 ```bash
-# Register this machine (one-time setup)
-cropscode worker --register
-
-# Start the worker
 cropscode worker
 ```
 
-The worker connects outbound to the orchestrator — no inbound ports, no firewall rules.
+On first run, the CLI walks you through tenant selection and then starts the worker daemon. The worker connects outbound to the orchestrator — no inbound ports, no firewall rules.
 
-Or run the guided wizard that handles everything:
+Or run the guided wizard that handles everything (login, tenant selection, runtime checks):
 
 ```bash
 cropscode onboard

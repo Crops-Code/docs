@@ -6,27 +6,52 @@ description: Manage CLI configuration.
 ## Usage
 
 ```bash
-cropscode config set <key> <value>
+cropscode config <subcommand> [arguments]
 ```
 
-## Description
+## Subcommands
 
-Reads and writes values in `~/.cropscode/config.json`.
+### `set`
 
-## Available Keys
-
-| Key | Description | Example |
-|-----|-------------|---------|
-| `orchestrator.url` | Orchestrator WebSocket URL | `wss://console.cropscode.io/ws/worker` |
-| `container.image` | Default container image | `localhost/claude-code-terminal:latest` |
-
-## Examples
-
-Set the orchestrator URL:
+Set a configuration value:
 
 ```bash
-cropscode config set orchestrator.url wss://console.cropscode.io/ws/worker
+cropscode config set WORKER_NAME my-dev-machine
 ```
+
+### `get`
+
+Read a configuration value:
+
+```bash
+cropscode config get WORKER_NAME
+```
+
+### `list`
+
+Show all configuration values:
+
+```bash
+cropscode config list
+```
+
+### `clear`
+
+Remove all local CropsCode config (credentials, worker registration, and settings). Prompts for confirmation before deleting:
+
+```bash
+cropscode config clear
+```
+
+After clearing, run `cropscode login` to set up again.
+
+## Allowed Keys
+
+| Key | Description |
+|-----|-------------|
+| `WORKER_NAME` | Display name for this worker (max 64 characters) |
+
+Only the keys listed above are accepted. Attempting to set an unknown key returns an error.
 
 ## Configuration File
 
@@ -34,11 +59,6 @@ Location: `~/.cropscode/config.json`
 
 ```json
 {
-  "orchestrator": {
-    "url": "wss://console.cropscode.io/ws/worker"
-  },
-  "container": {
-    "image": "localhost/claude-code-terminal:latest"
-  }
+  "WORKER_NAME": "my-dev-machine"
 }
 ```

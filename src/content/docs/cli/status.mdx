@@ -14,24 +14,26 @@ cropscode status
 Displays the current state of your CropsCode CLI setup at a glance:
 
 ```
-User:         you@example.com
-Worker:       registered (online)
-Tenant:       your-tenant
-Orchestrator: connected (wss://console.cropscode.io/ws/worker)
+  User:          you@example.com
+  Worker:        a1b2c3d4
+  Tenant:        your-tenant
+  Orchestrator:  console.cropscode.io
+  Connection:    Connected
 ```
 
 ## Fields
 
 | Field | Description |
 |-------|-------------|
-| User | Authenticated email (from `credentials.json`) |
-| Worker | Registration status and online/offline state |
-| Tenant | Which tenant this worker is assigned to |
-| Orchestrator | Connection status and URL |
+| User | Authenticated email (from `credentials.json`), or "Not logged in" |
+| Worker | First 8 characters of the worker UUID, or "Not registered" |
+| Tenant | Tenant name from worker config |
+| Orchestrator | Orchestrator hostname |
+| Connection | Live health check — Connected, Unhealthy, or Disconnected |
 
 ## Use Cases
 
 - Verify you're authenticated after `cropscode login`
-- Check worker connection after `cropscode worker`
+- Check worker configuration after `cropscode worker`
 - Debug connectivity issues
 - Confirm tenant assignment

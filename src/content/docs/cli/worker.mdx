@@ -1,36 +1,31 @@
 ---
 title: cropscode worker
-description: Register and start a CropsCode worker on this machine.
+description: Configure tenant and start the CropsCode worker on this machine.
 ---
 
 ## Usage
 
 ```bash
-# Register this machine (one-time)
-cropscode worker --register
-
-# Start the worker daemon
 cropscode worker
 ```
 
 ## Description
 
-The `worker` command manages the worker lifecycle on this machine:
+The `worker` command handles tenant selection (if needed) and starts the worker daemon.
 
-- **`--register`** — one-time registration that associates this machine with your tenant and stores a worker token
-- **Without flags** — starts the worker daemon that connects to the orchestrator and begins accepting container commands
+On first run, it walks you through setup:
 
-If the machine is not registered, running `cropscode worker` without `--register` will prompt you to register first.
+1. Checks that you're logged in (prompts to run `cropscode login` if not)
+2. Fetches your available tenants from the orchestrator
+3. If you have multiple tenants, lets you pick one
+4. Saves the configuration to `~/.cropscode/worker.json`
+5. Starts the worker daemon
 
-## Options
-
-| Flag | Description |
-|------|-------------|
-| `--register` | Register this machine as a worker (one-time setup) |
+On subsequent runs, it reads the saved config and starts the worker immediately.
 
 ## What Happens on Start
 
-1. Reads worker token from `~/.cropscode/worker.json`
+1. Reads worker config from `~/.cropscode/worker.json`
 2. Connects outbound to the orchestrator via WebSocket
 3. Reports system info (hostname, CPU, RAM)
 4. Begins sending heartbeats every 10 seconds
@@ -40,11 +35,12 @@ If the machine is not registered, running `cropscode worker` without `--register
 
 The worker connects **outbound** — no inbound ports, no firewall rules, works behind NAT. If the connection drops, it reconnects with exponential backoff (1s → 2s → 4s → ... up to 30s).
 
-## Registration
+## Worker Configuration
 
-Registration stores:
-- Worker ID (unique identifier)
-- Authentication token
-- Tenant assignment
+Running `cropscode worker` for the first time stores:
+
+- Worker ID (randomly generated UUID)
+- Tenant ID and name
+- Orchestrator WebSocket URL
 
 These are saved in `~/.cropscode/worker.json`.

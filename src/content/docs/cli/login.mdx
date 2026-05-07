@@ -13,13 +13,15 @@ cropscode login
 
 Opens your default browser for a secure OAuth sign-in. After authenticating, the CLI stores your API key in `~/.cropscode/credentials.json`.
 
+If you're already logged in, the CLI asks whether to keep the current session or log in with a different account.
+
 ## Options
 
 | Flag | Description |
 |------|-------------|
-| `--no-browser` | Headless mode — prints a URL to copy instead of opening the browser |
+| `--no-browser` | Token-based login (for headless/SSH environments) |
 
-## Headless Authentication
+## Token-Based Login
 
 For servers or environments without a browser:
 
@@ -27,7 +29,9 @@ For servers or environments without a browser:
 cropscode login --no-browser
 ```
 
-This prints a URL. Open it on any device, complete sign-in, and the CLI receives the token.
+This prompts you to paste an API token and your email address. Generate a token from your orchestrator's settings page.
+
+The CLI also auto-detects headless environments (SSH sessions, display-less Linux) and switches to token-based login automatically.
 
 ## Verify
 

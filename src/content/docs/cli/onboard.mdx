@@ -13,19 +13,19 @@ cropscode onboard
 
 An interactive wizard that walks you through the complete setup:
 
-1. Checks authentication (runs `login` if needed)
-2. Checks worker registration (runs `worker --register` if needed)
-3. Verifies orchestrator connectivity
-4. Checks container runtime (Podman/Docker)
-5. Checks WSL status (Windows only)
-6. Verifies disk space and memory
-
-For each failed check, `onboard` offers to fix it automatically.
+1. Runs all health checks (same as `cropscode doctor`)
+2. For each failure, offers to fix it:
+   - **Not logged in** → runs the login flow
+   - **Worker not configured** → runs tenant selection
+   - **WSL2 missing** (Windows) → installs WSL2 and Ubuntu distro
+   - **Container runtime missing** → installs and starts Podman
+   - **Orchestrator unreachable** → shows configuration guidance
+3. Re-runs all checks to verify fixes
 
 ## When to Use
 
 - First-time setup on a new machine
-- After `doctor` reports failures
+- After `cropscode doctor` reports failures
 - When you want a one-command setup instead of running individual commands
 
 ## Difference from `doctor`
@@ -33,8 +33,8 @@ For each failed check, `onboard` offers to fix it automatically.
 | | `doctor` | `onboard` |
 |---|---|---|
 | Checks health | ✓ | ✓ |
-| Fixes issues | Offers to run `onboard` | Fixes directly |
-| Interactive | No | Yes |
+| Fixes issues | Prompts to run `onboard` | Fixes directly |
+| Interactive | Yes (prompts on failure) | Yes |
 | Idempotent | Yes | Yes |
 
 Both are safe to run multiple times. `onboard` is the fix; `doctor` is the diagnosis.

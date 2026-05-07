@@ -1,6 +1,6 @@
 ---
 title: Environment Variables
-description: All environment variables for the CropsCode orchestrator and worker agent.
+description: Environment variables used by the CropsCode orchestrator and agents.
 ---
 
 ## Orchestrator
@@ -9,15 +9,6 @@ description: All environment variables for the CropsCode orchestrator and worker
 |----------|---------|-------------|
 | `PORT` | `3000` | HTTP/WebSocket server port |
 | `HOST` | `0.0.0.0` | Bind address |
-
-## Worker Agent
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `ORCHESTRATOR_URL` | `ws://localhost:3000/ws/worker` | WebSocket URL of the orchestrator |
-| `WORKER_TOKEN` | _(none)_ | Worker authentication token (from registration) |
-| `WORKER_NAME` | System hostname | Display name for this worker |
-| `CONTAINER_IMAGE` | `localhost/claude-code-terminal:latest` | Default Podman image for containers |
 
 ## Ticket Providers
 
