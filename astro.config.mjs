@@ -15,6 +15,10 @@ export default defineConfig({
       components: {
         Header: './src/components/Header.astro',
         ThemeSelect: './src/components/ThemeSelect.astro',
+        PageFrame: './src/components/PageFrame.astro',
+        Sidebar: './src/components/Sidebar.astro',
+        MobileMenuFooter: './src/components/MobileMenuFooter.astro',
+        MobileMenuToggle: './src/components/MobileMenuToggle.astro',
       },
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/Crops-Code' },
@@ -25,6 +29,7 @@ export default defineConfig({
       sidebar: [
         {
           label: 'Getting Started',
+          collapsed: true,
           items: [
             { label: 'Introduction', slug: 'getting-started/introduction' },
             { label: 'Quickstart', slug: 'getting-started/quickstart' },
@@ -34,6 +39,7 @@ export default defineConfig({
         },
         {
           label: 'Concepts',
+          collapsed: true,
           items: [
             { label: 'Workers', slug: 'concepts/workers' },
             { label: 'Containers', slug: 'concepts/containers' },
@@ -44,6 +50,7 @@ export default defineConfig({
         },
         {
           label: 'Guides',
+          collapsed: true,
           items: [
             { label: 'Launch from Ticket', slug: 'guides/launch-from-ticket' },
             { label: 'Custom Containerfile', slug: 'guides/custom-containerfile' },
@@ -56,6 +63,7 @@ export default defineConfig({
         },
         {
           label: 'CLI Reference',
+          collapsed: true,
           items: [
             { label: 'Overview', slug: 'cli/overview' },
             { label: 'login', slug: 'cli/login' },
@@ -68,6 +76,7 @@ export default defineConfig({
         },
         {
           label: 'Self-Hosting',
+          collapsed: true,
           items: [
             { label: 'Worker Agent', slug: 'self-hosting/worker-agent' },
             { label: 'Requirements', slug: 'self-hosting/requirements' },
@@ -76,6 +85,7 @@ export default defineConfig({
         },
         {
           label: 'Reference',
+          collapsed: true,
           items: [
             { label: 'Plans & Limits', slug: 'reference/plans-and-limits' },
             { label: 'Supported Agents', slug: 'reference/supported-agents' },
@@ -85,6 +95,7 @@ export default defineConfig({
         },
         {
           label: 'Links',
+          collapsed: true,
           items: [
             { label: 'Home', link: 'https://cropscode.io' },
             { label: 'Console', link: 'https://console.cropscode.io' },
