@@ -8,20 +8,44 @@ description: The in-platform AI assistant that manages your farm.
 ## What CropPilot Can Do
 
 - **Launch containers from tickets** — "Launch a container for github.com/org/repo/issues/42"
-- **Execute commands** — "Run npm start in container X"
-- **Open terminals** — "Open a terminal on container X"
-- **Build images** — "Build the claude-code-terminal image"
-- **Monitor status** — "What's running on worker-1?"
-- **Run shell commands** — "Check disk space on the host"
+- **Execute commands** — "Run npm start in container X" or start long-running processes in the background
+- **Open terminals and displays** — "Open a terminal on container X" or open a VNC display for GUI interaction
+- **Build images** — "Build the claude-code-terminal image" with composable capabilities
+- **Monitor status** — "What's running on worker-1?" or get details on a specific container
+- **Fetch tickets** — Pull details from GitHub Issues or Azure DevOps work items
+- **Navigate the UI** — CropPilot can direct you to any page in the dashboard
+- **Read docs** — CropPilot can look up CropsCode documentation to answer your questions
 
 ## How It Works
 
 CropPilot is an AI agent with access to MCP (Model Context Protocol) tools that control the orchestrator. When you ask it to do something, it:
 
 1. Interprets your request
-2. Calls the appropriate MCP tools (launch_container, open_terminal, etc.)
+2. Calls the appropriate MCP tools
 3. Confirms the action with you before executing (for destructive operations)
 4. Reports the result
+
+## Available MCP Tools
+
+| Tool | Description |
+|------|-------------|
+| `get_infrastructure_state` | Get current workers and containers |
+| `get_container` | Container details by ID or name |
+| `launch_container` | Launch a container from a ticket URL, empty, or from an existing container |
+| `start_container` | Start a stopped container |
+| `stop_container` | Stop a running container |
+| `remove_container` | Remove a container permanently |
+| `exec_in_container` | Execute a bash command in a running container |
+| `exec_in_container_background` | Start a long-running command via tmux (returns immediately) |
+| `list_images` | List available images on a worker |
+| `list_capabilities` | List composable image capabilities available on your plan |
+| `open_terminal` | Open a terminal session in the UI with optional auto-execute commands |
+| `open_display` | Open a VNC display session for GUI interaction |
+| `navigate` | Navigate to a page in the dashboard UI |
+| `build_image` | Build a composable container image with selected agents and capabilities |
+| `fetch_ticket` | Fetch ticket details from a URL (GitHub Issues, Azure DevOps) |
+| `read_docs` | Read CropsCode documentation pages |
+| `load_skill` | Load a CropPilot skill by name |
 
 ## Budget
 

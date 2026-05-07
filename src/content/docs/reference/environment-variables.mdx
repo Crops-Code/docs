@@ -9,6 +9,10 @@ description: Environment variables used by the CropsCode orchestrator and agents
 |----------|---------|-------------|
 | `PORT` | `3000` | HTTP/WebSocket server port |
 | `HOST` | `0.0.0.0` | Bind address |
+| `ORCHESTRATOR_URL` | `http://localhost:3000` | Backend API URL — used by MCP server for streaming endpoints |
+| `PORTAL_URL` | `http://localhost:3001` | Portal frontend URL — used for Clerk sign-in redirect |
+| `NEXT_PUBLIC_ORCHESTRATOR_URL` | `http://localhost:3000` | Client-side orchestrator URL for cross-app links |
+| `NEXT_PUBLIC_PORTAL_URL` | `http://localhost:3001` | Client-side portal URL for cross-app links |
 
 ## Ticket Providers
 
@@ -25,6 +29,18 @@ description: Environment variables used by the CropsCode orchestrator and agents
 | `OPENAI_API_KEY` | Codex | OpenAI API key |
 | `COPILOT_GITHUB_TOKEN` | GitHub Copilot | Copilot authentication token |
 | `GH_TOKEN` | GitHub Copilot | GitHub token for CLI operations |
+
+## Worker Agent
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `ORCHESTRATOR_WS_URL` | `ws://localhost:3000/ws/worker` | WebSocket URL the agent connects to |
+| `WORKER_NAME` | _(system hostname)_ | Override the worker's display name |
+| `AGENT_MODE` | `byom` | Worker mode — `byom` (bring-your-own-machine) or `fleet` |
+| `AGENT_CONFIG` | _(none)_ | Override YAML config file path (fleet mode) |
+| `DATA_DIR` | `/data` | Data directory for volume isolation (fleet mode) |
+| `PODMAN_PATH` | _(auto-detected)_ | Override the Podman binary path |
+| `SECURITY_FLOOR` | _(none)_ | Enforced minimum security profile for containers |
 
 ## CLI Configuration
 

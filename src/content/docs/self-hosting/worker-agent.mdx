@@ -3,7 +3,7 @@ title: Worker Agent
 description: How the CropsCode worker agent works internally.
 ---
 
-The worker agent is a lightweight daemon that runs on each machine and bridges the orchestrator to local Podman containers.
+The worker agent is a lightweight Go binary that runs on each machine and bridges the orchestrator to local Podman (or Docker) containers. It requires no runtime dependencies — just download and run.
 
 ## Architecture
 
@@ -23,10 +23,39 @@ Podman Containers
 ## Lifecycle
 
 1. **Connects** to the orchestrator via WebSocket (outbound, authenticated with worker token)
-2. **Registers** itself with system info (hostname, CPU count, RAM, OS, container engines)
-3. **Sends heartbeats** every 10 seconds (CPU usage, free memory, container count)
+2. **Registers** itself with system info (see below)
+3. **Sends heartbeats** every 10 seconds (see below)
 4. **Receives commands** from the orchestrator
-5. **Executes** container operations locally via Podman
+5. **Executes** container operations locally via Podman or Docker
+
+### Registration
+
+On connect, the agent sends a `worker.register` message with:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | Worker name (env, config, or hostname) |
+| `hostname` | string | System hostname |
+| `platform` | string | OS — `linux`, `darwin`, or `windows` |
+| `cpuCount` | int | Number of CPU cores |
+| `memoryTotal` | uint64 | Total RAM in bytes |
+| `containerEngines` | string[] | Detected engines (`podman`, `docker`) |
+| `agentVersion` | string | Agent version, e.g. `2.0.0` |
+| `mode` | string | `byom` (bring-your-own-machine) or `fleet` |
+
+### Heartbeat
+
+Every 10 seconds the agent sends a `worker.heartbeat` with:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `cpuUsage` | float64 | CPU usage 0–100% |
+| `memoryFree` | uint64 | Free RAM in bytes |
+| `diskTotal` | uint64? | Total disk in bytes |
+| `diskFree` | uint64? | Free disk in bytes |
+| `containersRunning` | int | Number of running containers |
+| `gatewayStatus` | string? | Gateway connectivity status |
+| `gatewayStatusDetail` | string? | Additional gateway info |
 
 ## Commands
 
@@ -67,6 +96,27 @@ If the WebSocket connection drops, the agent reconnects automatically with expon
 ```
 
 Containers continue running during disconnection — they're not affected by the agent's connection state.
+
+## Configuration
+
+The worker agent reads configuration from environment variables, YAML config files, or CLI flags.
+
+**BYOM mode** (bring-your-own-machine — default):
+
+| Path | Contents |
+|------|----------|
+| `~/.cropscode/credentials.json` | Auth token from `cropscode login` |
+| `~/.cropscode/worker.json` | Worker registration state |
+| `~/.cropscode/config.json` | User preferences (`WORKER_NAME`) |
+
+**Fleet mode** (managed deployments):
+
+| Path | Contents |
+|------|----------|
+| `/etc/cropscode/agent.yaml` | Full agent config (URL, token, mode, security) |
+| `AGENT_CONFIG` env var | Override the YAML path |
+
+Key environment variables: `ORCHESTRATOR_WS_URL`, `WORKER_NAME`, `AGENT_MODE`, `PODMAN_PATH`, `DATA_DIR`, `SECURITY_FLOOR`. See [Environment Variables](/reference/environment-variables) for the full list.
 
 ## Process Management
 

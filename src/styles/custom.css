@@ -80,6 +80,8 @@
   --ec-codePadBlock: 0.75rem;
   --ec-codePadInline: 1.125rem;
   --ec-frm-edTabBarBg: #1e1e1e;
+  --ec-frm-trmTtbBg: #1e1e1e;
+  --ec-frm-trmTtbBrdBtmCol: #3c3c3c;
 }
 
 :root[data-theme='light'] .expressive-code {
@@ -91,6 +93,18 @@
   --ec-codePadBlock: 0.75rem;
   --ec-codePadInline: 1.125rem;
   --ec-frm-edTabBarBg: #f3f3f3;
+  --ec-frm-trmTtbBg: #e0e0e0;
+  --ec-frm-trmTtbBrdBtmCol: #cecece;
+}
+
+/* Terminal frame — colored macOS-style dots (red, yellow, green) */
+.expressive-code .frame.is-terminal .header::before {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  background-color: transparent !important;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2060%2016'%20preserveAspectRatio%3D'xMidYMid%20meet'%3E%3Ccircle%20cx%3D'8'%20cy%3D'8'%20r%3D'8'%20fill%3D'%23ff5f57'%2F%3E%3Ccircle%20cx%3D'30'%20cy%3D'8'%20r%3D'8'%20fill%3D'%23febc2e'%2F%3E%3Ccircle%20cx%3D'52'%20cy%3D'8'%20r%3D'8'%20fill%3D'%2328c840'%2F%3E%3C%2Fsvg%3E") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
 }
 
 /* Starlight defaults to light; override to prefer dark */
@@ -406,7 +420,7 @@ header.header {
 .sl-link-button.primary {
   background: var(--sl-color-text-accent) !important;
   border-color: var(--sl-color-text-accent) !important;
-  color: #f3f3f3 !important;
+  color: var(--signup-text) !important;
 }
 
 .sl-link-button.secondary,
