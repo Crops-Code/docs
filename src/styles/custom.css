@@ -68,15 +68,27 @@
   --docs-muted: #616161;
 }
 
-/* Code blocks — match VS Code dark editor */
+/* Code blocks — match portal code snippet styling */
 :root[data-theme='dark'] .expressive-code {
   --ec-codeBg: #252526;
-  --ec-codeBorder: #3c3c3c;
+  --ec-codeBorder: #4a4a4a;
+  --ec-brdRad: 8px;
+  --ec-brdWd: 1.25px;
+  --ec-brdCol: #4a4a4a;
+  --ec-codePadBlock: 0.75rem;
+  --ec-codePadInline: 1.125rem;
+  --ec-frm-edTabBarBg: #1e1e1e;
 }
 
 :root[data-theme='light'] .expressive-code {
   --ec-codeBg: #ffffff;
-  --ec-codeBorder: #cecece;
+  --ec-codeBorder: #b0b0b0;
+  --ec-brdRad: 8px;
+  --ec-brdWd: 1.25px;
+  --ec-brdCol: #b0b0b0;
+  --ec-codePadBlock: 0.75rem;
+  --ec-codePadInline: 1.125rem;
+  --ec-frm-edTabBarBg: #f3f3f3;
 }
 
 /* Starlight defaults to light; override to prefer dark */
