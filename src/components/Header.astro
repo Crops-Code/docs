@@ -16,7 +16,7 @@ import Search from '@astrojs/starlight/components/Search.astro';
     </a>
     <Search {...Astro.props} />
     <docs-theme-toggle>
-      <button class="theme-toggle" aria-label="Toggle theme">
+      <button class="theme-toggle" aria-label="Toggle theme" onclick="window.__docsToggleTheme && window.__docsToggleTheme()">
         <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
           <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
@@ -50,16 +50,15 @@ import Search from '@astrojs/starlight/components/Search.astro';
         if (moon) moon.style.display = theme === 'dark' ? 'none' : 'block';
       });
     }
-    updateIcons();
-    document.addEventListener('click', function(e) {
-      var btn = e.target.closest && e.target.closest('docs-theme-toggle .theme-toggle');
-      if (!btn) return;
+    window.__docsToggleTheme = function() {
       var current = getTheme();
       var next = current === 'dark' ? 'light' : 'dark';
       if (typeof localStorage !== 'undefined') localStorage.setItem(storageKey, next);
       document.documentElement.dataset.theme = next;
+      if (window.StarlightThemeProvider) window.StarlightThemeProvider.updatePickers(next);
       updateIcons();
-    });
+    };
+    updateIcons();
     matchMedia('(prefers-color-scheme: light)').addEventListener('change', updateIcons);
 
     function splitHeroTitle() {

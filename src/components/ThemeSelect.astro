@@ -2,7 +2,7 @@
 ---
 
 <docs-theme-toggle>
-  <button class="theme-toggle" aria-label="Toggle theme">
+  <button class="theme-toggle" aria-label="Toggle theme" onclick="window.__docsToggleTheme && window.__docsToggleTheme()">
     <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="5"/>
       <line x1="12" y1="1" x2="12" y2="3"/>
@@ -19,39 +19,6 @@
     </svg>
   </button>
 </docs-theme-toggle>
-
-<script is:inline>
-  (function() {
-    var storageKey = 'starlight-theme';
-    function getTheme() {
-      var stored = typeof localStorage !== 'undefined' && localStorage.getItem(storageKey);
-      if (stored === 'dark' || stored === 'light') return stored;
-      return matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    }
-    function updateIcons() {
-      var theme = getTheme();
-      document.querySelectorAll('docs-theme-toggle').forEach(function(el) {
-        var sun = el.querySelector('.icon-sun');
-        var moon = el.querySelector('.icon-moon');
-        if (sun) sun.style.display = theme === 'dark' ? 'block' : 'none';
-        if (moon) moon.style.display = theme === 'dark' ? 'none' : 'block';
-      });
-    }
-    updateIcons();
-
-    document.addEventListener('click', function(e) {
-      var btn = e.target.closest('docs-theme-toggle .theme-toggle');
-      if (!btn) return;
-      var current = getTheme();
-      var next = current === 'dark' ? 'light' : 'dark';
-      if (typeof localStorage !== 'undefined') localStorage.setItem(storageKey, next);
-      document.documentElement.dataset.theme = next;
-      updateIcons();
-    });
-
-    matchMedia('(prefers-color-scheme: light)').addEventListener('change', updateIcons);
-  })();
-</script>
 
 <style>
   docs-theme-toggle {
