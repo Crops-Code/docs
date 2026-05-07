@@ -200,7 +200,13 @@ import Search from '@astrojs/starlight/components/Search.astro';
   }
 
   @media (max-width: 50rem) {
+    .header {
+      padding-right: 3.5rem;
+    }
     .header-login, .header-signup {
+      display: none;
+    }
+    docs-theme-toggle {
       display: none;
     }
     .header-logo {
