@@ -29,14 +29,20 @@ description: AI agent runtimes available in CropsCode.
 Every container includes these tools regardless of agent:
 
 - **GitHub CLI** (`gh`) — PR creation, issue management
-- **tmux** — terminal session management
-- **neovim** — text editing
-- **Git** — version control
 - **Oh My Posh** — shell prompt theming
+- **Nerd Font** — terminal icons
+- **Shell Config** — bash history, readline, tab completion
+- **Neovim** — text editing
 
-## Container Images
+Infrastructure (always present):
+- **Git** — version control
+- **Node.js** — runtime
+- **curl** — HTTP client
+- **tmux** — terminal multiplexer
 
-Each agent has a dedicated Dockerfile:
+## Agent Snippets
+
+Each agent has a dedicated Dockerfile snippet:
 
 | Agent | Image |
 |-------|-------|

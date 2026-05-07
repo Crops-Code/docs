@@ -49,10 +49,10 @@ systemctl --user start podman.socket
 **Cause:** The container image hasn't been built on this worker.
 
 **Fix:**
-```bash
-podman build -t localhost/claude-code-terminal:latest \
-  -f apps/orchestrator/containers/claude-code-terminal/Containerfile .
-```
+
+Build the image from the orchestrator dashboard or ask CropPilot:
+
+> "Build the claude-code-terminal image on worker-1"
 
 Or pull from the registry if available.
 

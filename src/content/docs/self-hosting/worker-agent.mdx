@@ -3,7 +3,7 @@ title: Worker Agent
 description: How the CropsCode worker agent works internally.
 ---
 
-The worker agent is a lightweight Node.js daemon that runs on each machine and bridges the orchestrator to local Podman containers.
+The worker agent is a lightweight daemon that runs on each machine and bridges the orchestrator to local Podman containers.
 
 ## Architecture
 
@@ -23,7 +23,7 @@ Podman Containers
 ## Lifecycle
 
 1. **Connects** to the orchestrator via WebSocket (outbound, authenticated with worker token)
-2. **Registers** itself with system info (hostname, CPU count, RAM, OS)
+2. **Registers** itself with system info (hostname, CPU count, RAM, OS, container engines)
 3. **Sends heartbeats** every 10 seconds (CPU usage, free memory, container count)
 4. **Receives commands** from the orchestrator
 5. **Executes** container operations locally via Podman
@@ -32,11 +32,27 @@ Podman Containers
 
 | Command | Action |
 |---------|--------|
-| `container.create` | Runs `podman run` to start a new container |
-| `container.stop` | Stops and removes a container |
-| `terminal.open` | Starts an interactive shell via `podman exec -it` |
-| `terminal.input` | Forwards keystrokes to the shell |
-| `terminal.resize` | Resizes the terminal dimensions |
+| `container.create` | Create a new container from image |
+| `container.setup` | Run initial setup (clone repo, generate CLAUDE.md) |
+| `container.start` | Start a stopped container |
+| `container.stop` | Stop a running container |
+| `container.remove` | Remove a container |
+| `container.list` | List containers for a tenant |
+| `container.list-all` | List all containers across tenants |
+| `container.exec` | Execute a command inside a container |
+| `container.exec.background` | Run a background command in a container |
+| `container.exec.background.kill` | Kill a background command |
+| `container.exec.background.capture` | Capture background command output |
+| `images.list` | List available container images |
+| `image.check` | Check if an image exists |
+| `image.delete` | Delete a container image |
+| `image.build` | Build a container image from Dockerfile |
+| `terminal.open` | Start an interactive shell session |
+| `terminal.input` | Forward keystrokes to a terminal |
+| `terminal.resize` | Resize terminal dimensions |
+| `terminal.close` | Close a terminal session |
+| `display.open` | Open a VNC display session |
+| `display.close` | Close a VNC display session |
 
 ## Terminal Streaming
 
