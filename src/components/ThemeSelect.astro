@@ -50,4 +50,12 @@
   .icon-moon {
     display: none;
   }
+
+  :global(:root[data-theme='dark']) .icon-sun {
+    display: block;
+  }
+
+  :global(:root[data-theme='light']) .icon-moon {
+    display: block;
+  }
 </style>

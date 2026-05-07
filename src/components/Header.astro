@@ -164,6 +164,14 @@ import Search from '@astrojs/starlight/components/Search.astro';
     display: none;
   }
 
+  :global(:root[data-theme='dark']) .icon-sun {
+    display: block;
+  }
+
+  :global(:root[data-theme='light']) .icon-moon {
+    display: block;
+  }
+
   .header-login {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-size: 0.875rem;
