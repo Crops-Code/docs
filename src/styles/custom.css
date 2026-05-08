@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@100..800&display=swap');
 
 :root {
   --sl-font: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
@@ -182,22 +182,43 @@ nav.sidebar a {
   font-size: 0.875rem;
   padding: 0.625rem 1rem;
   border-radius: 0.25rem;
+  color: var(--sl-color-gray-2);
   transition: background-color 150ms ease, color 150ms ease;
 }
 
 nav.sidebar a:hover,
 nav.sidebar a:focus {
   background-color: var(--sl-color-hairline-light);
-  color: var(--sl-color-text);
+  color: var(--sl-color-white);
 }
 
-/* Active sidebar item — 2px left accent bar matching portal */
-nav.sidebar a[aria-current='page'] {
-  background-color: var(--sl-color-accent-low);
-  color: var(--sl-color-accent);
-  border-left: 2px solid var(--sl-color-accent);
-  padding-left: calc(1rem - 2px);
-  font-weight: 600;
+/* Active sidebar item — text color + left accent bar, matching portal */
+nav.sidebar a[aria-current='page'],
+nav.sidebar a[aria-current='page']:hover,
+nav.sidebar a[aria-current='page']:focus {
+  background: transparent;
+  color: var(--sl-color-white);
+  font-weight: 400;
+  position: relative;
+}
+
+nav.sidebar a[aria-current='page']::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+  background: #005fb8;
+}
+
+:root[data-theme='dark'] nav.sidebar a[aria-current='page']::before {
+  background: #569cd6;
+}
+
+nav.sidebar li {
+  border-inline-start: none !important;
 }
 
 /* Sidebar content — remove Starlight's default padding/gap for flush items */
@@ -222,6 +243,10 @@ nav.sidebar .group-label {
   align-items: center;
   padding: 0 1rem;
   transition: color 150ms ease, background-color 150ms ease;
+}
+
+nav.sidebar .group-label .large {
+  color: inherit;
 }
 
 nav.sidebar details > summary {
@@ -490,10 +515,10 @@ a:not([class]):hover {
    ============================================================ */
 
 /* Fix double header — Starlight wraps our custom Header in its own
-   <header class="header">. Hide the outer wrapper's border/bg so
-   only our inner .header renders visually. */
+   <header class="header">. Reset the outer wrapper's chrome so
+   only our inner .header controls the visual layout. */
 header.header {
-  background: transparent !important;
+  background: var(--sl-color-bg-nav) !important;
   border: none !important;
   padding: 0 !important;
   height: auto !important;
@@ -813,10 +838,31 @@ header.header {
   padding: 0 0 0.5rem;
 }
 
-.collapsed-logo img {
+.collapsed-logo-img {
   width: 40px;
   height: 40px;
   object-fit: contain;
+}
+
+.collapsed-logo-chevron {
+  display: none;
+  color: var(--sl-color-gray-2);
+}
+
+.sidebar-collapsed-strip:hover .collapsed-logo-img {
+  display: none;
+}
+
+.sidebar-collapsed-strip:hover .collapsed-logo-chevron {
+  display: block;
+}
+
+.sidebar-collapsed-strip:hover .collapsed-logo {
+  color: var(--sl-color-gray-2);
+}
+
+.sidebar-collapsed-strip:hover .collapsed-logo:hover {
+  color: var(--sl-color-text);
 }
 
 /* ============================================================
@@ -927,10 +973,106 @@ sl-sidebar-state-persist > ul > li:nth-child(7) > details > summary .group-label
 }
 
 .bottom-nav-item.active {
-  color: var(--sl-color-accent);
+  color: #005fb8;
+}
+
+:root[data-theme='dark'] .bottom-nav-item.active {
+  color: #569cd6;
 }
 
 .bottom-nav-item svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ============================================================
+   MOBILE MENU PANEL — slide-up from bottom nav (portal-style)
+   ============================================================ */
+@media (max-width: 50rem) {
+  starlight-menu-button {
+    display: none !important;
+  }
+
+  .bottom-nav {
+    z-index: 9999 !important;
+  }
+
+  .breadcrumbs {
+    display: flex !important;
+  }
+
+  .breadcrumb-sep,
+  .breadcrumb-link {
+    display: none;
+  }
+
+  .breadcrumb-current {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+}
+
+.bottom-nav-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.bottom-nav-backdrop.open {
+  display: block;
+}
+
+.bottom-nav-menu {
+  display: none;
+  position: fixed;
+  bottom: 3.5rem;
+  left: 0;
+  right: 0;
+  z-index: 9998;
+  background: var(--sl-color-bg-sidebar);
+  border-top: 1px solid var(--sl-color-hairline);
+  animation: slide-up 150ms ease-out;
+}
+
+.bottom-nav-menu.open {
+  display: block;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.bottom-nav-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  color: var(--sl-color-gray-2);
+  text-decoration: none;
+  transition: color 100ms ease, background-color 100ms ease;
+}
+
+.bottom-nav-menu-item:hover {
+  color: var(--sl-color-text);
+  text-decoration: none;
+}
+
+.bottom-nav-menu-item.active {
+  color: #005fb8;
+  background: rgba(0, 95, 184, 0.1);
+}
+
+:root[data-theme='dark'] .bottom-nav-menu-item.active {
+  color: #569cd6;
+  background: rgba(86, 156, 214, 0.1);
+}
+
+.bottom-nav-menu-item svg {
   width: 20px;
   height: 20px;
+  flex-shrink: 0;
 }
