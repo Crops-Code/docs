@@ -46,7 +46,6 @@ export const GET: APIRoute = async () => {
     return new Response(JSON.stringify({ pages }, null, 2), {
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
       },
     });
   } catch {
@@ -54,7 +53,6 @@ export const GET: APIRoute = async () => {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
       },
     });
   }
