@@ -278,6 +278,28 @@ starlight-search button:hover {
   color: var(--sl-color-text) !important;
 }
 
+/* Kbd badge inside search button — match portal */
+site-search button kbd,
+starlight-search button kbd {
+  font-size: 10px !important;
+  padding: 1px 4px !important;
+  border-radius: 3px !important;
+}
+
+:root[data-theme='dark'] site-search button kbd,
+:root[data-theme='dark'] starlight-search button kbd {
+  background-color: #3c3c3c !important;
+  border: 1px solid #4a4a4a !important;
+  color: #616161 !important;
+}
+
+:root[data-theme='light'] site-search button kbd,
+:root[data-theme='light'] starlight-search button kbd {
+  background-color: #cecece !important;
+  border: 1px solid #b0b0b0 !important;
+  color: #767676 !important;
+}
+
 /* ============================================================
    CONTENT AREA — match portal (px-6 py-10)
    ============================================================ */
@@ -286,13 +308,14 @@ starlight-search button:hover {
   padding-block: 2.5rem;
 }
 
-/* Hide page title panel — breadcrumb already shows the page name */
-.content-panel:has(h1#_top) {
+/* Hide page title panel — breadcrumb already shows the page name.
+   Exclude splash/hero pages where the title panel contains the hero. */
+:root:not([data-has-hero]) .content-panel:has(h1#_top) {
   display: none;
 }
 
 /* Remove border-top left over from hidden title panel */
-.content-panel:has(h1#_top) + .content-panel {
+:root:not([data-has-hero]) .content-panel:has(h1#_top) + .content-panel {
   border-top: none;
 }
 
@@ -315,6 +338,26 @@ starlight-search button:hover {
 /* "On this page" sidebar — subtle left border on the TOC content */
 .right-sidebar {
   border-inline-start: none !important;
+}
+
+@media (max-width: 50rem) {
+  .right-sidebar,
+  starlight-toc {
+    display: none !important;
+  }
+}
+
+@media (max-width: 72rem) {
+  mobile-starlight-toc {
+    display: none !important;
+  }
+  .main-frame {
+    --sl-mobile-toc-height: 0rem !important;
+  }
+  .main-pane {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
 }
 
 starlight-toc nav {
@@ -456,6 +499,29 @@ header.header {
   height: auto !important;
 }
 
+/* Home page — swap nav/body colors to match portal home page.
+   Portal: white nav + gray body (light), #252526 nav + #1e1e1e body (dark).
+   Docs defaults are inverted, so override on splash pages. */
+:root[data-has-hero][data-theme='light'] {
+  --sl-color-bg: #f3f3f3;
+  --sl-color-bg-nav: #ffffff;
+}
+
+:root[data-has-hero][data-theme='dark'] {
+  --sl-color-bg: #1e1e1e;
+  --sl-color-bg-nav: #252526;
+}
+
+:root[data-has-hero] .header {
+  background: var(--sl-color-bg-nav) !important;
+}
+
+/* Home page login/signup — use Inter to match portal nav */
+:root[data-has-hero] .header-login,
+:root[data-has-hero] .header-signup {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
 /* Hero section — centered, constrained width like marketing portal */
 .hero {
   text-align: center;
@@ -584,7 +650,7 @@ header.header {
    BREADCRUMBS — portal-style slash-separated path in header
    ============================================================ */
 .breadcrumbs {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 0.25rem;
   font-size: 0.875rem;
@@ -595,6 +661,12 @@ header.header {
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
+}
+
+@media (min-width: 50rem) {
+  .breadcrumbs {
+    display: flex;
+  }
 }
 
 .breadcrumb-sep {
@@ -824,8 +896,11 @@ sl-sidebar-state-persist > ul > li:nth-child(7) > details > summary .group-label
 }
 
 @media (max-width: 50rem) {
-  :not([data-has-hero]) .bottom-nav {
+  :root:not([data-has-hero]) .bottom-nav {
     display: flex;
+  }
+  :root:not([data-has-hero]) .search-trigger {
+    display: none;
   }
 }
 

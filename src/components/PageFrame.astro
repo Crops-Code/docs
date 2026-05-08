@@ -2,7 +2,9 @@
 import MobileMenuToggle from 'virtual:starlight/components/MobileMenuToggle';
 import BottomNav from './BottomNav.astro';
 
-const { hasSidebar } = Astro.locals.starlightRoute;
+const { hasSidebar, entry } = Astro.locals.starlightRoute;
+const isHomePage = !entry?.slug || entry.slug === '';
+const showSidebar = hasSidebar && !isHomePage;
 const currentPath = Astro.url.pathname;
 
 const collapsedItems = [
@@ -22,7 +24,7 @@ function isActive(prefix: string) {
 
 <div class="page sl-flex">
 	{
-		hasSidebar && (
+		showSidebar && (
 			<nav class="sidebar print:hidden" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
 				<MobileMenuToggle />
 				<div id="starlight__sidebar" class="sidebar-pane">
@@ -34,7 +36,7 @@ function isActive(prefix: string) {
 		)
 	}
 	{
-		hasSidebar && (
+		showSidebar && (
 			<aside class="sidebar-collapsed-strip print:hidden">
 				<div class="collapsed-icons">
 					{collapsedItems.map((item) => (
