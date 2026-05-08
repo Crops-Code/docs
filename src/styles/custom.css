@@ -6,7 +6,7 @@
   --sl-text-body-sm: 0.875rem;
   --sl-nav-height: 3rem;
   --sl-sidebar-width: 240px;
-  --sl-content-width: 45rem;
+  --sl-content-width: 55rem;
   --sl-nav-pad-x: 1rem;
   --docs-green: #10c0f0;
   --docs-border2: #3c3c3c;
@@ -344,9 +344,10 @@ starlight-search button kbd {
   border-top: none;
 }
 
-/* Center content between sidebar and TOC */
-[data-has-sidebar][data-has-toc] .main-pane {
-  --sl-content-margin-inline: auto;
+/* Center content + TOC as a single unit in the viewport */
+.main-frame > .lg\:sl-flex {
+  max-width: calc(var(--sl-content-width) + var(--sl-sidebar-width));
+  margin-inline: auto;
 }
 
 
@@ -378,10 +379,6 @@ starlight-search button kbd {
   }
   .main-frame {
     --sl-mobile-toc-height: 0rem !important;
-  }
-  .main-pane {
-    max-width: 48rem;
-    margin-inline: auto;
   }
 }
 
