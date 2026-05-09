@@ -247,6 +247,7 @@ nav.sidebar .group-label {
 
 nav.sidebar .group-label .large {
   color: inherit;
+  font-weight: inherit;
 }
 
 nav.sidebar details > summary {
