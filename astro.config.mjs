@@ -99,7 +99,7 @@ export default defineConfig({
           items: [
             { label: 'Home', link: 'https://cropscode.io' },
             { label: 'Console', link: 'https://console.cropscode.io' },
-            { label: 'Admin', link: 'https://admin.cropscode.io' },
+            { label: 'Admin', link: 'https://cropscode.io/admin' },
           ],
         },
       ],
