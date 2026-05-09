@@ -8,13 +8,13 @@ const showSidebar = hasSidebar && !isHomePage;
 const currentPath = Astro.url.pathname;
 
 const collapsedItems = [
-  { label: 'Menu', prefix: '', icon: 'menu', action: 'expand' },
   { label: 'Getting Started', href: '/getting-started/quickstart/', prefix: '/getting-started/', icon: 'book' },
   { label: 'Concepts', href: '/concepts/workers/', prefix: '/concepts/', icon: 'puzzle' },
   { label: 'Guides', href: '/guides/launch-from-ticket/', prefix: '/guides/', icon: 'map' },
   { label: 'CLI', href: '/cli/overview/', prefix: '/cli/', icon: 'terminal' },
   { label: 'Self-Hosting', href: '/self-hosting/worker-agent/', prefix: '/self-hosting/', icon: 'server' },
   { label: 'Reference', href: '/reference/plans-and-limits/', prefix: '/reference/', icon: 'file' },
+  { label: 'Links', href: 'https://cropscode.io', prefix: '', icon: 'link' },
 ];
 
 function isActive(prefix: string) {
@@ -40,14 +40,7 @@ function isActive(prefix: string) {
 			<aside class="sidebar-collapsed-strip print:hidden">
 				<div class="collapsed-icons">
 					{collapsedItems.map((item) => (
-						item.action === 'expand' ? (
-							<button class="collapsed-icon-item" aria-label={item.label} data-sidebar-expand title={item.label}>
-								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-									<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
-								</svg>
-							</button>
-						) : (
-							<a href={item.href} class:list={['collapsed-icon-item', { active: isActive(item.prefix) }]} title={item.label}>
+							<a href={item.href} class:list={['collapsed-icon-item', { active: isActive(item.prefix) }]} title={item.label} target={item.icon === 'link' ? '_blank' : undefined} rel={item.icon === 'link' ? 'noopener' : undefined}>
 								{item.icon === 'book' && (
 									<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 										<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
@@ -80,8 +73,12 @@ function isActive(prefix: string) {
 										<line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line>
 									</svg>
 								)}
+								{item.icon === 'link' && (
+									<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+										<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+									</svg>
+								)}
 							</a>
-						)
 					))}
 				</div>
 				<button class="collapsed-logo" data-sidebar-expand aria-label="Expand sidebar" title="Expand sidebar">
@@ -255,7 +252,7 @@ function isActive(prefix: string) {
 			width: 48px;
 			flex-shrink: 0;
 			background-color: var(--sl-color-bg-sidebar);
-			border-inline-end: 1px solid var(--sl-color-hairline-shade);
+			border-inline-end: 1px solid var(--sl-color-hairline);
 		}
 	}
 </style>
