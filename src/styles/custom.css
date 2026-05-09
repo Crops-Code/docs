@@ -677,7 +677,7 @@ header.header {
   align-items: center;
   gap: 0.25rem;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--sl-color-gray-2);
   margin-inline-start: 0.75rem;
   white-space: nowrap;
