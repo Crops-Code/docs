@@ -231,10 +231,10 @@ nav.sidebar sl-sidebar-state-persist > ul > li {
   margin-top: 0 !important;
 }
 
-/* Sidebar group labels — match portal: text-sm, font-weight 500, h-[48px], px-4 */
+/* Sidebar group labels — match portal: text-sm, font-weight 400, h-[48px], px-4 */
 nav.sidebar .group-label {
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
   color: var(--sl-color-gray-2);
