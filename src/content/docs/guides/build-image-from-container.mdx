@@ -1,0 +1,129 @@
+---
+title: Build an Image from a Container
+description: Snapshot a running container into a reusable golden image, then launch from it.
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+You've tuned a container by hand — installed tools, cloned a repo, pasted credentials, finished the Windows first-boot install — and now you want every future launch to start from that exact state. **Building an image from a container** snapshots a running container into a reusable image (a "golden image") so you don't have to re-run a build or rewrite a Containerfile.
+
+<Aside type="note">
+  Building an image from a container requires a **Pro or Enterprise** plan and the **owner**, **admin**, or **member** role. Starter users see an upgrade prompt in place of the form.
+</Aside>
+
+## Before you start
+
+The source-container picker only lists containers that are **all** of:
+
+- **yours** — you launched it
+- **running**
+- **not part of a Greenhouse** — greenhouse-managed containers are excluded
+
+If a container you expect isn't listed, check it against these three rules first.
+
+## Build the image
+
+<Steps>
+
+1. Open **Create Image** and select the **From Container** segment.
+
+2. Pick the **target worker**. The image is built on — and stays on — this one worker. (Images aren't replicated across workers.)
+
+3. Pick the **source container** from the filterable list (only eligible containers appear — see above).
+
+4. Enter an **image name**. Names are lowercase, must start with a letter or number, are 2–64 characters, and may use `a–z`, `0–9`, `.`, `_`, and `-`.
+
+5. Enter a **tag** (optional — defaults to `latest`). Tags are 1–63 characters and may use `A–Z`, `a–z`, `0–9`, `.`, `_`, and `-`.
+
+6. Optionally add **custom capabilities** as chips — up to **10**, each **40 characters or fewer**, with no commas.
+
+7. Submit. A **Linux** snapshot finishes in well under a minute. A **Windows** snapshot is slower (it can take several minutes) — see below.
+
+</Steps>
+
+## Capabilities
+
+Two kinds of capability labels travel with the image and render as chips in the launch picker:
+
+- **Inherited capabilities** are derived automatically from the source container and shown read-only — you don't re-enter them.
+- **Custom capabilities** are the free-form labels you add. They're stored with a `custom:` prefix (e.g. `custom:tax-prep-2025`) so they never collide with built-in capability ids, and they render beside the built-in badges.
+
+Re-declaring a capability the source already carries won't duplicate it — the lists are merged and de-duplicated.
+
+## Linux vs Windows
+
+**Linux** images are captured directly from the container's filesystem. The snapshot is fast and includes everything you added — for example, a repository you cloned into the container persists in the resulting image.
+
+**Windows** images work differently:
+
+<Aside type="caution">
+  Snapshotting a Windows container **stops it briefly** to capture a consistent disk, so the snapshot takes longer, and the resulting image **only runs on workers that support Windows VMs**.
+</Aside>
+
+The payoff is large: launching from a Windows golden image skips the 20–30 minute first-boot Windows install and reaches a working desktop in seconds, because the post-install disk is baked into the image.
+
+## Launch from your golden image
+
+A snapshot lives on exactly **one** worker, so launches need to land on that worker. CropsCode handles this through the launch target picker.
+
+<Steps>
+
+1. Open the launch flow and open the **target** picker.
+
+2. Find your worker under the red **Fleet** group (it mirrors the green **Greenhouses** group). A fleet worker appears here when it belongs to **your tenant**.
+
+3. Select it. This **pins the launch to that worker**, so it can serve the image stored there.
+
+4. Pick your golden image — filter by name, tag, or capability.
+
+5. Launch.
+
+</Steps>
+
+The same red **Fleet** group appears in **Quick Launch** and the **Schedule** create panel.
+
+<Aside type="note">
+  Shared or foreign fleet workers never appear here — only fleet workers owned by your tenant. Launching directly on a fleet worker from **CropPilot (the AI agent)** isn't supported yet; the agent still routes fleet capacity through a Greenhouse.
+</Aside>
+
+## Reference
+
+### Eligibility & gating
+
+| What | Rule |
+|---|---|
+| Plan | Pro or Enterprise (`images.publish`) |
+| Role | owner, admin, or member |
+| Source container | yours · running · not in a Greenhouse |
+
+### Validation limits
+
+| Field | Rule |
+|---|---|
+| Image name | lowercase, leading alphanumeric, 2–64 chars, `[a-z0-9._-]` |
+| Tag | 1–63 chars, `[A-Za-z0-9._-]`, defaults to `latest` |
+| Custom capabilities | up to 10, each ≤40 chars, no commas, stored as `custom:<name>` |
+
+### Image labels
+
+Every snapshot is tagged with these OCI labels, which CropsCode reads to render the image in the pickers:
+
+| Label | Value | Meaning |
+|---|---|---|
+| `io.cropscode.managed` | `true` | Produced by CropsCode; shown in the pickers |
+| `io.cropscode.os` | `linux` or `windows` | Drives OS badges and size hints |
+| `io.cropscode.owner` | your user id | Who created the image |
+| `io.cropscode.source` | `container-commit` | Marks it as a snapshot (vs a built image) |
+| `io.cropscode.capabilities` | comma-separated list, including `custom:` entries | Renders as chips |
+
+<Aside type="tip">
+  Image metadata lives in these labels on the image itself — there's no separate server-side image registry. An image is therefore only visible while the worker that holds it is online (you can't launch on an offline worker anyway).
+</Aside>
+
+## Related
+
+- [Containers](/concepts/containers)
+- [Custom Containerfile](/guides/custom-containerfile)
+- [Workers](/concepts/workers)
+- [Greenhouse](/guides/greenhouse)
+- [Plans & Limits](/reference/plans-and-limits)
