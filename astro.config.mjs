@@ -54,6 +54,7 @@ export default defineConfig({
           items: [
             { label: 'Launch from Ticket', slug: 'guides/launch-from-ticket' },
             { label: 'Custom Containerfile', slug: 'guides/custom-containerfile' },
+            { label: 'Build from Container', slug: 'guides/build-image-from-container' },
             { label: 'Cron Workflows', slug: 'guides/cron-workflows' },
             { label: 'Team Setup', slug: 'guides/team-setup' },
             { label: 'Greenhouse', slug: 'guides/greenhouse' },

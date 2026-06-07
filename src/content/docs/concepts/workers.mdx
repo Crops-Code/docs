@@ -38,6 +38,16 @@ Greenhouse is CropsCode's managed compute offering. Instead of running workers o
 
 See the [Greenhouse guide](/guides/greenhouse) for setup details.
 
+## Fleet Workers as Launch Targets
+
+Fleet workers are CropsCode-managed shared workers. You normally reach fleet capacity through a [Greenhouse](/guides/greenhouse) — but a fleet worker that belongs to **your tenant** is also a direct launch target.
+
+When one is available, it appears in a red **Fleet** group in the launch target picker, alongside your own (self-hosted) workers and the green **Greenhouses** group. The rule is ownership: a worker is launchable when it's in your tenant — shared or foreign fleet workers are never shown.
+
+Selecting a fleet worker **pins the launch to that worker**, so it can serve images that live only there. This is what makes the golden-image workflow possible: build an image on a fleet worker, then launch from it on that same worker. See [Build an Image from a Container](/guides/build-image-from-container).
+
+Launching directly on a fleet worker from **CropPilot (the AI agent)** isn't supported yet; the agent still routes fleet capacity through a Greenhouse.
+
 ## How Workers Connect
 
 ```
