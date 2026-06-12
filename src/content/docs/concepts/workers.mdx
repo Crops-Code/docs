@@ -3,6 +3,10 @@ title: Workers
 description: Understand self-hosted workers and Greenhouse managed compute.
 ---
 
+import ThemedImage from '../../../components/ThemedImage.astro';
+import workersDark from '../../../assets/screenshots/workers-fleet-groups-dark.png';
+import workersLight from '../../../assets/screenshots/workers-fleet-groups-light.png';
+
 A **worker** is a machine that runs containers for CropsCode. It connects outbound to the orchestrator over WebSocket and executes container operations locally using Podman.
 
 ## Self-Hosted Workers
@@ -43,6 +47,14 @@ See the [Greenhouse guide](/guides/greenhouse) for setup details.
 Fleet workers are CropsCode-managed shared workers. You normally reach fleet capacity through a [Greenhouse](/guides/greenhouse) — but a fleet worker that belongs to **your tenant** is also a direct launch target.
 
 When one is available, it appears in a red **Fleet** group in the launch target picker, alongside your own (self-hosted) workers and the green **Greenhouses** group. The rule is ownership: a worker is launchable when it's in your tenant — shared or foreign fleet workers are never shown.
+
+The Workers page uses the same grouping — self-hosted machines carry a **BYOM** badge, tenant-owned fleet workers a red **Fleet** badge:
+
+<ThemedImage
+  dark={workersDark}
+  light={workersLight}
+  alt="The Workers page showing three online workers: a self-hosted laptop with a BYOM badge, and two tenant-owned fleet workers with red Fleet badges, each card listing CPU, memory, disk, container count, and security gateway status."
+/>
 
 Selecting a fleet worker **pins the launch to that worker**, so it can serve images that live only there. This is what makes the golden-image workflow possible: build an image on a fleet worker, then launch from it on that same worker. See [Build an Image from a Container](/guides/build-image-from-container).
 

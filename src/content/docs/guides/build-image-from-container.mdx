@@ -4,6 +4,17 @@ description: Snapshot a running container into a reusable golden image, then lau
 ---
 
 import { Aside, Steps } from '@astrojs/starlight/components';
+import ThemedImage from '../../../components/ThemedImage.astro';
+import formDark from '../../../assets/screenshots/build-from-container-form-dark.png';
+import formLight from '../../../assets/screenshots/build-from-container-form-light.png';
+import winWarnDark from '../../../assets/screenshots/build-from-container-windows-warning-dark.png';
+import winWarnLight from '../../../assets/screenshots/build-from-container-windows-warning-light.png';
+import fleetGroupDark from '../../../assets/screenshots/launch-target-fleet-group-dark.png';
+import fleetGroupLight from '../../../assets/screenshots/launch-target-fleet-group-light.png';
+import fleetSelectedDark from '../../../assets/screenshots/launch-target-fleet-selected-dark.png';
+import fleetSelectedLight from '../../../assets/screenshots/launch-target-fleet-selected-light.png';
+import customChipsDark from '../../../assets/screenshots/launch-image-custom-chips-dark.png';
+import customChipsLight from '../../../assets/screenshots/launch-image-custom-chips-light.png';
 
 You've tuned a container by hand — installed tools, cloned a repo, pasted credentials, finished the Windows first-boot install — and now you want every future launch to start from that exact state. **Building an image from a container** snapshots a running container into a reusable image (a "golden image") so you don't have to re-run a build or rewrite a Containerfile.
 
@@ -41,6 +52,14 @@ If a container you expect isn't listed, check it against these three rules first
 
 </Steps>
 
+The completed form, with a source container selected, the inherited capabilities preview, and two custom capability chips added:
+
+<ThemedImage
+  dark={formDark}
+  light={formLight}
+  alt="The From Container form on the Create Image page: a target worker and source container are selected, the image name and tag are filled in, inherited capabilities are shown as read-only badges, and two custom capability chips (custom:tax-prep-2026 and custom:internal-vpn) have been added above the Publish Container as Image button."
+/>
+
 ## Capabilities
 
 Two kinds of capability labels travel with the image and render as chips in the launch picker:
@@ -62,6 +81,12 @@ Re-declaring a capability the source already carries won't duplicate it — the 
 
 The payoff is large: launching from a Windows golden image skips the 20–30 minute first-boot Windows install and reaches a working desktop in seconds, because the post-install disk is baked into the image.
 
+<ThemedImage
+  dark={winWarnDark}
+  light={winWarnLight}
+  alt="The From Container form with a Windows source container selected. A warning banner reads: Snapshotting a Windows container can be slow. The resulting image will only run on workers that support Windows VMs."
+/>
+
 ## Launch from your golden image
 
 A snapshot lives on exactly **one** worker, so launches need to land on that worker. CropsCode handles this through the launch target picker.
@@ -72,9 +97,27 @@ A snapshot lives on exactly **one** worker, so launches need to land on that wor
 
 2. Find your worker under the red **Fleet** group (it mirrors the green **Greenhouses** group). A fleet worker appears here when it belongs to **your tenant**.
 
-3. Select it. This **pins the launch to that worker**, so it can serve the image stored there.
+   <ThemedImage
+     dark={fleetGroupDark}
+     light={fleetGroupLight}
+     alt="The launch target picker open, showing a Workers group with a self-hosted worker and a red Fleet group containing two tenant-owned fleet workers."
+   />
 
-4. Pick your golden image — filter by name, tag, or capability.
+3. Select it. This **pins the launch to that worker**, so it can serve the image stored there. The trigger turns red and shows a `Fleet · N containers` sublabel.
+
+   <ThemedImage
+     dark={fleetSelectedDark}
+     light={fleetSelectedLight}
+     alt="The target picker with a fleet worker selected: the control has a red border and shows the sublabel Fleet · 1 container."
+   />
+
+4. Pick your golden image — filter by name, tag, or capability. Custom capabilities render as chips beside the built-in capability badges.
+
+   <ThemedImage
+     dark={customChipsDark}
+     light={customChipsLight}
+     alt="The image picker open over a fleet worker, listing a golden image with built-in capability badges (Terminal, Node.js, Git, Neovim, Python, Claude) plus two custom capability chips: tax-prep-2026 and internal-vpn."
+   />
 
 5. Launch.
 
