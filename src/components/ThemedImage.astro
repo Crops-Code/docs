@@ -16,7 +16,7 @@ import type { ImageMetadata } from 'astro';
  *   import formDark from '../../../assets/screenshots/build-from-container-form-dark.png';
  *   import formLight from '../../../assets/screenshots/build-from-container-form-light.png';
  *
- *   <ThemedImage dark={formDark} light={formLight} alt="The From Container form" />
+ *   <ThemedImage dark={formDark} light={formLight} alt="The From Container form" title="Create Image" />
  */
 interface Props {
   /** Image shown when the docs theme is dark. */
@@ -28,9 +28,12 @@ interface Props {
   alt: string;
   /** URL-bar text in the faux browser chrome. */
   url?: string;
+  /** Page title shown on the right of the chrome bar (the browser-tab name),
+   *  mirroring the portal's `app-screenshot` component. */
+  title?: string;
 }
 
-const { dark, light, alt, url = 'console.cropscode.io' } = Astro.props;
+const { dark, light, alt, url = 'console.cropscode.io', title } = Astro.props;
 ---
 
 <figure class="themed-image">
@@ -40,6 +43,7 @@ const { dark, light, alt, url = 'console.cropscode.io' } = Astro.props;
       <span class="dot" style="background:#ffbd2e"></span>
       <span class="dot" style="background:#28ca41"></span>
       <span class="url">{url}</span>
+      {title && <span class="title">{title}</span>}
     </div>
     <div class="browser-body">
       <Image src={dark} alt={alt} class="themed-image-dark" loading="lazy" />
@@ -81,6 +85,14 @@ const { dark, light, alt, url = 'console.cropscode.io' } = Astro.props;
     font-family: var(--sl-font-mono, ui-monospace, monospace);
     font-size: 0.75rem;
     line-height: 1.4;
+  }
+  .title {
+    margin-left: auto;
+    color: var(--sl-color-gray-3);
+    font-family: var(--sl-font-mono, ui-monospace, monospace);
+    font-size: 0.7rem;
+    line-height: 1.4;
+    white-space: nowrap;
   }
   .browser-body :global(img) {
     display: block;
