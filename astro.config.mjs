@@ -46,6 +46,16 @@ export default defineConfig({
             { label: 'CropPilot', slug: 'concepts/croppilot' },
             { label: 'Tickets', slug: 'concepts/tickets' },
             { label: 'Runtime Catalog', slug: 'concepts/runtime-catalog' },
+            {
+              label: 'Automation',
+              collapsed: true,
+              items: [
+                { label: 'Overview', slug: 'concepts/automation' },
+                { label: 'Schedules', slug: 'guides/schedules' },
+                { label: 'Runs', slug: 'guides/runs' },
+                { label: 'Engines', slug: 'concepts/subagents' },
+              ],
+            },
           ],
         },
         {
@@ -55,7 +65,6 @@ export default defineConfig({
             { label: 'Launch from Ticket', slug: 'guides/launch-from-ticket' },
             { label: 'Custom Containerfile', slug: 'guides/custom-containerfile' },
             { label: 'Build from Container', slug: 'guides/build-image-from-container' },
-            { label: 'Cron Workflows', slug: 'guides/cron-workflows' },
             { label: 'Team Setup', slug: 'guides/team-setup' },
             { label: 'Greenhouse', slug: 'guides/greenhouse' },
             { label: 'VS Code Extension', slug: 'guides/vscode-extension' },

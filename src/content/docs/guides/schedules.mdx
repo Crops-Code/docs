@@ -1,0 +1,134 @@
+---
+title: Schedules
+description: Run an AI agent on a recurring cron cadence — autonomous container jobs that spin up, do the work, and tear down on their own.
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+import ThemedImage from '../../../components/ThemedImage.astro';
+import schedulesDark from '../../../assets/screenshots/schedules-list-dark.png';
+import schedulesLight from '../../../assets/screenshots/schedules-list-light.png';
+
+A **Schedule** runs an AI agent on a recurring **cron cadence** — wake up to
+draft PRs every morning, sweep for flaky tests nightly, audit dependencies
+weekly. Each run spins up a container, does the work, and tears down on its own.
+
+Schedules are **autonomous**: no one is watching, so the agent never pauses to
+ask a question. If you want a back-and-forth, use a [Run](/guides/runs) instead.
+
+<ThemedImage
+  dark={schedulesDark}
+  light={schedulesLight}
+  title="Schedules"
+  alt="The Schedules page listing six recurring jobs — each row shows the name, engine (Claude Code, Codex, or Copilot), cron cadence, target worker, and the next run time; one schedule is disabled."
+/>
+
+## How it works
+
+```
+Cron trigger (e.g. weekdays at 6am)
+  → Coordinator spins up a container on your worker
+    → The engine implements the task
+      → Result reported (e.g. a draft PR)
+        → Container torn down
+```
+
+The coordinator delegates the coding to the [engine](/concepts/subagents) you
+choose. Because there's no human in the loop, the agent reports a result exactly
+once and never asks for input — anything ambiguous is decided autonomously or
+left for the result summary.
+
+## The Schedules pages
+
+Three views, each with a purpose:
+
+- **Schedules list** — every schedule, with its engine, cadence, target, next
+  run, and an **enabled/disabled** toggle. The top stats show how many are
+  enabled, running now, and failed in the last 24h. Each row has **Run now** (to
+  fire it immediately) and **Details**.
+- **Schedule detail / run history** — one schedule's configuration plus the list
+  of its past executions, each with status and duration. Open an execution to
+  see its [timeline](/guides/runs#the-timeline--watch-it-work) — the same
+  step-by-step view a Run has.
+- **Create / edit panel** — the form for a new or existing schedule (below).
+
+## Creating a schedule
+
+From the **Schedules** page, **+ Schedule** opens the form:
+
+<Steps>
+
+1. **Prompt** — what the agent should do each run.
+
+2. **Cadence** — a cron expression (e.g. `0 6 * * 1-5` for weekdays at 6am), or
+   a preset (Hourly, Daily, Weekly). A live preview shows the next run time.
+
+3. **Engine** — which [engine](/concepts/subagents) runs the task, or
+   *auto-detect*.
+
+4. **Target** — which [worker](/concepts/workers) or
+   [greenhouse](/guides/greenhouse) it runs on, or auto-select.
+
+5. **Image** — the container image to launch.
+
+</Steps>
+
+A schedule can be **enabled** or **disabled** at any time without deleting it —
+disabled schedules keep their config but never fire.
+
+## Guided example: a nightly dependency audit
+
+Start to finish, a schedule that opens a PR every night:
+
+<Steps>
+
+1. **Open the Schedules page** and click **+ Schedule**.
+
+2. **Write the prompt:**
+   > `Audit npm dependencies for vulnerabilities and open a PR bumping any vulnerable package.`
+
+3. **Set the cadence** to `0 2 * * *` (daily at 2am) — the preview confirms the
+   next run time.
+
+4. **Pick the engine** — e.g. **Claude Code — Plan** — and a **target worker**
+   and **image**.
+
+5. **Save.** The schedule appears in the list, **enabled**, with its next run
+   time counting down.
+
+6. **Test it now** with **Run now** instead of waiting for 2am — it fires
+   immediately as a one-off execution.
+
+7. **Open its run history** from **Details** and click the execution to watch the
+   [timeline](/guides/runs#the-timeline--watch-it-work): it launches a container,
+   audits the dependencies, opens the PR, and tears down — all unattended.
+
+8. Each following night it runs on its own; **disable** it any time without
+   losing the configuration.
+
+</Steps>
+
+## Limits
+
+| Plan | Schedules |
+|------|-----------|
+| Starter | 1 |
+| Pro | 10 |
+| Enterprise | Unlimited |
+
+## Use cases
+
+- **Nightly ticket processing** — process all "Ready for Dev" tickets overnight.
+- **Dependency audits** — check for vulnerable packages weekly and open a PR.
+- **Flaky-test sweeps** — re-run the suite, find flaky specs, file issues.
+- **Documentation generation** — rebuild docs from source nightly.
+
+<Aside type="caution">
+  Each run consumes container slots and AI credits. Monitor your usage to stay
+  within plan limits.
+</Aside>
+
+## Next
+
+- [Runs](/guides/runs) — the on-demand, interactive counterpart (with the
+  timeline and pause-to-ask).
+- [Engines](/concepts/subagents) — what each engine can do.
