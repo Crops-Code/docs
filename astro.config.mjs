@@ -46,16 +46,19 @@ export default defineConfig({
             { label: 'CropPilot', slug: 'concepts/croppilot' },
             { label: 'Tickets', slug: 'concepts/tickets' },
             { label: 'Runtime Catalog', slug: 'concepts/runtime-catalog' },
-            {
-              label: 'Automation',
-              collapsed: true,
-              items: [
-                { label: 'Overview', slug: 'concepts/automation' },
-                { label: 'Schedules', slug: 'guides/schedules' },
-                { label: 'Runs', slug: 'guides/runs' },
-                { label: 'Engines', slug: 'concepts/subagents' },
-              ],
-            },
+          ],
+        },
+        {
+          // Top-level (not nested under Concepts) and expanded by default so the
+          // Schedules/Runs guides + the timeline showcase are discoverable at a
+          // glance — they were getting lost two levels deep.
+          label: 'Automation',
+          collapsed: false,
+          items: [
+            { label: 'Overview', slug: 'concepts/automation' },
+            { label: 'Schedules', slug: 'guides/schedules' },
+            { label: 'Runs', slug: 'guides/runs' },
+            { label: 'Engines', slug: 'concepts/subagents' },
           ],
         },
         {
