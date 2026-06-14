@@ -3,6 +3,10 @@ title: Containers
 description: Understand CropsCode container lifecycle — from planting to harvest.
 ---
 
+import ThemedImage from '../../../components/ThemedImage.astro';
+import containersDark from '../../../assets/screenshots/containers-list-dark.png';
+import containersLight from '../../../assets/screenshots/containers-list-light.png';
+
 A **container** in CropsCode is an isolated development environment where an AI agent works on a task. Each container gets its own filesystem, network, and runtime — like giving every ticket its own machine.
 
 ## Lifecycle
@@ -13,6 +17,15 @@ A **container** in CropsCode is an isolated development environment where an AI 
 | Running | Growing | AI agent works on the task, you can watch via terminal |
 | Complete | Harvest | Work is done — PR drafted, branch pushed, tests passing |
 | Stopped | Cleared | Container removed, resources freed |
+
+The Containers page shows every container across your workers, with its ticket, branch, capability badges, live resource usage, and status:
+
+<ThemedImage
+  dark={containersDark}
+  light={containersLight}
+  title="Containers"
+  alt="The Containers page listing running and stopped containers across workers, each card showing the container name, ticket title, branch, capability badges, CPU/memory/disk usage, host worker, and a terminal launcher."
+/>
 
 ## What's Inside a Container
 

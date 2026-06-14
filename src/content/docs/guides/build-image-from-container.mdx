@@ -64,27 +64,21 @@ The payoff is large: launching from a Windows golden image skips the 20–30 min
 
 ## Launch from your golden image
 
-A snapshot lives on exactly **one** worker, so launches need to land on that worker. CropsCode handles this through the launch target picker.
+A snapshot lives on exactly **one** worker, so the launch has to land on that worker. The launch target picker handles this.
 
 <Steps>
 
 1. Open the launch flow and open the **target** picker.
 
-2. Find your worker under the red **Fleet** group (it mirrors the green **Greenhouses** group). A fleet worker appears here when it belongs to **your tenant**.
+2. Select the worker that holds your image. This **pins the launch to that worker**, so it can serve the image stored there.
 
-3. Select it. This **pins the launch to that worker**, so it can serve the image stored there.
+3. Pick your golden image — filter by name, tag, or capability. Custom capabilities render as chips beside the built-in capability badges.
 
-4. Pick your golden image — filter by name, tag, or capability.
-
-5. Launch.
+4. Launch.
 
 </Steps>
 
-The same red **Fleet** group appears in **Quick Launch** and the **Schedule** create panel.
-
-<Aside type="note">
-  Shared or foreign fleet workers never appear here — only fleet workers owned by your tenant. Launching directly on a fleet worker from **CropPilot (the AI agent)** isn't supported yet; the agent still routes fleet capacity through a Greenhouse.
-</Aside>
+The launch target picker works the same way in **Quick Launch** and the **Schedule** create panel.
 
 ## Reference
 
