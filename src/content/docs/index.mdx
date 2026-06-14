@@ -21,6 +21,9 @@ hero:
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import AgentMeshBackground from '../../components/AgentMeshBackground.astro';
+
+<AgentMeshBackground />
 
 <CardGrid>
   <Card title="Install the CLI" icon="terminal">
@@ -42,5 +45,33 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
     Full reference for every `cropscode` command.
 
     [CLI docs →](/cli/overview)
+  </Card>
+</CardGrid>
+
+## Automate your workflow
+
+Hand a task to an AI agent that spins up a container, does the work, and tears
+down — on a schedule or on demand, all on infrastructure you own.
+
+<CardGrid>
+  <Card title="Automation" icon="setting">
+    The big picture: Schedules vs Runs, recipes, and the coordinator + engine model.
+
+    [Overview →](/concepts/automation)
+  </Card>
+  <Card title="Schedules" icon="rocket">
+    Recurring, autonomous cron jobs — wake up to draft PRs, audits, and sweeps.
+
+    [Schedules →](/guides/schedules)
+  </Card>
+  <Card title="Runs" icon="random">
+    On-demand and interactive — watch the timeline, steer it, answer its questions.
+
+    [Runs →](/guides/runs)
+  </Card>
+  <Card title="Engines" icon="puzzle">
+    Claude Code, Codex, and Copilot — what each engine does and how it pauses.
+
+    [Engines →](/concepts/subagents)
   </Card>
 </CardGrid>
