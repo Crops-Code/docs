@@ -139,41 +139,75 @@ fit for **Claude Code — Plan** (it can pause itself mid-task); a tightly-scope
 job suits **Claude Code — API credits** or **Codex**. See
 [Engines](/concepts/subagents) for the full comparison and how each one pauses.
 
-## Guided example: fix a bug and open a PR
+## Guided example: sweep the backlog until a PR
 
-Start to finish, an interactive Run that fixes a failing test:
+A single **autonomous** Run that picks up a ticket and carries it all the way to
+a pull request — no babysitting.
 
 <Steps>
 
 1. **Open the Runs page** and click **+ New run**.
 
-2. **Write the instruction:**
-   > `Reproduce the failing auth test, fix it, and open a PR.`
+2. **Write the instruction** — give it the whole arc, including how to recover:
 
-3. **Paste the ticket URL** (optional) so the container clones the right repo and
-   branch.
+   > Find the highest-priority open issue labeled `ready-for-dev` in this repo.
+   > Implement it in a fresh container, run the full test suite, and open a pull
+   > request. If the tests fail after your change, keep iterating on the fix
+   > until they pass. Report the PR link when done.
 
-4. Leave **Target** blank and pick **Claude Code — Plan** as the engine — a good
-   fit when you might want a back-and-forth. Keep **Mode: Interactive**.
+3. **Pin a Target** — a [worker](/concepts/workers) **and** an image (autonomous
+   Runs can't ask you to pick one, so this is required).
 
-5. **Start Run.** With no host pinned, the Run pauses almost immediately and
-   **asks you where to launch** — choose your worker.
+4. Pick an **Engine** (e.g. **Codex**, or auto-detect) and set
+   **Mode: Autonomous**.
 
-6. **Watch the [timeline](#the-timeline--watch-it-work):** the agent launches a
-   container, runs the auth suite (it fails), applies a fix, re-runs (green), and
-   opens the PR — each step visible as it happens.
-
-7. If it pauses to **ask a question** (e.g. "scope the fix narrowly or refactor?"),
-   answer inline and it resumes.
-
-8. When it reports **completed**, the summary links the PR. The container stays
-   up, so you can send a follow-up ("also add a regression test") to continue in
-   the same workspace.
+5. **Start Run.** It executes unattended — never pausing for input. Watch the
+   [timeline](#the-timeline--watch-it-work): it lists the open issues (`gh issue
+   list`), picks the top one, launches a container, implements the change, runs
+   the suite (red), iterates until green, opens the PR, and reports **completed**
+   with the link.
 
 </Steps>
 
-Want the same job to run unattended? Pin the worker **and** an image, set
-**Mode: Autonomous**, and it runs straight through to a result with no prompts.
+<Aside type="tip">
+  Want this to happen every night instead of once? It's the same recipe as a
+  [Schedule](/guides/schedules#guided-example-a-nightly-backlog-sweep) — a
+  Schedule is this Run on a cron cadence.
+</Aside>
+
+## Guided example: one run, every engine
+
+A Run isn't tied to a single engine — the coordinator can delegate different
+subtasks to different [engines](/concepts/subagents), each playing to its
+strengths, all in one timeline.
+
+<Steps>
+
+1. **+ New run**, and **name an engine per task** right in the instruction:
+
+   > Do three things, each with the tool I name:
+   > 1. Refactor the `payments` module for clarity — **use Codex**.
+   > 2. Write a migration guide under `docs/` for the change — **use Claude Code**.
+   > 3. Update the GitHub Actions CI matrix to add Node 22 — **use Copilot**.
+
+2. **Pick a Target** worker (or leave it blank and answer when it asks). Keep
+   **Mode: Interactive** so you can steer.
+
+3. **Start Run.** The [timeline](#the-timeline--watch-it-work) shows the
+   coordinator delegating each subtask to the engine you named — a **Codex** step,
+   then a **Claude Code** step, then a **Copilot** step — each a distinct entry.
+
+4. Answer any question inline (e.g. Claude Code pausing to confirm the guide's
+   scope), and the Run continues to a single **completed** summary covering all
+   three pieces.
+
+</Steps>
+
+<Aside type="note">
+  Name the engine explicitly when it matters — left on auto-detect, the run
+  picks one CLI for the whole job. See [Engines](/concepts/subagents) for what
+  each is good at.
+</Aside>
 
 ## When to use a Run vs a Schedule
 
