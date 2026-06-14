@@ -1,0 +1,53 @@
+---
+/**
+ * Landing-page-only header behavior, mirroring the portal home nav: the
+ * Starlight site header is transparent at the very top (so the hero/mesh shows
+ * through it) and fades the solid surface + bottom hairline in once the page is
+ * scrolled ~24px. This component is imported only from index.mdx, so the class
+ * is never added on other docs pages.
+ */
+---
+
+<script>
+  const header = document.querySelector('header.header');
+  if (header) {
+    header.classList.add('nav-landing');
+    const update = () => {
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      if (y > 24) header.setAttribute('data-scrolled', 'true');
+      else header.removeAttribute('data-scrolled');
+    };
+    update();
+    // Capture-phase on document catches scrolling from the window OR any inner
+    // scroll container (scroll events don't bubble, but do reach capture).
+    document.addEventListener('scroll', update, { passive: true, capture: true });
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>
+
+<style is:global>
+  /* Transparent at the top of the landing page; the surface + hairline fade in
+     on scroll. The leading `:root` and `background` shorthand are deliberate:
+     the custom Header.astro ships `:root[data-has-hero] .header { background:
+     var(--sl-color-bg-nav) !important }` (specificity 0,3,0) which otherwise
+     wins. `:root header.header.nav-landing` is (0,3,1) so it beats that, and
+     using the `background` shorthand (not just background-color) overrides the
+     shorthand it sets. */
+  :root header.header.nav-landing {
+    background: transparent !important;
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+    transition:
+      background-color 250ms ease,
+      border-color 250ms ease !important;
+  }
+  :root header.header.nav-landing[data-scrolled='true'] {
+    background: var(--sl-color-bg-nav) !important;
+    border-bottom-color: var(--sl-color-hairline-shade) !important;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :root header.header.nav-landing {
+      transition: none !important;
+    }
+  }
+</style>
