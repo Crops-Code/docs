@@ -57,7 +57,7 @@ const activeNav = activeNavLabel(pathname);
   <div class="sl-flex header-start">
     <a href="/" class="site-title-link header-logo-link">
       <span class="header-logo-mobile"><Logo variant="mark" size={24} /></span>
-      <span class="header-logo-desktop"><Logo variant="docs" size={20} /></span>
+      <span class="header-logo-desktop"><Logo variant={isHomePage ? 'full' : 'docs'} size={20} /></span>
     </a>
     <nav class="header-nav" aria-label="Primary">
       {primaryNav.map((item) => (
