@@ -5,10 +5,11 @@ description: Your per-user CropsCode preferences — secrets and BYOK keys, Crop
 
 import { Aside } from '@astrojs/starlight/components';
 
-**Settings** holds your personal preferences for the orchestrator — open it from
-the sidebar. Everything here is **per-user**: your secrets, your CropPilot
-instructions, your theme. The page is organised into the sections below (the
-right-hand nav jumps between them).
+**Settings** holds your preferences for the orchestrator — open it from the
+sidebar. Most of it is **per-user** (your secrets, CropPilot instructions,
+theme); the **Container Security** profiles are **tenant-level** — shared across
+your team. The page is organised into the sections below (the right-hand nav
+jumps between them).
 
 ## Secrets
 
@@ -53,10 +54,21 @@ choice applies immediately and persists on this device.
 
 ## Containers
 
-Display preferences for the [Containers](/concepts/containers) page:
+Two groups of settings for your [containers](/concepts/containers):
+
+**Display**
 
 - **Hide external and system containers** — show only the containers managed by
   CropsCode, hiding anything else running on your workers.
+
+**Container Security** — configure your **tenant's security profiles**. Each
+tenant defines a **default [security profile](/concepts/security-profiles)**
+applied to **every container launched on its workers** (it governs what the
+container can reach — egress, allowed domains, and so on). You'll see one card
+per tenant you belong to, showing its current default profile and your role; from
+here you set that **default**. You can still **override the profile or add extra
+allowed domains per container at launch time**. Changing the tenant default
+requires the right role (e.g. owner/admin).
 
 ## Notifications
 
