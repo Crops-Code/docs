@@ -101,35 +101,33 @@ Every night, turn "ready" tickets into draft PRs while you sleep — the recurri
 counterpart of the
 [Runs backlog sweep](/guides/runs#guided-example-sweep-the-backlog-until-a-pr).
 
+**The prompt** — paste this into the schedule's prompt field:
+
+```text
+For each open issue labeled `ready-for-dev` that doesn't already have an open
+pull request, implement it in its own container, run the test suite, and open a
+draft PR. Skip anything you can't finish cleanly.
+```
+
+**Set it up**
+
 <Steps>
 
-1. **Open the Schedules page** and click **+ Schedule**.
+1. Open the **Schedules** page → **+ Schedule**, and paste the prompt above.
 
-2. **Write the prompt** — describe the whole sweep:
-
-   > For each open issue labeled `ready-for-dev` that doesn't already have an open
-   > pull request, implement it in its own container, run the test suite, and open
-   > a draft PR. Skip anything you can't finish cleanly.
-
-3. **Set the cadence** to `0 2 * * *` (daily at 2am) — the preview confirms the
+2. **Set the cadence** to `0 2 * * *` (daily at 2am) — the preview confirms the
    next run time.
 
-4. **Pick the engine** (e.g. **Codex**), a **target worker**, and an **image**.
-
-5. **Save.** It appears in the list, **enabled**, with its next run counting
-   down. Schedules are autonomous, so it works each ticket end-to-end without
-   asking you anything.
-
-6. **Test it now** with **Run now** instead of waiting for 2am.
-
-7. **Open its run history** from **Details** and click the execution to watch the
-   [timeline](/guides/runs#the-timeline--watch-it-work) — a container per ticket,
-   each carried to a draft PR, then torn down.
-
-8. Each following night it sweeps the backlog on its own; **disable** it any time
-   without losing the configuration.
+3. **Pick the engine** (e.g. **Codex**), a **target worker**, and an **image**, then **Save**.
 
 </Steps>
+
+**How it works** — it appears in the list **enabled**, next run counting down.
+Each night, autonomously and without asking you anything, it works every ready
+ticket end-to-end: a container per ticket, test suite, draft PR, then torn down.
+Test it immediately with **Run now**, and open its
+[run history](#the-schedules-pages) to watch any execution's timeline. **Disable**
+it any time without losing the configuration.
 
 ## Guided example: a weekly dependency audit
 
@@ -137,31 +135,34 @@ A different cadence and a different job — every Monday morning, find risky
 dependencies and open **one** PR with the safe upgrades, so security patches
 never pile up.
 
+**The prompt** — paste this into the schedule's prompt field:
+
+```text
+Audit this repo's dependencies for known vulnerabilities and outdated major
+versions. On a new branch, apply only the safe, non-breaking upgrades, run the
+full test suite, and open one pull request summarizing what you changed and what
+you skipped (and why). Never push anything that breaks the build.
+```
+
+**Set it up**
+
 <Steps>
 
-1. **+ Schedule**, and **write the prompt** for the whole audit:
-
-   > Audit this repo's dependencies for known vulnerabilities and outdated major
-   > versions. On a new branch, apply only the safe, non-breaking upgrades, run
-   > the full test suite, and open **one** pull request summarizing what you
-   > changed and what you skipped (and why). Never push anything that breaks the
-   > build.
+1. **+ Schedule**, and paste the prompt above.
 
 2. **Set the cadence** to `0 7 * * 1` (Mondays at 7am) — a weekly rhythm, unlike
    the nightly sweep above. The preview confirms the next Monday.
 
-3. **Pick the engine** — **Claude Code** is a good fit here (it reasons well over
-   changelogs and breaking-change notes) — plus a **target worker** and **image**.
-
-4. **Save**, then **Run now** once to see it end-to-end without waiting for Monday.
-
-5. **Open its run history** and click the execution to watch the
-   [timeline](/guides/runs#the-timeline--watch-it-work): it scans the dependency
-   tree, opens a branch, applies the safe bumps, runs the suite, and calls
-   `gh pr create` — finishing with a single audit PR you can review at your
-   leisure.
+3. **Pick the engine** — **Claude Code** is a good fit (it reasons well over
+   changelogs and breaking-change notes) — plus a **target worker** and **image**,
+   then **Save**.
 
 </Steps>
+
+**How it works** — **Run now** once to see it end-to-end without waiting for
+Monday. On the [timeline](#the-schedules-pages) you watch it scan the dependency
+tree, open a branch, apply the safe bumps, run the suite, and call `gh pr create`
+— finishing with a single audit PR you can review at your leisure.
 
 <Aside type="tip">
   Two schedules, two rhythms: the **nightly** sweep clears the backlog while you
