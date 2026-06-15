@@ -31,6 +31,25 @@ const isHomePage = !route?.entry?.slug || route.entry.slug === '';
 const breadcrumb = (!isHomePage && route?.sidebar)
   ? findBreadcrumb(route.sidebar) || []
   : [];
+
+// Primary top-nav so the main doc sections — Automation in particular — are
+// reachable straight from the navbar on every page, including the splash home
+// page (which has no sidebar at all).
+const pathname = Astro.url.pathname;
+const primaryNav = [
+  { label: 'Concepts', href: '/concepts/workers/' },
+  { label: 'Automation', href: '/concepts/automation/' },
+  { label: 'Guides', href: '/guides/launch-from-ticket/' },
+  { label: 'CLI', href: '/cli/overview/' },
+];
+function activeNavLabel(path: string): string | null {
+  if (/^\/(concepts\/automation|guides\/schedules|guides\/runs|concepts\/subagents)/.test(path)) return 'Automation';
+  if (path.startsWith('/concepts/')) return 'Concepts';
+  if (path.startsWith('/guides/')) return 'Guides';
+  if (path.startsWith('/cli/')) return 'CLI';
+  return null;
+}
+const activeNav = activeNavLabel(pathname);
 ---
 
 <div class:list={["header", "sl-flex", { "header-home": isHomePage }]}>
@@ -39,6 +58,14 @@ const breadcrumb = (!isHomePage && route?.sidebar)
       <img src="/logo-icon.png" alt="CropsCode" class="header-logo header-logo-mobile" />
       <img src="/logo-small-docs.png" alt="CropsCode Docs" class="header-logo header-logo-desktop" />
     </a>
+    <nav class="header-nav" aria-label="Primary">
+      {primaryNav.map((item) => (
+        <a
+          href={item.href}
+          class:list={["header-nav-link", { "header-nav-active": activeNav === item.label }]}
+        >{item.label}</a>
+      ))}
+    </nav>
     {breadcrumb.length > 0 && (
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         {breadcrumb.map((crumb, i) => (
@@ -153,6 +180,49 @@ const breadcrumb = (!isHomePage && route?.sidebar)
     align-items: center;
     min-width: 0;
     flex: 1;
+  }
+
+  /* Primary nav — desktop only; on mobile the sidebar/hamburger handles it. */
+  .header-nav {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+    margin-inline-start: 1.75rem;
+  }
+
+  @media (min-width: 50rem) {
+    .header-nav {
+      display: flex;
+    }
+  }
+
+  .header-nav-link {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--sl-color-gray-2);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 200ms ease;
+  }
+
+  .header-nav-link:hover {
+    color: var(--sl-color-text);
+    text-decoration: none;
+  }
+
+  .header-nav-active {
+    color: var(--sl-color-text);
+    font-weight: 600;
+  }
+
+  /* When the primary nav is visible (desktop), drop the in-header breadcrumb to
+     avoid a logo | nav | breadcrumb pile-up — the sidebar already shows where
+     you are. The breadcrumb returns below 50rem where the nav is hidden. */
+  @media (min-width: 50rem) {
+    .header:not(.header-home) .breadcrumbs {
+      display: none;
+    }
   }
 
   .site-title-link {
