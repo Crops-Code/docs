@@ -66,11 +66,8 @@ export default defineConfig({
           collapsed: true,
           items: [
             { label: 'Launch from Ticket', slug: 'guides/launch-from-ticket' },
-            // Schedules & Runs also live under the Automation group above; they
-            // are surfaced here too because users reliably look for them under
-            // "Guides".
-            { label: 'Schedules', slug: 'guides/schedules' },
-            { label: 'Runs', slug: 'guides/runs' },
+            // Schedules & Runs are automation guides; they live only in the
+            // Automation group above (listing them here too was redundant).
             { label: 'Custom Containerfile', slug: 'guides/custom-containerfile' },
             { label: 'Build from Container', slug: 'guides/build-image-from-container' },
             { label: 'Team Setup', slug: 'guides/team-setup' },
