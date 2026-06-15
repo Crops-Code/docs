@@ -9,6 +9,8 @@ import timelineDark from '../../../assets/screenshots/runs-timeline-dark.png';
 import timelineLight from '../../../assets/screenshots/runs-timeline-light.png';
 import askDark from '../../../assets/screenshots/runs-paused-question-dark.png';
 import askLight from '../../../assets/screenshots/runs-paused-question-light.png';
+import chatDark from '../../../assets/screenshots/run-chat-dark.png';
+import chatLight from '../../../assets/screenshots/run-chat-light.png';
 
 A **Run** is an on-demand agent job that fires **once**. You write a prompt, the
 coordinator spins up a container and gets to work, and — unlike a
@@ -131,6 +133,13 @@ A Run is a conversation. Below the timeline is a **chat composer**:
   the Run from where it paused.
 - **Continue a finished Run** — if the container is still up, a new message picks
   the work back up in the same workspace.
+
+<ThemedImage
+  dark={chatDark}
+  light={chatLight}
+  title="Runs"
+  alt="A running Run with its chat composer at the bottom — placeholder 'Steer this run — type an instruction to queue for the next turn' — and a note that the message is delivered at the next turn boundary, alongside the live Run details panel."
+/>
 
 ## Picking an engine
 
