@@ -46,6 +46,7 @@ export default defineConfig({
             { label: 'CropPilot', slug: 'concepts/croppilot' },
             { label: 'Tickets', slug: 'concepts/tickets' },
             { label: 'Runtime Catalog', slug: 'concepts/runtime-catalog' },
+            { label: 'Settings', slug: 'concepts/settings' },
           ],
         },
         {
