@@ -1,16 +1,19 @@
 ---
 /**
- * Landing-page-only header behavior, mirroring the portal home nav: the site
- * header is transparent over the hero at the top of the page, then fades in the
- * solid surface + bottom hairline + a drop shadow once scrolled ~24px.
+ * Landing-page-only header behavior, mirroring the portal home nav: transparent
+ * over the hero at the top, then a solid surface + hairline + drop shadow once
+ * scrolled ~24px.
  *
- * The transparent state is **pure CSS**, keyed on `:root[data-has-hero]` (set by
- * the splash hero) — it does not depend on any JS-added class, so it can't be
- * defeated by a stale/cached script bundle. The script is `is:inline` (embedded
- * in the page HTML, never a separately-cached asset) and only toggles the
- * `data-scrolled` attribute that switches on the solid state.
+ * IMPORTANT: there are TWO ".header" elements — Starlight's outer
+ * `<header class="header">` and, nested inside it, the custom Header.astro root
+ * `<div class="header sl-flex header-home">`. The *inner* div carries the
+ * visible surface + border, so the styles below target it (`.header-home`); the
+ * outer header is cleared too so its background can't show through.
  *
- * Imported only from index.mdx, so the global style is scoped to the landing.
+ * The transparent state is pure CSS keyed on `:root[data-has-hero]` (set by the
+ * splash hero), so it can't be defeated by a stale/cached script. The
+ * `is:inline` script only toggles `data-scrolled` on the outer header for the
+ * solid state. Imported only from index.mdx.
  */
 ---
 
@@ -24,37 +27,40 @@
       else header.removeAttribute('data-scrolled');
     }
     update();
-    // Capture-phase catches the scroll whether the window or an inner element scrolls.
     document.addEventListener('scroll', update, { passive: true, capture: true });
     window.addEventListener('scroll', update, { passive: true });
   })();
 </script>
 
 <style is:global>
-  /* Transparent over the hero at the top. `:root[data-has-hero] header.header`
-     is specificity (0,3,1), which outranks Header.astro's
-     `:root[data-has-hero] .header { background: var(--sl-color-bg-nav) !important }`
-     (0,3,0) that otherwise fills it. `background` shorthand (not just
-     background-color) overrides the shorthand that rule sets. */
-  :root[data-has-hero] header.header {
+  /* Transparent at the top of the hero: clear the surface + border on BOTH the
+     outer <header> and the inner home <div class="header header-home"> (either
+     showing a fill or border would make it look "filled"). The selectors
+     outrank Header.astro's `:root[data-has-hero] .header { background: ...
+     !important }` (0,3,0). */
+  :root[data-has-hero] header.header,
+  :root[data-has-hero] header.header .header-home {
     background: transparent !important;
-    border-bottom-color: transparent !important;
+    border-bottom: none !important;
     box-shadow: none !important;
     transition:
       background-color 250ms ease,
       border-color 250ms ease,
       box-shadow 250ms ease !important;
   }
-  /* On scroll: surface + crisp hairline + a soft drop shadow. The shadow is what
-     makes the change read — the nav surface is nearly the page-background colour
-     (especially dark theme), so the colour swap alone is imperceptible. */
-  :root[data-has-hero] header.header[data-scrolled='true'] {
+  /* On scroll: fill the inner surface, add ONE hairline + ONE drop shadow on it
+     (the outer header stays transparent, so no doubled border/shadow). The
+     shadow is what makes the change read — the nav surface is nearly the same
+     colour as the page background. data-scrolled is toggled on the outer
+     <header> by the script above. */
+  :root[data-has-hero] header.header[data-scrolled='true'] .header-home {
     background: var(--sl-color-bg-nav) !important;
-    border-bottom-color: var(--sl-color-hairline-shade) !important;
+    border-bottom: 1px solid var(--sl-color-hairline-shade) !important;
     box-shadow: 0 6px 24px -6px rgba(0, 0, 0, 0.45) !important;
   }
   @media (prefers-reduced-motion: reduce) {
-    :root[data-has-hero] header.header {
+    :root[data-has-hero] header.header,
+    :root[data-has-hero] header.header .header-home {
       transition: none !important;
     }
   }
