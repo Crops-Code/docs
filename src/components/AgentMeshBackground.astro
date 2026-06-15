@@ -21,7 +21,12 @@
     /* Behind all page content (but above the page's own background), so the
        splash copy and cards render crisply on top. */
     z-index: -1;
-    opacity: 0.5;
+    opacity: 0.6;
+  }
+  /* Light mode sits on a near-white background; lift the whole layer a touch
+     more so the (darker) mesh reads. */
+  :root[data-theme='light'] #agent-mesh-bg {
+    opacity: 0.8;
   }
 </style>
 
@@ -57,8 +62,8 @@
       canvas.width = Math.max(1, Math.round(W * dpr));
       canvas.height = Math.max(1, Math.round(H * dpr));
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const target = Math.round((W * H) / 30000);
-      const count = Math.max(22, Math.min(60, target));
+      const target = Math.round((W * H) / 20000);
+      const count = Math.max(36, Math.min(84, target));
       nodes = Array.from({ length: count }, () => ({
         x: Math.random() * W, y: Math.random() * H,
         vx: rand(-0.16, 0.16), vy: rand(-0.16, 0.16),
@@ -67,11 +72,16 @@
       pulses = [];
     };
 
-    const D = 150;
+    const D = 165;
     const draw = (t: number, step: boolean) => {
       const light = isLight();
-      const lineBase = light ? 0.28 : 0.5;
-      const dotAlpha = light ? 0.55 : 0.7;
+      // Light mode needs a darker, more saturated blue (cyan on white is
+      // invisible) and higher alpha; dark mode keeps the cyan glow.
+      const lineRGB = light ? '12,110,205' : '16,192,240';
+      const dotRGB = light ? '12,110,205' : '0,128,224';
+      const boxColor = light ? '#0a6ecd' : CYAN;
+      const lineBase = light ? 0.62 : 0.55;
+      const dotAlpha = light ? 0.95 : 0.75;
       ctx.clearRect(0, 0, W, H);
 
       if (step) {
@@ -88,7 +98,7 @@
           const d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d < D) {
             const o = (1 - d / D) * lineBase;
-            ctx.strokeStyle = `rgba(16,192,240,${o.toFixed(3)})`;
+            ctx.strokeStyle = `rgba(${lineRGB},${o.toFixed(3)})`;
             ctx.lineWidth = 1;
             ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
           }
@@ -100,7 +110,7 @@
           const d = Math.hypot(p.x - ptr.x, p.y - ptr.y);
           if (d < D) {
             const o = Math.min((1 - d / D) * lineBase * 1.7, 1);
-            ctx.strokeStyle = `rgba(16,192,240,${o.toFixed(3)})`;
+            ctx.strokeStyle = `rgba(${lineRGB},${o.toFixed(3)})`;
             ctx.lineWidth = 1.2;
             ctx.beginPath(); ctx.moveTo(ptr.x, ptr.y); ctx.lineTo(p.x, p.y); ctx.stroke();
           }
@@ -142,18 +152,18 @@
 
       for (const p of nodes) {
         if (p.box) {
-          ctx.fillStyle = CYAN; ctx.shadowColor = CYAN; ctx.shadowBlur = 8;
+          ctx.fillStyle = boxColor; ctx.shadowColor = boxColor; ctx.shadowBlur = 8;
           ctx.fillRect(p.x - 3, p.y - 3, 6, 6); ctx.shadowBlur = 0;
         } else {
-          ctx.fillStyle = `rgba(0,128,224,${dotAlpha})`;
+          ctx.fillStyle = `rgba(${dotRGB},${dotAlpha})`;
           ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
         }
       }
 
       if (ptr.on) {
-        ctx.strokeStyle = 'rgba(16,192,240,0.5)'; ctx.lineWidth = 1.5;
+        ctx.strokeStyle = `rgba(${lineRGB},0.6)`; ctx.lineWidth = 1.5;
         ctx.beginPath(); ctx.arc(ptr.x, ptr.y, 9, 0, Math.PI * 2); ctx.stroke();
-        ctx.fillStyle = CYAN; ctx.shadowColor = CYAN; ctx.shadowBlur = 14;
+        ctx.fillStyle = boxColor; ctx.shadowColor = boxColor; ctx.shadowBlur = 14;
         ctx.beginPath(); ctx.arc(ptr.x, ptr.y, 3.4, 0, Math.PI * 2); ctx.fill();
         ctx.shadowBlur = 0;
       }
