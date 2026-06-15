@@ -3,7 +3,19 @@ title: CropPilot
 description: The in-platform AI assistant that manages your farm.
 ---
 
+import { Aside } from '@astrojs/starlight/components';
+
 **CropPilot** is CropsCode's built-in AI assistant. It lives in the orchestrator dashboard and helps you manage workers, launch containers, execute commands, and monitor your farm — all through natural conversation.
+
+<Aside type="caution" title="CropPilot runs on Anthropic models">
+  CropPilot is powered internally by **Anthropic (Claude)** models. Each plan
+  includes a monthly AI allowance (see [Budget](#budget)); when you exhaust it —
+  or to run on your own account — **bring your own key** in
+  [Settings → Secrets](/concepts/settings#bring-your-own-key-byok): add an
+  **Anthropic API key** or a **Claude OAuth token** and toggle **Use for
+  CropPilot**. The OAuth option routes requests through your personal Claude Code
+  subscription.
+</Aside>
 
 ## What CropPilot Can Do
 
@@ -57,7 +69,7 @@ CropPilot sessions use AI credits from your plan allowance:
 | Pro | $6/mo |
 | Enterprise | $10/user/mo |
 
-You can also bring your own API key (BYOK) to use your own AI provider credentials. See [AI Credits](/guides/ai-credits).
+You can also **bring your own key** in [Settings → Secrets](/concepts/settings#bring-your-own-key-byok) — an Anthropic API key or a Claude OAuth token — for usage beyond your plan. See [AI Credits](/guides/ai-credits) for how the allowance works.
 
 ## Tips
 
