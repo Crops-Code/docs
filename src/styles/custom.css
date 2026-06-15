@@ -760,9 +760,11 @@ header.header {
   padding: 0 !important;
 }
 
-.sidebar-footer-logo img {
-  height: 49px;
-  width: auto;
+/* The footer logo is now the live <Logo> lockup (cube + "ClusterCode Docs"),
+   which sizes itself via --cc-size. Do NOT force a fixed height on its inner
+   mark <img> — that would break the lockup's proportions. */
+.sidebar-footer-logo .cc-logo {
+  font-size: 22px;
 }
 
 .sidebar-collapse-btn {
@@ -851,8 +853,8 @@ header.header {
 }
 
 .collapsed-logo-img {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
 }
 
