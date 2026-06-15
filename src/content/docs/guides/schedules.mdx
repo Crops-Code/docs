@@ -111,6 +111,44 @@ counterpart of the
 
 </Steps>
 
+## Guided example: a weekly dependency audit
+
+A different cadence and a different job — every Monday morning, find risky
+dependencies and open **one** PR with the safe upgrades, so security patches
+never pile up.
+
+<Steps>
+
+1. **+ Schedule**, and **write the prompt** for the whole audit:
+
+   > Audit this repo's dependencies for known vulnerabilities and outdated major
+   > versions. On a new branch, apply only the safe, non-breaking upgrades, run
+   > the full test suite, and open **one** pull request summarizing what you
+   > changed and what you skipped (and why). Never push anything that breaks the
+   > build.
+
+2. **Set the cadence** to `0 7 * * 1` (Mondays at 7am) — a weekly rhythm, unlike
+   the nightly sweep above. The preview confirms the next Monday.
+
+3. **Pick the engine** — **Claude Code** is a good fit here (it reasons well over
+   changelogs and breaking-change notes) — plus a **target worker** and **image**.
+
+4. **Save**, then **Run now** once to see it end-to-end without waiting for Monday.
+
+5. **Open its run history** and click the execution to watch the
+   [timeline](/guides/runs#the-timeline--watch-it-work): it scans the dependency
+   tree, opens a branch, applies the safe bumps, runs the suite, and calls
+   `gh pr create` — finishing with a single audit PR you can review at your
+   leisure.
+
+</Steps>
+
+<Aside type="tip">
+  Two schedules, two rhythms: the **nightly** sweep clears the backlog while you
+  sleep; the **weekly** audit keeps dependencies healthy. Mix cadences and
+  engines to cover whatever recurring work you'd rather not do by hand.
+</Aside>
+
 ## Limits
 
 | Plan | Schedules |
