@@ -151,37 +151,45 @@ job suits **Claude Code — API credits** or **Codex**. See
 ## Guided example: sweep the backlog until a PR
 
 A single **autonomous** Run that picks up a ticket and carries it all the way to
-a pull request — no babysitting.
+a pull request — no babysitting. Copy the prompt, pin a host, and let it go.
+
+**The prompt** — paste this into the Run composer:
+
+```text
+Find the highest-priority open issue labeled `ready-for-dev` in this repo.
+Implement it in a fresh container, run the full test suite, and open a pull
+request. If the tests fail after your change, keep iterating on the fix until
+they pass. Report the PR link when done.
+```
+
+**Set it up**
 
 <Steps>
 
-1. **Open the Runs page** and click **+ New run**.
+1. Open the **Runs** page → **+ New run**, and paste the prompt above.
 
-2. **Write the instruction** — give it the whole arc, including how to recover:
-
-   > Find the highest-priority open issue labeled `ready-for-dev` in this repo.
-   > Implement it in a fresh container, run the full test suite, and open a pull
-   > request. If the tests fail after your change, keep iterating on the fix
-   > until they pass. Report the PR link when done.
-
-3. **Pin a Target** — a [worker](/concepts/workers) **and** an image (autonomous
+2. **Pin a Target** — a [worker](/concepts/workers) **and** an image (autonomous
    Runs can't ask you to pick one, so this is required).
 
-4. Pick an **Engine** (e.g. **Codex**, or auto-detect) and set
+3. Pick an **Engine** (e.g. **Codex**, or auto-detect) and set
    **Mode: Autonomous**.
 
-5. **Start Run.** It executes unattended — never pausing for input. Watch the
-   [timeline](#the-timeline--watch-it-work): it lists the open issues (`gh issue
-   list`), picks the top one, launches a container, implements the change, runs
-   the suite (red), iterates until green, opens the PR, and reports **completed**
-   with the link.
+4. **Start Run.**
 
 </Steps>
 
+**How it works** — it runs unattended, never pausing for input. On the
+[timeline](#the-timeline--watch-it-work) you watch it:
+
+1. list the open issues (`gh issue list --label ready-for-dev`) and pick the top one;
+2. launch a container and implement the change;
+3. run the suite — red — then iterate on the fix until it's green;
+4. open the PR (`gh pr create`) and report **completed** with the link.
+
 <Aside type="tip">
-  Want this to happen every night instead of once? It's the same recipe as a
-  [Schedule](/guides/schedules#guided-example-a-nightly-backlog-sweep) — a
-  Schedule is this Run on a cron cadence.
+  Want this every night instead of once? It's the same recipe as the
+  [nightly backlog sweep](/guides/schedules#guided-example-a-nightly-backlog-sweep)
+  Schedule — a Schedule is this Run on a cron cadence.
 </Aside>
 
 ## Guided example: one run, every engine
@@ -190,27 +198,34 @@ A Run isn't tied to a single engine — the coordinator can delegate different
 subtasks to different [engines](/concepts/subagents), each playing to its
 strengths, all in one timeline.
 
+**The prompt** — name an engine per task right in the instruction:
+
+```text
+Do three things, each with the tool I name:
+1. Refactor the `payments` module for clarity — use Codex.
+2. Write a migration guide under docs/ for the change — use Claude Code.
+3. Update the GitHub Actions CI matrix to add Node 22 — use Copilot.
+```
+
+**Set it up**
+
 <Steps>
 
-1. **+ New run**, and **name an engine per task** right in the instruction:
-
-   > Do three things, each with the tool I name:
-   > 1. Refactor the `payments` module for clarity — **use Codex**.
-   > 2. Write a migration guide under `docs/` for the change — **use Claude Code**.
-   > 3. Update the GitHub Actions CI matrix to add Node 22 — **use Copilot**.
+1. **+ New run**, and paste the prompt above.
 
 2. **Pick a Target** worker (or leave it blank and answer when it asks). Keep
    **Mode: Interactive** so you can steer.
 
-3. **Start Run.** The [timeline](#the-timeline--watch-it-work) shows the
-   coordinator delegating each subtask to the engine you named — a **Codex** step,
-   then a **Claude Code** step, then a **Copilot** step — each a distinct entry.
-
-4. Answer any question inline (e.g. Claude Code pausing to confirm the guide's
-   scope), and the Run continues to a single **completed** summary covering all
-   three pieces.
+3. **Start Run.**
 
 </Steps>
+
+**How it works** — the [timeline](#the-timeline--watch-it-work) shows the
+coordinator delegating each subtask to the engine you named: a **Codex** step,
+then a **Claude Code** step, then a **Copilot** step, each a distinct entry.
+Answer any question inline (e.g. Claude Code pausing to confirm the guide's
+scope), and the Run finishes with a single **completed** summary covering all
+three pieces.
 
 <Aside type="note">
   Name the engine explicitly when it matters — left on auto-detect, the run
