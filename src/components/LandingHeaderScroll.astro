@@ -39,11 +39,18 @@
     box-shadow: none !important;
     transition:
       background-color 250ms ease,
-      border-color 250ms ease !important;
+      border-color 250ms ease,
+      box-shadow 250ms ease !important;
   }
+  /* On scroll: bring in the surface, a crisp hairline, AND a soft drop shadow.
+     The shadow is what makes the change read on the landing page — the nav
+     surface is nearly the same colour as the page background (especially in
+     dark theme), so the colour swap alone is imperceptible; the shadow lifts
+     the header above the scrolling content the way the portal nav does. */
   :root header.header.nav-landing[data-scrolled='true'] {
     background: var(--sl-color-bg-nav) !important;
     border-bottom-color: var(--sl-color-hairline-shade) !important;
+    box-shadow: 0 6px 24px -6px rgba(0, 0, 0, 0.45) !important;
   }
   @media (prefers-reduced-motion: reduce) {
     :root header.header.nav-landing {
