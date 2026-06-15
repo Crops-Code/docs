@@ -57,6 +57,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { label: 'Overview', slug: 'concepts/automation' },
+            { label: 'CropRunner', slug: 'concepts/croprunner' },
             { label: 'Schedules', slug: 'concepts/schedules' },
             { label: 'Runs', slug: 'concepts/runs' },
             { label: 'Engines', slug: 'concepts/subagents' },
