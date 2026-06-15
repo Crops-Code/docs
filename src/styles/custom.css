@@ -635,6 +635,20 @@ header.header {
   padding: 0 1.5rem 3rem;
 }
 
+/* Section intro above the automation card grid: constrain it to the same width
+   and horizontal alignment as the cards (the grid is max-width:864px centered
+   with 1.5rem side padding), and add breathing room before the grid. Without
+   this the heading + paragraph span the full content column and overhang the
+   cards on both sides. */
+.automation-intro {
+  max-width: 864px;
+  margin: 0 auto;
+  padding: 0 1.5rem 1.5rem;
+}
+.automation-intro > :last-child {
+  margin-bottom: 0;
+}
+
 .card {
   border-color: var(--sl-color-hairline) !important;
   border-radius: 0.5rem !important;
