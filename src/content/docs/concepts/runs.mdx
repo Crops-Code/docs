@@ -1,6 +1,6 @@
 ---
 title: Runs
-description: Start an AI agent on demand, watch its timeline, steer it mid-flight, and answer its questions — an interactive container job that fires once.
+description: A Run is an on-demand AI agent job that fires once — watch its timeline, steer it mid-flight, and answer its questions.
 ---
 
 import { Aside, Steps } from '@astrojs/starlight/components';
@@ -14,8 +14,14 @@ import chatLight from '../../../assets/screenshots/run-chat-light.png';
 
 A **Run** is an on-demand agent job that fires **once**. You write a prompt, the
 coordinator spins up a container and gets to work, and — unlike a
-[Schedule](/guides/schedules) — you can **watch its timeline, steer it, and
+[Schedule](/concepts/schedules) — you can **watch its timeline, steer it, and
 answer its questions** as it goes.
+
+<Aside type="tip">
+  Ready to try one? The [Run an agent on demand](/guides/run-on-demand) guide
+  has copy-paste recipes (take a ticket to a PR, delegate across engines, fix a
+  bug). This page explains how Runs work.
+</Aside>
 
 ## Starting a Run
 
@@ -52,7 +58,7 @@ A Run can fire in one of two modes:
   [ask you a question](#it-can-pause-and-ask-you), and you can steer it. This is
   everything described on this page.
 - **Autonomous** — fire-and-forget. The Run executes to completion **without
-  ever pausing** — it's a [Schedule's](/guides/schedules) body fired once, on
+  ever pausing** — it's a [Schedule's](/concepts/schedules) body fired once, on
   demand. There's no human in the loop, so it never asks a question; if it hits
   an ambiguity it decides for itself or fails fast with a result.
 
@@ -119,7 +125,7 @@ comes from the coordinator, not the engine. The container and its session stay
 alive while paused, so it's safe to answer minutes — or hours — later.
 
 <Aside type="note">
-  Questions only happen in **Runs**. A [Schedule](/guides/schedules) is
+  Questions only happen in **Runs**. A [Schedule](/concepts/schedules) is
   autonomous, so it never asks — it reports a result and finishes.
 </Aside>
 
@@ -148,99 +154,15 @@ fit for **Claude Code — Plan** (it can pause itself mid-task); a tightly-scope
 job suits **Claude Code — API credits** or **Codex**. See
 [Engines](/concepts/subagents) for the full comparison and how each one pauses.
 
-## Guided example: sweep the backlog until a PR
-
-A single **autonomous** Run that picks up a ticket and carries it all the way to
-a pull request — no babysitting. Copy the prompt, pin a host, and let it go.
-
-**The prompt** — paste this into the Run composer:
-
-```text
-Find the highest-priority open issue labeled `ready-for-dev` in this repo.
-Implement it in a fresh container, run the full test suite, and open a pull
-request. If the tests fail after your change, keep iterating on the fix until
-they pass. Report the PR link when done.
-```
-
-**Set it up**
-
-<Steps>
-
-1. Open the **Runs** page → **+ New run**, and paste the prompt above.
-
-2. **Pin a Target** — a [worker](/concepts/workers) **and** an image (autonomous
-   Runs can't ask you to pick one, so this is required).
-
-3. Pick an **Engine** (e.g. **Codex**, or auto-detect) and set
-   **Mode: Autonomous**.
-
-4. **Start Run.**
-
-</Steps>
-
-**How it works** — it runs unattended, never pausing for input. On the
-[timeline](#the-timeline--watch-it-work) you watch it:
-
-1. list the open issues (`gh issue list --label ready-for-dev`) and pick the top one;
-2. launch a container and implement the change;
-3. run the suite — red — then iterate on the fix until it's green;
-4. open the PR (`gh pr create`) and report **completed** with the link.
-
-<Aside type="tip">
-  Want this every night instead of once? It's the same recipe as the
-  [nightly backlog sweep](/guides/schedules#guided-example-a-nightly-backlog-sweep)
-  Schedule — a Schedule is this Run on a cron cadence.
-</Aside>
-
-## Guided example: one run, every engine
-
-A Run isn't tied to a single engine — the coordinator can delegate different
-subtasks to different [engines](/concepts/subagents), each playing to its
-strengths, all in one timeline.
-
-**The prompt** — name an engine per task right in the instruction:
-
-```text
-Do three things, each with the tool I name:
-1. Refactor the `payments` module for clarity — use Codex.
-2. Write a migration guide under docs/ for the change — use Claude Code.
-3. Update the GitHub Actions CI matrix to add Node 22 — use Copilot.
-```
-
-**Set it up**
-
-<Steps>
-
-1. **+ New run**, and paste the prompt above.
-
-2. **Pick a Target** worker (or leave it blank and answer when it asks). Keep
-   **Mode: Interactive** so you can steer.
-
-3. **Start Run.**
-
-</Steps>
-
-**How it works** — the [timeline](#the-timeline--watch-it-work) shows the
-coordinator delegating each subtask to the engine you named: a **Codex** step,
-then a **Claude Code** step, then a **Copilot** step, each a distinct entry.
-Answer any question inline (e.g. Claude Code pausing to confirm the guide's
-scope), and the Run finishes with a single **completed** summary covering all
-three pieces.
-
-<Aside type="note">
-  Name the engine explicitly when it matters — left on auto-detect, the run
-  picks one CLI for the whole job. See [Engines](/concepts/subagents) for what
-  each is good at.
-</Aside>
-
 ## When to use a Run vs a Schedule
 
 - **Run** — exploratory or ambiguous work, anything you want to watch, steer, or
   where the agent may need a decision from you.
-- **[Schedule](/guides/schedules)** — recurring, well-specified work that needs
+- **[Schedule](/concepts/schedules)** — recurring, well-specified work that needs
   no supervision.
 
 ## Next
 
+- [Run an agent on demand](/guides/run-on-demand) — copy-paste recipes to try.
 - [Engines](/concepts/subagents) — what each engine can do, and how each pauses.
-- [Schedules](/guides/schedules) — the recurring, autonomous counterpart.
+- [Schedules](/concepts/schedules) — the recurring, autonomous counterpart.

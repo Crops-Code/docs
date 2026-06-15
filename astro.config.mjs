@@ -56,8 +56,8 @@ export default defineConfig({
           collapsed: false,
           items: [
             { label: 'Overview', slug: 'concepts/automation' },
-            { label: 'Schedules', slug: 'guides/schedules' },
-            { label: 'Runs', slug: 'guides/runs' },
+            { label: 'Schedules', slug: 'concepts/schedules' },
+            { label: 'Runs', slug: 'concepts/runs' },
             { label: 'Engines', slug: 'concepts/subagents' },
           ],
         },
@@ -66,8 +66,8 @@ export default defineConfig({
           collapsed: true,
           items: [
             { label: 'Launch from Ticket', slug: 'guides/launch-from-ticket' },
-            // Schedules & Runs are automation guides; they live only in the
-            // Automation group above (listing them here too was redundant).
+            { label: 'Run an agent on demand', slug: 'guides/run-on-demand' },
+            { label: 'Automate recurring work', slug: 'guides/recurring-work' },
             { label: 'Custom Containerfile', slug: 'guides/custom-containerfile' },
             { label: 'Build from Container', slug: 'guides/build-image-from-container' },
             { label: 'Team Setup', slug: 'guides/team-setup' },

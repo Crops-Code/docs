@@ -1,6 +1,6 @@
 ---
 title: Schedules
-description: Run an AI agent on a recurring cron cadence — autonomous container jobs that spin up, do the work, and tear down on their own.
+description: A Schedule runs an AI agent on a recurring cron cadence — autonomous container jobs that spin up, do the work, and tear down on their own.
 ---
 
 import { Aside, Steps } from '@astrojs/starlight/components';
@@ -17,7 +17,13 @@ draft PRs every morning, sweep for flaky tests nightly, audit dependencies
 weekly. Each run spins up a container, does the work, and tears down on its own.
 
 Schedules are **autonomous**: no one is watching, so the agent never pauses to
-ask a question. If you want a back-and-forth, use a [Run](/guides/runs) instead.
+ask a question. If you want a back-and-forth, use a [Run](/concepts/runs) instead.
+
+<Aside type="tip">
+  Ready to set one up? The [Automate recurring work](/guides/recurring-work)
+  guide has copy-paste recipes (nightly backlog sweep, weekly dependency audit,
+  flaky-test sweep). This page explains how Schedules work.
+</Aside>
 
 <ThemedImage
   dark={schedulesDark}
@@ -62,7 +68,7 @@ Three views, each with a purpose:
 />
 
 Open any execution to see its **timeline** — the same step-by-step trace a
-[Run](/guides/runs#the-timeline--watch-it-work) has, reached from the schedule:
+[Run](/concepts/runs#the-timeline--watch-it-work) has, reached from the schedule:
 
 <ThemedImage
   dark={schedTimelineDark}
@@ -95,81 +101,6 @@ From the **Schedules** page, **+ Schedule** opens the form:
 A schedule can be **enabled** or **disabled** at any time without deleting it —
 disabled schedules keep their config but never fire.
 
-## Guided example: a nightly backlog sweep
-
-Every night, turn "ready" tickets into draft PRs while you sleep — the recurring
-counterpart of the
-[Runs backlog sweep](/guides/runs#guided-example-sweep-the-backlog-until-a-pr).
-
-**The prompt** — paste this into the schedule's prompt field:
-
-```text
-For each open issue labeled `ready-for-dev` that doesn't already have an open
-pull request, implement it in its own container, run the test suite, and open a
-draft PR. Skip anything you can't finish cleanly.
-```
-
-**Set it up**
-
-<Steps>
-
-1. Open the **Schedules** page → **+ Schedule**, and paste the prompt above.
-
-2. **Set the cadence** to `0 2 * * *` (daily at 2am) — the preview confirms the
-   next run time.
-
-3. **Pick the engine** (e.g. **Codex**), a **target worker**, and an **image**, then **Save**.
-
-</Steps>
-
-**How it works** — it appears in the list **enabled**, next run counting down.
-Each night, autonomously and without asking you anything, it works every ready
-ticket end-to-end: a container per ticket, test suite, draft PR, then torn down.
-Test it immediately with **Run now**, and open its
-[run history](#the-schedules-pages) to watch any execution's timeline. **Disable**
-it any time without losing the configuration.
-
-## Guided example: a weekly dependency audit
-
-A different cadence and a different job — every Monday morning, find risky
-dependencies and open **one** PR with the safe upgrades, so security patches
-never pile up.
-
-**The prompt** — paste this into the schedule's prompt field:
-
-```text
-Audit this repo's dependencies for known vulnerabilities and outdated major
-versions. On a new branch, apply only the safe, non-breaking upgrades, run the
-full test suite, and open one pull request summarizing what you changed and what
-you skipped (and why). Never push anything that breaks the build.
-```
-
-**Set it up**
-
-<Steps>
-
-1. **+ Schedule**, and paste the prompt above.
-
-2. **Set the cadence** to `0 7 * * 1` (Mondays at 7am) — a weekly rhythm, unlike
-   the nightly sweep above. The preview confirms the next Monday.
-
-3. **Pick the engine** — **Claude Code** is a good fit (it reasons well over
-   changelogs and breaking-change notes) — plus a **target worker** and **image**,
-   then **Save**.
-
-</Steps>
-
-**How it works** — **Run now** once to see it end-to-end without waiting for
-Monday. On the [timeline](#the-schedules-pages) you watch it scan the dependency
-tree, open a branch, apply the safe bumps, run the suite, and call `gh pr create`
-— finishing with a single audit PR you can review at your leisure.
-
-<Aside type="tip">
-  Two schedules, two rhythms: the **nightly** sweep clears the backlog while you
-  sleep; the **weekly** audit keeps dependencies healthy. Mix cadences and
-  engines to cover whatever recurring work you'd rather not do by hand.
-</Aside>
-
 ## Limits
 
 | Plan | Schedules |
@@ -192,6 +123,6 @@ tree, open a branch, apply the safe bumps, run the suite, and call `gh pr create
 
 ## Next
 
-- [Runs](/guides/runs) — the on-demand, interactive counterpart (with the
-  timeline and pause-to-ask).
+- [Automate recurring work](/guides/recurring-work) — copy-paste schedule recipes.
+- [Runs](/concepts/runs) — the on-demand, interactive counterpart.
 - [Engines](/concepts/subagents) — what each engine can do.

@@ -5,7 +5,7 @@ description: The CLI engines that do the coding inside a container — Claude Co
 
 import { Aside } from '@astrojs/starlight/components';
 
-Every [Schedule](/guides/schedules) and [Run](/guides/runs) has two layers. The
+Every [Schedule](/concepts/schedules) and [Run](/concepts/runs) has two layers. The
 **engine** is the inner one — the CLI that does the actual coding inside the
 container.
 
@@ -13,9 +13,9 @@ container.
 
 - **Coordinator** — the agent that runs the job: it reads your instruction,
   picks a host, launches the container, and delegates the coding. In an
-  **interactive [Run](/guides/runs)** the coordinator owns the **"ask the human"
+  **interactive [Run](/concepts/runs)** the coordinator owns the **"ask the human"
   tool**, so it can pause and ask you a question *regardless of which engine you
-  pick*. (A [Schedule](/guides/schedules) — or an **autonomous** Run — has no
+  pick*. (A [Schedule](/concepts/schedules) — or an **autonomous** Run — has no
   human, so it never pauses.)
 - **Engine (subagent)** — the CLI that writes the code inside the container.
   You choose it per Schedule or per Run.
@@ -55,5 +55,5 @@ how it pauses**:
   brainstorm is a good fit for **Claude Code — Plan**, while a tightly-scoped
   unattended job suits **Claude Code — API credits** or **Codex**.
 
-See [Runs](/guides/runs) for how a paused question looks, and
-[Schedules](/guides/schedules) for the autonomous contract.
+See [Runs](/concepts/runs) for how a paused question looks, and
+[Schedules](/concepts/schedules) for the autonomous contract.
