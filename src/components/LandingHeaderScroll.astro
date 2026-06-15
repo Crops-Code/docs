@@ -1,39 +1,42 @@
 ---
 /**
- * Landing-page-only header behavior, mirroring the portal home nav: the
- * Starlight site header is transparent at the very top (so the hero/mesh shows
- * through it) and fades the solid surface + bottom hairline in once the page is
- * scrolled ~24px. This component is imported only from index.mdx, so the class
- * is never added on other docs pages.
+ * Landing-page-only header behavior, mirroring the portal home nav: the site
+ * header is transparent over the hero at the top of the page, then fades in the
+ * solid surface + bottom hairline + a drop shadow once scrolled ~24px.
+ *
+ * The transparent state is **pure CSS**, keyed on `:root[data-has-hero]` (set by
+ * the splash hero) — it does not depend on any JS-added class, so it can't be
+ * defeated by a stale/cached script bundle. The script is `is:inline` (embedded
+ * in the page HTML, never a separately-cached asset) and only toggles the
+ * `data-scrolled` attribute that switches on the solid state.
+ *
+ * Imported only from index.mdx, so the global style is scoped to the landing.
  */
 ---
 
-<script>
-  const header = document.querySelector('header.header');
-  if (header) {
-    header.classList.add('nav-landing');
-    const update = () => {
-      const y = window.scrollY || document.documentElement.scrollTop || 0;
+<script is:inline>
+  (function () {
+    var header = document.querySelector('header.header');
+    if (!header) return;
+    function update() {
+      var y = window.scrollY || document.documentElement.scrollTop || 0;
       if (y > 24) header.setAttribute('data-scrolled', 'true');
       else header.removeAttribute('data-scrolled');
-    };
+    }
     update();
-    // Capture-phase on document catches scrolling from the window OR any inner
-    // scroll container (scroll events don't bubble, but do reach capture).
+    // Capture-phase catches the scroll whether the window or an inner element scrolls.
     document.addEventListener('scroll', update, { passive: true, capture: true });
     window.addEventListener('scroll', update, { passive: true });
-  }
+  })();
 </script>
 
 <style is:global>
-  /* Transparent at the top of the landing page; the surface + hairline fade in
-     on scroll. The leading `:root` and `background` shorthand are deliberate:
-     the custom Header.astro ships `:root[data-has-hero] .header { background:
-     var(--sl-color-bg-nav) !important }` (specificity 0,3,0) which otherwise
-     wins. `:root header.header.nav-landing` is (0,3,1) so it beats that, and
-     using the `background` shorthand (not just background-color) overrides the
-     shorthand it sets. */
-  :root header.header.nav-landing {
+  /* Transparent over the hero at the top. `:root[data-has-hero] header.header`
+     is specificity (0,3,1), which outranks Header.astro's
+     `:root[data-has-hero] .header { background: var(--sl-color-bg-nav) !important }`
+     (0,3,0) that otherwise fills it. `background` shorthand (not just
+     background-color) overrides the shorthand that rule sets. */
+  :root[data-has-hero] header.header {
     background: transparent !important;
     border-bottom-color: transparent !important;
     box-shadow: none !important;
@@ -42,18 +45,16 @@
       border-color 250ms ease,
       box-shadow 250ms ease !important;
   }
-  /* On scroll: bring in the surface, a crisp hairline, AND a soft drop shadow.
-     The shadow is what makes the change read on the landing page — the nav
-     surface is nearly the same colour as the page background (especially in
-     dark theme), so the colour swap alone is imperceptible; the shadow lifts
-     the header above the scrolling content the way the portal nav does. */
-  :root header.header.nav-landing[data-scrolled='true'] {
+  /* On scroll: surface + crisp hairline + a soft drop shadow. The shadow is what
+     makes the change read — the nav surface is nearly the page-background colour
+     (especially dark theme), so the colour swap alone is imperceptible. */
+  :root[data-has-hero] header.header[data-scrolled='true'] {
     background: var(--sl-color-bg-nav) !important;
     border-bottom-color: var(--sl-color-hairline-shade) !important;
     box-shadow: 0 6px 24px -6px rgba(0, 0, 0, 0.45) !important;
   }
   @media (prefers-reduced-motion: reduce) {
-    :root header.header.nav-landing {
+    :root[data-has-hero] header.header {
       transition: none !important;
     }
   }
