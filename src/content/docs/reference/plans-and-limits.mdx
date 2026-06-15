@@ -26,7 +26,7 @@ managed compute.
 |----------|------|---------|-----|-----------|
 | Self-hosted workers | 1 | 2 | 10 | Unlimited |
 | Concurrent containers | 3 | 5 | 15 | Unlimited |
-| Greenhouse (cloud) containers | 0 | 100 | 100 | 100 |
+| Greenhouse (cloud) containers | None | Unlimited | Unlimited | Unlimited |
 | Custom images | 3 | Unlimited | Unlimited | Unlimited |
 | Concurrent runs | 1 | 1 | 5 | 10 |
 | Parallel subagents per run | 0 | 3 | 5 | 10 |
@@ -41,8 +41,8 @@ managed compute.
 
 A few notes:
 
-- **Greenhouse containers** are managed cloud compute. Free has none (`0`) — it's
-  BYOM-only; paid tiers can run up to 100 concurrent greenhouse containers.
+- **Greenhouse containers** are managed cloud compute. Free has none — it's
+  BYOM-only; paid tiers are unlimited.
 - **Custom images** is a use-cap: on a capped plan only the **newest N** managed
   images stay launchable (Free keeps the newest 3); older ones lock until you
   upgrade or remove some.
