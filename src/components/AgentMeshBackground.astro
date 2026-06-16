@@ -9,6 +9,14 @@
  */
 ---
 
+<!-- Ambient brand-colored orbs drifting behind the mesh (decorative). Mirrors
+     the portal hero's three .hero-orb glows, lifted to a full-screen fixed
+     layer for the docs landing. -->
+<div class="agent-mesh-orbs" aria-hidden="true">
+  <div class="agent-mesh-orb agent-mesh-orb-1"></div>
+  <div class="agent-mesh-orb agent-mesh-orb-2"></div>
+  <div class="agent-mesh-orb agent-mesh-orb-3"></div>
+</div>
 <canvas id="agent-mesh-bg" aria-hidden="true"></canvas>
 
 <style>
@@ -29,6 +37,70 @@
      more so the (darker) mesh reads. */
   :root[data-theme='light'] #agent-mesh-bg {
     opacity: 0.95;
+  }
+
+  /* ─── Ambient orbs — full-screen fixed layer one step behind the mesh
+     (z-index -2). Ported 1:1 from the portal hero's .hero-orb-1/2/3. */
+  .agent-mesh-orbs {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -2;
+  }
+  .agent-mesh-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(72px);
+    opacity: 0.5;
+    will-change: transform;
+  }
+  :root[data-theme='light'] .agent-mesh-orb {
+    opacity: 0.28;
+  }
+  .agent-mesh-orb-1 {
+    top: -8%;
+    left: 8%;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, #10c0f0 0%, transparent 70%);
+    animation: agent-mesh-orb-drift 19s ease-in-out infinite alternate;
+  }
+  .agent-mesh-orb-2 {
+    top: 6%;
+    right: 6%;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, #0080e0 0%, transparent 70%);
+    animation: agent-mesh-orb-drift 23s ease-in-out infinite alternate-reverse;
+  }
+  .agent-mesh-orb-3 {
+    bottom: -16%;
+    left: 38%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #3cb371 0%, transparent 70%);
+    opacity: 0.32;
+    animation: agent-mesh-orb-drift 27s ease-in-out infinite alternate;
+  }
+  :root[data-theme='light'] .agent-mesh-orb-3 {
+    opacity: 0.18;
+  }
+
+  /* Honour reduced-motion like the mesh canvas does — freeze the drift. */
+  @media (prefers-reduced-motion: reduce) {
+    .agent-mesh-orb {
+      animation: none;
+    }
+  }
+
+  @keyframes agent-mesh-orb-drift {
+    from {
+      transform: translate(0, 0) scale(1);
+    }
+    to {
+      transform: translate(24px, -28px) scale(1.08);
+    }
   }
 </style>
 
@@ -162,11 +234,11 @@
         }
       }
 
+      // Subtle cursor dot — no outer ring, small radius, barely-there glow — so
+      // it just anchors the connector lines instead of drawing the eye.
       if (ptr.on) {
-        ctx.strokeStyle = `rgba(${lineRGB},0.6)`; ctx.lineWidth = 1.5;
-        ctx.beginPath(); ctx.arc(ptr.x, ptr.y, 9, 0, Math.PI * 2); ctx.stroke();
-        ctx.fillStyle = boxColor; ctx.shadowColor = boxColor; ctx.shadowBlur = 14;
-        ctx.beginPath(); ctx.arc(ptr.x, ptr.y, 3.4, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = boxColor; ctx.shadowColor = boxColor; ctx.shadowBlur = 3;
+        ctx.beginPath(); ctx.arc(ptr.x, ptr.y, 2, 0, Math.PI * 2); ctx.fill();
         ctx.shadowBlur = 0;
       }
     };
