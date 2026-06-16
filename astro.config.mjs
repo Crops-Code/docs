@@ -41,6 +41,7 @@ export default defineConfig({
           label: 'Concepts',
           collapsed: true,
           items: [
+            { label: 'Projects', slug: 'concepts/projects' },
             { label: 'Workers', slug: 'concepts/workers' },
             { label: 'Containers', slug: 'concepts/containers' },
             { label: 'CropPilot', slug: 'concepts/croppilot' },
