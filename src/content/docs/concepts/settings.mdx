@@ -1,12 +1,12 @@
 ---
 title: Settings
-description: Your per-user CropsCode preferences — secrets and BYOK keys, CropPilot behavior, appearance, container display, notifications, and version info.
+description: Your per-user ClusterCode preferences — secrets and BYOK keys, Nucleus behavior, appearance, container display, notifications, and version info.
 ---
 
 import { Aside } from '@astrojs/starlight/components';
 
 **Settings** holds your preferences for the orchestrator — open it from the
-sidebar. Most of it is **per-user** (your secrets, CropPilot instructions,
+sidebar. Most of it is **per-user** (your secrets, Nucleus instructions,
 theme); the **Container Security** profiles are **tenant-level** — shared across
 your team. The page is organised into the sections below (the right-hand nav
 jumps between them).
@@ -14,12 +14,12 @@ jumps between them).
 ## Secrets
 
 API keys and tokens for external services. Values are **encrypted at rest** and
-are only ever handed to your running container instances and CropPilot — never
+are only ever handed to your running container instances and Nucleus — never
 shown back to you once saved (you replace a value by pasting a new one).
 
 Each credential you add can be switched on for one or both **uses**:
 
-- **Use for CropPilot (Bring Your Own Key)** — route CropPilot's own requests
+- **Use for Nucleus (Bring Your Own Key)** — route Nucleus's own requests
   through your key. See [Bring your own key](#bring-your-own-key-byok) below.
 - **Use for container authentication** — make the token available **inside** the
   containers you launch (for example a GitHub token so an agent can push and open
@@ -27,23 +27,23 @@ Each credential you add can be switched on for one or both **uses**:
 
 ### Bring your own key (BYOK)
 
-CropPilot is built on **Anthropic (Claude)** models. Every plan includes a
+Nucleus is built on **Anthropic (Claude)** models. Every plan includes a
 monthly AI allowance, but you can add your own credential for **additional usage
 beyond your plan** — or to run entirely on your own account. Two options:
 
 - **Anthropic API key** — billed to your Anthropic account, used directly for
-  CropPilot requests.
-- **Claude OAuth token** — routes CropPilot through your **personal Claude Code
+  Nucleus requests.
+- **Claude OAuth token** — routes Nucleus through your **personal Claude Code
   subscription**. Make sure your usage complies with Anthropic's terms.
 
-Paste the key under **Secrets**, then enable **Use for CropPilot (Bring Your Own
+Paste the key under **Secrets**, then enable **Use for Nucleus (Bring Your Own
 Key)**. See also [AI Credits](/guides/ai-credits) for how plan allowance and BYOK
 interact.
 
-## CropPilot
+## Nucleus
 
-Customize [CropPilot](/concepts/croppilot)'s behavior with a personal instruction
-file — a **`CROPPILOT.md`**, conceptually like a `CLAUDE.md`. Use it to set tone,
+Customize [Nucleus](/concepts/nucleus)'s behavior with a personal instruction
+file — a **`NUCLEUS.md`**, conceptually like a `CLAUDE.md`. Use it to set tone,
 standing preferences, or project context the assistant should always keep in
 mind. You can edit it inline and **reset** it back to the default at any time.
 
@@ -59,7 +59,7 @@ Two groups of settings for your [containers](/concepts/containers):
 **Display**
 
 - **Hide external and system containers** — show only the containers managed by
-  CropsCode, hiding anything else running on your workers.
+  ClusterCode, hiding anything else running on your workers.
 
 **Container Security** — configure your **tenant's security profiles**. Each
 tenant defines a **default [security profile](/concepts/security-profiles)**

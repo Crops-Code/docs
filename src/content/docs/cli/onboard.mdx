@@ -1,19 +1,19 @@
 ---
-title: cropscode onboard
+title: clustercode onboard
 description: Guided setup wizard that handles everything automatically.
 ---
 
 ## Usage
 
 ```bash
-cropscode onboard
+clustercode onboard
 ```
 
 ## Description
 
 An interactive wizard that walks you through the complete setup:
 
-1. Runs all health checks (same as `cropscode doctor`)
+1. Runs all health checks (same as `clustercode doctor`)
 2. For each failure, offers to fix it:
    - **Not logged in** → runs the login flow
    - **Worker not configured** → runs tenant selection
@@ -25,7 +25,7 @@ An interactive wizard that walks you through the complete setup:
 ## When to Use
 
 - First-time setup on a new machine
-- After `cropscode doctor` reports failures
+- After `clustercode doctor` reports failures
 - When you want a one-command setup instead of running individual commands
 
 ## Difference from `doctor`

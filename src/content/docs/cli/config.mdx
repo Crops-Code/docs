@@ -1,12 +1,12 @@
 ---
-title: cropscode config
+title: clustercode config
 description: Manage CLI configuration.
 ---
 
 ## Usage
 
 ```bash
-cropscode config <subcommand> [arguments]
+clustercode config <subcommand> [arguments]
 ```
 
 ## Subcommands
@@ -16,7 +16,7 @@ cropscode config <subcommand> [arguments]
 Set a configuration value:
 
 ```bash
-cropscode config set WORKER_NAME my-dev-machine
+clustercode config set WORKER_NAME my-dev-machine
 ```
 
 ### `get`
@@ -24,7 +24,7 @@ cropscode config set WORKER_NAME my-dev-machine
 Read a configuration value:
 
 ```bash
-cropscode config get WORKER_NAME
+clustercode config get WORKER_NAME
 ```
 
 ### `list`
@@ -32,18 +32,18 @@ cropscode config get WORKER_NAME
 Show all configuration values:
 
 ```bash
-cropscode config list
+clustercode config list
 ```
 
 ### `clear`
 
-Remove all local CropsCode config (credentials, worker registration, and settings). Prompts for confirmation before deleting:
+Remove all local ClusterCode config (credentials, worker registration, and settings). Prompts for confirmation before deleting:
 
 ```bash
-cropscode config clear
+clustercode config clear
 ```
 
-After clearing, run `cropscode login` to set up again.
+After clearing, run `clustercode login` to set up again.
 
 ## Allowed Keys
 
@@ -55,7 +55,7 @@ Only the keys listed above are accepted. Attempting to set an unknown key return
 
 ## Configuration File
 
-Location: `~/.cropscode/config.json`
+Location: `~/.clustercode/config.json`
 
 ```json
 {

@@ -1,22 +1,22 @@
 ---
-title: Greenhouse
+title: Cloud worker
 description: Managed compute workers — no hardware required.
 ---
 
-Greenhouse is CropsCode's managed compute service. Instead of providing your own machines, Greenhouse runs workers in the cloud on your behalf.
+Cloud worker is ClusterCode's managed compute service. Instead of providing your own machines, Cloud worker runs workers in the cloud on your behalf.
 
-## Self-Hosted vs Greenhouse
+## Self-Hosted vs Cloud worker
 
-| | Self-Hosted | Greenhouse |
+| | Self-Hosted | Cloud worker |
 |---|---|---|
-| Hardware | You provide | CropsCode provides |
+| Hardware | You provide | ClusterCode provides |
 | Maintenance | You manage | Zero maintenance |
 | Cost | Your electricity + hardware | Included compute allowance + top-ups |
 | Control | Full | Managed |
 | Availability | Depends on your machines | Always-on |
 | Windows support | Requires Windows host | Built-in |
 
-## When to Use Greenhouse
+## When to Use Cloud worker
 
 - You don't have spare machines or don't want to manage them
 - You need Windows containers for .NET or desktop testing
@@ -25,10 +25,10 @@ Greenhouse is CropsCode's managed compute service. Instead of providing your own
 
 ## Getting Started
 
-Greenhouse workers appear automatically in your dashboard. No CLI setup, no registration — they're always connected and ready.
+Cloud worker workers appear automatically in your dashboard. No CLI setup, no registration — they're always connected and ready.
 
 1. Open the orchestrator dashboard
-2. When launching a container, select a Greenhouse worker
+2. When launching a container, select a Cloud worker worker
 3. Containers run on managed infrastructure
 
 ## Compute Allowance
@@ -45,8 +45,8 @@ Top-ups available on Pro and Enterprise plans when you exceed your allowance.
 
 ## Supported Container Types
 
-Greenhouse workers support:
-- **Linux containers** — all standard CropsCode runtimes
+Cloud worker workers support:
+- **Linux containers** — all standard ClusterCode runtimes
 - **Windows containers** — .NET, desktop apps, Visual Studio workflows
 
 For Windows, you can [snapshot a configured container into a golden image](/guides/build-image-from-container) so future launches skip the 20–30 minute first-boot install and reach a working desktop in seconds.

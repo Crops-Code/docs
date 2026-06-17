@@ -1,6 +1,6 @@
 ---
 title: Quickstart
-description: Get your farm running in under 5 minutes.
+description: Get your cluster running in under 5 minutes.
 ---
 
 Everything you need to go from zero to running AI containers on your own hardware.
@@ -8,9 +8,9 @@ Everything you need to go from zero to running AI containers on your own hardwar
 ## 1. Install the CLI
 
 ```bash
-npm config set @crops-code:registry https://npm.pkg.github.com
-npm install -g @crops-code/cli
-cropscode --version
+npm config set @clustercode:registry https://npm.pkg.github.com
+npm install -g @clustercode/cli
+clustercode --version
 ```
 
 Requires Node.js 22+. See [Install CLI](/getting-started/install-cli) for details.
@@ -18,15 +18,15 @@ Requires Node.js 22+. See [Install CLI](/getting-started/install-cli) for detail
 ## 2. Log in
 
 ```bash
-cropscode login
+clustercode login
 ```
 
-This opens your browser for a secure OAuth sign-in with your CropsCode account.
+This opens your browser for a secure OAuth sign-in with your ClusterCode account.
 
 ## 3. Start a worker
 
 ```bash
-cropscode worker
+clustercode worker
 ```
 
 On first run, the CLI walks you through tenant selection and then starts the worker daemon. The worker connects outbound to the orchestrator — no inbound ports, no firewall rules.
@@ -34,7 +34,7 @@ On first run, the CLI walks you through tenant selection and then starts the wor
 Or run the guided wizard that handles everything (login, tenant selection, runtime checks):
 
 ```bash
-cropscode onboard
+clustercode onboard
 ```
 
 ## 4. Launch your first container

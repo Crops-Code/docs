@@ -1,17 +1,17 @@
 ---
-title: cropscode login
-description: Authenticate with your CropsCode account.
+title: clustercode login
+description: Authenticate with your ClusterCode account.
 ---
 
 ## Usage
 
 ```bash
-cropscode login
+clustercode login
 ```
 
 ## Description
 
-Opens your default browser for a secure OAuth sign-in. After authenticating, the CLI stores your API key in `~/.cropscode/credentials.json`.
+Opens your default browser for a secure OAuth sign-in. After authenticating, the CLI stores your API key in `~/.clustercode/credentials.json`.
 
 If you're already logged in, the CLI asks whether to keep the current session or log in with a different account.
 
@@ -26,7 +26,7 @@ If you're already logged in, the CLI asks whether to keep the current session or
 For servers or environments without a browser:
 
 ```bash
-cropscode login --no-browser
+clustercode login --no-browser
 ```
 
 This prompts you to paste an API token and your email address. Generate a token from your orchestrator's settings page.
@@ -36,7 +36,7 @@ The CLI also auto-detects headless environments (SSH sessions, display-less Linu
 ## Verify
 
 ```bash
-cropscode status
+clustercode status
 ```
 
 Shows your authenticated email and connection state.

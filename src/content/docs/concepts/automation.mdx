@@ -5,11 +5,11 @@ description: Hand work to an AI agent that spins up a container, does the task, 
 
 import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-**Automation** is CropsCode handing a task to an AI agent that spins up a
+**Automation** is ClusterCode handing a task to an AI agent that spins up a
 container, does the work, and tears down — either on a recurring **Schedule**
 or as an on-demand **Run**. Every execution happens on **infrastructure you
 own and control**: your own [workers](/concepts/workers) and
-[greenhouses](/guides/greenhouse), never a black-box cloud.
+[cloud workers](/guides/cloud-worker), never a black-box cloud.
 
 ## Two modes
 
@@ -46,8 +46,8 @@ A few recipes to make it concrete:
 
 Automation doesn't ship your code to someone else's servers. Each Schedule or
 Run executes on a [worker](/concepts/workers) you registered or a
-[greenhouse](/guides/greenhouse) you provisioned — machines you control, behind
-your own network. You pick the host (or let CropsCode choose from the ones you
+[cloud worker](/guides/cloud-worker) you provisioned — machines you control, behind
+your own network. You pick the host (or let ClusterCode choose from the ones you
 have), and the AI work bills against your own engine credentials.
 
 <Aside type="tip">

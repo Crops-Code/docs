@@ -1,6 +1,6 @@
-# CropsCode Docs
+# ClusterCode Docs
 
-Public documentation site for CropsCode, served at https://docs.cropscode.io.
+Public documentation site for ClusterCode, served at https://docs.clustercode.io.
 
 ## Tech stack
 
@@ -73,10 +73,10 @@ pnpm preview   # preview the production build locally
 }
 ```
 
-This endpoint is consumed by CropPilot (the in-app AI assistant) via the
+This endpoint is consumed by Nucleus (the in-app AI assistant) via the
 `read_docs` MCP tool to answer documentation questions at runtime. The
 orchestrator fetches it server-side; the URL is configurable via
-`NEXT_PUBLIC_DOCS_URL` (defaults to `https://docs.cropscode.io`).
+`NEXT_PUBLIC_DOCS_URL` (defaults to `https://docs.clustercode.io`).
 
 ## Project structure
 

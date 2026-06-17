@@ -1,20 +1,20 @@
 ---
 title: Register a Worker
-description: Connect a machine to your CropsCode orchestrator as a worker.
+description: Connect a machine to your ClusterCode orchestrator as a worker.
 ---
 
 A worker is a machine running Podman (or Docker) that executes containers on behalf of the orchestrator. Registration is a one-time step where the CLI selects a tenant and generates a worker identity.
 
 ## Prerequisites
 
-- [CLI installed](/getting-started/install-cli) and authenticated (`cropscode login`)
+- [CLI installed](/getting-started/install-cli) and authenticated (`clustercode login`)
 - **Podman** (or Docker) installed and running on this machine
 - Network access to the orchestrator (outbound only — no inbound ports needed)
 
 ## Quick path
 
 ```bash
-cropscode onboard
+clustercode onboard
 ```
 
 The onboard wizard checks everything (auth, tenant selection, orchestrator reachability, container runtime, disk/memory) and fixes issues automatically.
@@ -24,14 +24,14 @@ The onboard wizard checks everything (auth, tenant selection, orchestrator reach
 ### Start the worker
 
 ```bash
-cropscode worker
+clustercode worker
 ```
 
 On first run, the CLI:
 1. Checks your authentication
 2. Fetches available tenants from the orchestrator
 3. Lets you pick a tenant (or auto-selects if there's only one)
-4. Saves the worker config to `~/.cropscode/worker.json`
+4. Saves the worker config to `~/.clustercode/worker.json`
 5. Starts the worker daemon
 
 On subsequent runs, it reads the saved config and starts immediately.
@@ -39,7 +39,7 @@ On subsequent runs, it reads the saved config and starts immediately.
 ### Verify
 
 ```bash
-cropscode status
+clustercode status
 ```
 
 You should see:
@@ -48,7 +48,7 @@ You should see:
   User:          you@example.com
   Worker:        a1b2c3d4
   Tenant:        your-tenant
-  Orchestrator:  console.cropscode.io
+  Orchestrator:  console.clustercode.io
   Connection:    Connected
 ```
 
@@ -56,10 +56,10 @@ The worker also appears in the orchestrator dashboard under the Workers panel.
 
 ## Health check
 
-Run `cropscode doctor` at any time to verify the worker's health:
+Run `clustercode doctor` at any time to verify the worker's health:
 
 ```bash
-cropscode doctor
+clustercode doctor
 ```
 
 It checks: authentication, worker registration, orchestrator connectivity, WSL2 (Windows only), container runtime (Podman/Docker), disk space, and available memory.

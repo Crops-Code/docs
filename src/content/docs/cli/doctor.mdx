@@ -1,19 +1,19 @@
 ---
-title: cropscode doctor
+title: clustercode doctor
 description: Check system health — auth, connectivity, container runtime, resources.
 ---
 
 ## Usage
 
 ```bash
-cropscode doctor
+clustercode doctor
 ```
 
 ## Description
 
-Runs a comprehensive health check on this machine's CropsCode setup. Checks:
+Runs a comprehensive health check on this machine's ClusterCode setup. Checks:
 
-- **Authentication** — valid credentials in `~/.cropscode/credentials.json`
+- **Authentication** — valid credentials in `~/.clustercode/credentials.json`
 - **Worker registration** — worker configured with a tenant
 - **Orchestrator connectivity** — can reach the health endpoint
 - **WSL2** — (Windows only) WSL2 installed with a Linux distro
@@ -34,7 +34,7 @@ Each check shows a pass/fail/warn status:
 ```
   ✓ Logged in as you@example.com
   ✓ Registered (your-tenant)
-  ✓ Reachable (console.cropscode.io)
+  ✓ Reachable (console.clustercode.io)
   ✓ podman v5.3.1
   ✓ 42.0GB free
   ⚠ Low memory: 0.8GB free of 16.0GB
@@ -44,12 +44,12 @@ Icons: **✓** pass, **✗** fail, **⚠** warning. Disk and memory use warnings
 
 ## Interactive Fix
 
-When failures are found, `doctor` prompts you to run `cropscode onboard` to fix them automatically. If only warnings remain, it reports them without prompting.
+When failures are found, `doctor` prompts you to run `clustercode onboard` to fix them automatically. If only warnings remain, it reports them without prompting.
 
 ## CI Usage
 
 ```bash
-cropscode doctor --json
+clustercode doctor --json
 ```
 
 Returns a JSON object with `healthy` (boolean) and `checks` (array). Exit code is 0 when healthy, 1 otherwise.

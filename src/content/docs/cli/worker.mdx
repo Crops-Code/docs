@@ -1,12 +1,12 @@
 ---
-title: cropscode worker
-description: Configure tenant and start the CropsCode worker on this machine.
+title: clustercode worker
+description: Configure tenant and start the ClusterCode worker on this machine.
 ---
 
 ## Usage
 
 ```bash
-cropscode worker
+clustercode worker
 ```
 
 ## Description
@@ -15,17 +15,17 @@ The `worker` command handles tenant selection (if needed) and starts the worker 
 
 On first run, it walks you through setup:
 
-1. Checks that you're logged in (prompts to run `cropscode login` if not)
+1. Checks that you're logged in (prompts to run `clustercode login` if not)
 2. Fetches your available tenants from the orchestrator
 3. If you have multiple tenants, lets you pick one
-4. Saves the configuration to `~/.cropscode/worker.json`
+4. Saves the configuration to `~/.clustercode/worker.json`
 5. Starts the worker daemon
 
 On subsequent runs, it reads the saved config and starts the worker immediately.
 
 ## What Happens on Start
 
-1. Reads worker config from `~/.cropscode/worker.json`
+1. Reads worker config from `~/.clustercode/worker.json`
 2. Connects outbound to the orchestrator via WebSocket
 3. Reports system info (hostname, CPU, RAM)
 4. Begins sending heartbeats every 10 seconds
@@ -37,10 +37,10 @@ The worker connects **outbound** — no inbound ports, no firewall rules, works 
 
 ## Worker Configuration
 
-Running `cropscode worker` for the first time stores:
+Running `clustercode worker` for the first time stores:
 
 - Worker ID (randomly generated UUID)
 - Tenant ID and name
 - Orchestrator WebSocket URL
 
-These are saved in `~/.cropscode/worker.json`.
+These are saved in `~/.clustercode/worker.json`.

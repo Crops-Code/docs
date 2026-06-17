@@ -1,23 +1,23 @@
 ---
-title: CropPilot
+title: Nucleus
 description: The in-platform AI assistant that manages your farm.
 ---
 
 import { Aside } from '@astrojs/starlight/components';
 
-**CropPilot** is CropsCode's built-in AI assistant. It lives in the orchestrator dashboard and helps you manage workers, launch containers, execute commands, and monitor your farm — all through natural conversation.
+**Nucleus** is ClusterCode's built-in AI assistant. It lives in the orchestrator dashboard and helps you manage workers, launch containers, execute commands, and monitor your cluster — all through natural conversation.
 
-<Aside type="caution" title="CropPilot runs on Anthropic models">
-  CropPilot is powered internally by **Anthropic (Claude)** models. Each plan
+<Aside type="caution" title="Nucleus runs on Anthropic models">
+  Nucleus is powered internally by **Anthropic (Claude)** models. Each plan
   includes a monthly AI allowance (see [Budget](#budget)); when you exhaust it —
   or to run on your own account — **bring your own key** in
   [Settings → Secrets](/concepts/settings#bring-your-own-key-byok): add an
   **Anthropic API key** or a **Claude OAuth token** and toggle **Use for
-  CropPilot**. The OAuth option routes requests through your personal Claude Code
+  Nucleus**. The OAuth option routes requests through your personal Claude Code
   subscription.
 </Aside>
 
-## What CropPilot Can Do
+## What Nucleus Can Do
 
 - **Launch containers from tickets** — "Launch a container for github.com/org/repo/issues/42"
 - **Execute commands** — "Run npm start in container X" or start long-running processes in the background
@@ -25,12 +25,12 @@ import { Aside } from '@astrojs/starlight/components';
 - **Build images** — "Build the claude-code-terminal image" with composable capabilities
 - **Monitor status** — "What's running on worker-1?" or get details on a specific container
 - **Fetch tickets** — Pull details from GitHub Issues or Azure DevOps work items
-- **Navigate the UI** — CropPilot can direct you to any page in the dashboard
-- **Read docs** — CropPilot can look up CropsCode documentation to answer your questions
+- **Navigate the UI** — Nucleus can direct you to any page in the dashboard
+- **Read docs** — Nucleus can look up ClusterCode documentation to answer your questions
 
 ## How It Works
 
-CropPilot is an AI agent with access to MCP (Model Context Protocol) tools that control the orchestrator. When you ask it to do something, it:
+Nucleus is an AI agent with access to MCP (Model Context Protocol) tools that control the orchestrator. When you ask it to do something, it:
 
 1. Interprets your request
 2. Calls the appropriate MCP tools
@@ -56,12 +56,12 @@ CropPilot is an AI agent with access to MCP (Model Context Protocol) tools that 
 | `navigate` | Navigate to a page in the dashboard UI |
 | `build_image` | Build a composable container image with selected agents and capabilities |
 | `fetch_ticket` | Fetch ticket details from a URL (GitHub Issues, Azure DevOps) |
-| `read_docs` | Read CropsCode documentation pages |
-| `load_skill` | Load a CropPilot skill by name |
+| `read_docs` | Read ClusterCode documentation pages |
+| `load_skill` | Load a Nucleus skill by name |
 
 ## Budget
 
-CropPilot sessions use AI credits from your plan allowance:
+Nucleus sessions use AI credits from your plan allowance:
 
 | Plan | Monthly AI Allowance |
 |------|---------------------|
@@ -73,7 +73,7 @@ You can also **bring your own key** in [Settings → Secrets](/concepts/settings
 
 ## Tips
 
-- Ask CropPilot to launch a container from a GitHub issue or Azure DevOps ticket
+- Ask Nucleus to launch a container from a GitHub issue or Azure DevOps ticket
 - Enable host networking when launching to test from your phone at host-ip:port
 - Try: "Open a terminal on container X" to get a live shell
-- CropPilot will confirm launch details with you before creating a container
+- Nucleus will confirm launch details with you before creating a container

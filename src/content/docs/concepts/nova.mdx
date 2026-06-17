@@ -1,19 +1,19 @@
 ---
-title: CropRunner
-description: CropsCode's automation agent — the coordinator that orchestrates background agentic runs, in two modes (interactive Runs and autonomous Schedules).
+title: Nova
+description: ClusterCode's automation agent — the coordinator that orchestrates background agentic runs, in two modes (interactive Runs and autonomous Schedules).
 ---
 
 import { Aside } from '@astrojs/starlight/components';
 
-**CropRunner** is CropsCode's **automation agent** — the one that actually runs a
+**Nova** is ClusterCode's **automation agent** — the one that actually runs a
 [Run](/concepts/runs) or a [Schedule](/concepts/schedules). It works on your
 behalf in the background: it reads your job prompt, picks a host, launches a
 container, and **delegates the real coding to an in-container
 [engine](/concepts/subagents)**, then reports the result. It's the *coordinator*
 in the two-layer model — distinct from the engine that writes the code.
 
-<Aside type="caution" title="CropRunner runs on Anthropic models">
-  Like [CropPilot](/concepts/croppilot), CropRunner's coordination is powered
+<Aside type="caution" title="Nova runs on Anthropic models">
+  Like [Nucleus](/concepts/nucleus), Nova's coordination is powered
   internally by **Anthropic (Claude)** models, drawing on your plan's AI
   allowance. To add usage beyond your plan — or run on your own account —
   **bring your own key** in
@@ -22,27 +22,27 @@ in the two-layer model — distinct from the engine that writes the code.
   may use their own credentials — see [Engines](/concepts/subagents).)
 </Aside>
 
-## CropPilot vs CropRunner
+## Nucleus vs Nova
 
-CropsCode has two agents, both Anthropic-powered, with different jobs:
+ClusterCode has two agents, both Anthropic-powered, with different jobs:
 
-- **[CropPilot](/concepts/croppilot)** — the **interactive assistant** in the
-  dashboard. You chat with it to manage your farm (launch containers, run
+- **[Nucleus](/concepts/nucleus)** — the **interactive assistant** in the
+  dashboard. You chat with it to manage your cluster (launch containers, run
   commands, check status).
-- **CropRunner** — the **background automation agent**. You don't chat with it
+- **Nova** — the **background automation agent**. You don't chat with it
   directly; you give it a job (a Run or a Schedule) and it executes that job
   end-to-end, on its own.
 
 ## Two modes
 
-CropRunner is the same agent in both cases — only the **contract** changes:
+Nova is the same agent in both cases — only the **contract** changes:
 
 - **Interactive — a [Run](/concepts/runs)** — a human started it and is watching
-  live. CropRunner can **pause and ask you a question**, and you can **steer** it
+  live. Nova can **pause and ask you a question**, and you can **steer** it
   through the chat. This mode owns the "ask the human" tool.
 - **Autonomous — a [Schedule](/concepts/schedules)** (or an autonomous Run) —
   headless, on a cron cadence, **no human in the loop**. There is no chat, no
-  clarification, no follow-up turn: CropRunner executes the job prompt once and
+  clarification, no follow-up turn: Nova executes the job prompt once and
   reports a result. Anything ambiguous it decides for itself.
 
 <Aside type="note">
@@ -53,11 +53,11 @@ CropRunner is the same agent in both cases — only the **contract** changes:
 
 ## What it does each run
 
-Whichever mode, a CropRunner execution follows the same arc:
+Whichever mode, a Nova execution follows the same arc:
 
 1. **Read** your instruction (and any [ticket](/concepts/tickets) context).
 2. **Launch** a container on the chosen [worker](/concepts/workers) or
-   [greenhouse](/guides/greenhouse).
+   [cloud worker](/guides/cloud-worker).
 3. **Delegate** the coding to an [engine](/concepts/subagents) (Claude Code,
    Codex, or Copilot) inside the container, and run quick checks itself.
 4. **Track** every container it touches, so the orchestrator knows what was
@@ -69,4 +69,4 @@ Whichever mode, a CropRunner execution follows the same arc:
 
 - [Run an agent on demand](/guides/run-on-demand) — recipes for interactive Runs.
 - [Automate recurring work](/guides/recurring-work) — recipes for Schedules.
-- [Engines](/concepts/subagents) — the CLIs CropRunner delegates the coding to.
+- [Engines](/concepts/subagents) — the CLIs Nova delegates the coding to.
