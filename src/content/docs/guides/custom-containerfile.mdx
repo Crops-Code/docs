@@ -5,7 +5,7 @@ description: Build custom container images for specialized development environme
 
 import { Aside } from '@astrojs/starlight/components';
 
-The default CropsCode container image covers general development. For specialized needs, build your own.
+The default ClusterCode container image covers general development. For specialized needs, build your own.
 
 <Aside type="note">
   Custom images (BYOI) require a Pro or Enterprise plan.
@@ -17,7 +17,7 @@ The default CropsCode container image covers general development. For specialize
 
 ## Base image
 
-Start from the CropsCode base image to get all default tools:
+Start from the ClusterCode base image to get all default tools:
 
 ```dockerfile
 FROM localhost/claude-code-terminal:latest
@@ -54,7 +54,7 @@ Build on your worker machine:
 podman build -t localhost/my-custom-image:latest -f Containerfile .
 ```
 
-Or trigger a build from the orchestrator dashboard / CropPilot:
+Or trigger a build from the orchestrator dashboard / Nucleus:
 
 > "Build my-custom-image from ./Containerfile"
 

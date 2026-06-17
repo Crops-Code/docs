@@ -1,6 +1,6 @@
 ---
 title: Worker Agent
-description: How the CropsCode worker agent works internally.
+description: How the ClusterCode worker agent works internally.
 ---
 
 The worker agent is a lightweight Go binary that runs on each machine and bridges the orchestrator to local Podman (or Docker) containers. It requires no runtime dependencies — just download and run.
@@ -105,15 +105,15 @@ The worker agent reads configuration from environment variables, YAML config fil
 
 | Path | Contents |
 |------|----------|
-| `~/.cropscode/credentials.json` | Auth token from `cropscode login` |
-| `~/.cropscode/worker.json` | Worker registration state |
-| `~/.cropscode/config.json` | User preferences (`WORKER_NAME`) |
+| `~/.clustercode/credentials.json` | Auth token from `clustercode login` |
+| `~/.clustercode/worker.json` | Worker registration state |
+| `~/.clustercode/config.json` | User preferences (`WORKER_NAME`) |
 
 **Fleet mode** (managed deployments):
 
 | Path | Contents |
 |------|----------|
-| `/etc/cropscode/agent.yaml` | Full agent config (URL, token, mode, security) |
+| `/etc/clustercode/agent.yaml` | Full agent config (URL, token, mode, security) |
 | `AGENT_CONFIG` env var | Override the YAML path |
 
 Key environment variables: `ORCHESTRATOR_WS_URL`, `WORKER_NAME`, `AGENT_MODE`, `PODMAN_PATH`, `DATA_DIR`, `SECURITY_FLOOR`. See [Environment Variables](/reference/environment-variables) for the full list.
@@ -124,12 +124,12 @@ The worker agent runs as a foreground process. To run it as a background service
 
 **Linux (systemd):**
 ```bash
-cropscode worker
+clustercode worker
 ```
 
 **macOS (launchd):**
 ```bash
-cropscode worker
+clustercode worker
 ```
 
 The agent is designed to be restarted safely — it picks up existing containers on reconnection.

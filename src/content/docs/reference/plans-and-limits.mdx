@@ -1,6 +1,6 @@
 ---
 title: Plans & Limits
-description: CropsCode pricing tiers, resource limits, and feature availability.
+description: ClusterCode pricing tiers, resource limits, and feature availability.
 ---
 
 All values on this page are kept in sync with the canonical source in core
@@ -16,8 +16,8 @@ All values on this page are kept in sync with the canonical source in core
 
 **Free** is a real plan tier, not a trial. It runs on your **own machine (BYOM)**
 using your **own Claude key (BYOK)** — there's no platform AI or compute
-allowance, no cloud/greenhouse containers, and no schedules. It's the simplest
-way to self-host CropsCode; upgrade to Starter+ for platform AI, scheduling, and
+allowance, no cloud/cloud-worker containers, and no schedules. It's the simplest
+way to self-host ClusterCode; upgrade to Starter+ for platform AI, scheduling, and
 managed compute.
 
 ## Resource Limits
@@ -26,7 +26,7 @@ managed compute.
 |----------|------|---------|-----|-----------|
 | Self-hosted workers | 1 | 2 | 10 | Unlimited |
 | Concurrent containers | 3 | 5 | 15 | Unlimited |
-| Greenhouse (cloud) containers | None | Unlimited | Unlimited | Unlimited |
+| Cloud worker (cloud) containers | None | Unlimited | Unlimited | Unlimited |
 | Custom images | 3 | Unlimited | Unlimited | Unlimited |
 | Concurrent runs | 1 | 1 | 5 | 10 |
 | Parallel subagents per run | 0 | 3 | 5 | 10 |
@@ -42,7 +42,7 @@ managed compute.
 
 A few notes:
 
-- **Greenhouse containers** are managed cloud compute. Free has none — it's
+- **Cloud worker containers** are managed cloud compute. Free has none — it's
   BYOM-only; paid tiers are unlimited.
 - **Custom images** is a use-cap: on a capped plan only the **newest N** managed
   images stay launchable (Free keeps the newest 3); older ones lock until you
@@ -69,7 +69,7 @@ A few notes:
 
 - **Platform AI allowance** and **Included compute** are separate monthly pools
   (LLM spend vs. container runtime), both denominated in USD.
-- On **Free** there is no platform AI pool, so runs and CropPilot work **only**
+- On **Free** there is no platform AI pool, so runs and Nucleus work **only**
   through your own key (BYOK) configured under **Settings → Secrets**. On paid
   tiers BYOK is optional — use the included platform allowance or your own key.
 - Once an allowance is spent, paid tiers can keep going via the pay-as-you-go

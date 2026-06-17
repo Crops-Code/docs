@@ -1,22 +1,22 @@
 ---
 title: Containers
-description: Understand CropsCode container lifecycle — from planting to harvest.
+description: Understand ClusterCode container lifecycle — from launch to teardown.
 ---
 
 import ThemedImage from '../../../components/ThemedImage.astro';
 import containersDark from '../../../assets/screenshots/containers-list-dark.png';
 import containersLight from '../../../assets/screenshots/containers-list-light.png';
 
-A **container** in CropsCode is an isolated development environment where an AI agent works on a task. Each container gets its own filesystem, network, and runtime — like giving every ticket its own machine.
+A **container** in ClusterCode is an isolated development environment where an AI agent works on a task. Each container gets its own filesystem, network, and runtime — like giving every ticket its own machine.
 
 ## Lifecycle
 
-| Phase | Farm Term | What Happens |
-|-------|-----------|-------------|
-| Launch | Planting | Container created from image, repo cloned, agent starts |
-| Running | Growing | AI agent works on the task, you can watch via terminal |
-| Complete | Harvest | Work is done — PR drafted, branch pushed, tests passing |
-| Stopped | Cleared | Container removed, resources freed |
+| Phase | What Happens |
+|-------|-------------|
+| Launch | Container created from image, repo cloned, agent starts |
+| Running | AI agent works on the task, you can watch via terminal |
+| Complete | Work is done — PR drafted, branch pushed, tests passing |
+| Stopped | Container removed, resources freed |
 
 The Containers page shows every container across your workers, with its ticket, branch, capability badges, live resource usage, and status:
 
@@ -38,7 +38,7 @@ Every container includes:
 
 ## Runtime Images
 
-CropsCode uses Podman container images to define what's inside each container. The default image (`claude-code-terminal`) includes everything needed for general development.
+ClusterCode uses Podman container images to define what's inside each container. The default image (`claude-code-terminal`) includes everything needed for general development.
 
 You can build custom images for specialized environments. See [Custom Containerfile](/guides/custom-containerfile). You can also snapshot a running container into a reusable image — see [Build an Image from a Container](/guides/build-image-from-container).
 

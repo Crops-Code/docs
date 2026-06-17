@@ -37,7 +37,7 @@ From the orchestrator's **Runs** page, **+ New run** opens the composer:
    container.
 
 3. **Target** *(optional)* — pin a [worker](/concepts/workers) or
-   [greenhouse](/guides/greenhouse), **or leave it blank** — the agent will ask
+   [cloud worker](/guides/cloud-worker), **or leave it blank** — the agent will ask
    you to pick a host (and image) the moment it needs to launch.
 
 4. **Engine** — which [engine](/concepts/subagents) runs the task, or
@@ -64,7 +64,7 @@ A Run can fire in one of two modes:
 
 Because an autonomous Run can't ask you anything, it **must be given a target up
 front** — a [worker](/concepts/workers) *and* an image, or a
-[greenhouse](/guides/greenhouse) (which auto-picks an image). A "just
+[cloud worker](/guides/cloud-worker) (which auto-picks an image). A "just
 instructions" autonomous Run with no host is rejected at creation, since it
 could only fail when it reached the point of needing to ask.
 

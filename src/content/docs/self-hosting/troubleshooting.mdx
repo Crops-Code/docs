@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: Common issues and solutions for CropsCode workers.
+description: Common issues and solutions for ClusterCode workers.
 ---
 
 ## Diagnostics
@@ -8,7 +8,7 @@ description: Common issues and solutions for CropsCode workers.
 Always start with:
 
 ```bash
-cropscode doctor
+clustercode doctor
 ```
 
 This identifies most common issues and offers to fix them.
@@ -20,10 +20,10 @@ This identifies most common issues and offers to fix them.
 **Cause:** WebSocket connection lost or never established.
 
 **Fix:**
-1. Check the worker is running: `cropscode status`
+1. Check the worker is running: `clustercode status`
 2. Verify network access: can you reach the orchestrator URL from this machine?
 3. Check firewall rules — outbound WSS (port 443) must be allowed
-4. Restart the worker: `cropscode worker`
+4. Restart the worker: `clustercode worker`
 
 ### "Cannot connect to container runtime"
 
@@ -50,7 +50,7 @@ systemctl --user start podman.socket
 
 **Fix:**
 
-Build the image from the orchestrator dashboard or ask CropPilot:
+Build the image from the orchestrator dashboard or ask Nucleus:
 
 > "Build the claude-code-terminal image on worker-1"
 
@@ -78,7 +78,7 @@ podman system df
 
 The worker auto-reconnects with exponential backoff. If it doesn't recover:
 1. Check network connectivity
-2. Restart the worker: `cropscode worker`
+2. Restart the worker: `clustercode worker`
 
 ### WSL issues (Windows)
 
@@ -97,11 +97,11 @@ Verify: `wsl --status` should show WSL2 as default.
 The worker agent logs to stdout. To capture logs:
 
 ```bash
-cropscode worker 2>&1 | tee ~/.cropscode/worker.log
+clustercode worker 2>&1 | tee ~/.clustercode/worker.log
 ```
 
 ## Still stuck?
 
-- Run `cropscode doctor --json` and share the output
+- Run `clustercode doctor --json` and share the output
 - Join [Discord](https://discord.gg/BRPt2DXM) for community support
 - Check [GitHub Issues](https://github.com/Crops-Code/crops-code-core/issues) for known issues

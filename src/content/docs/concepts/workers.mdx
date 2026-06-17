@@ -1,13 +1,13 @@
 ---
 title: Workers
-description: Understand self-hosted workers and Greenhouse managed compute.
+description: Understand self-hosted workers and Cloud worker managed compute.
 ---
 
 import ThemedImage from '../../../components/ThemedImage.astro';
 import workersDark from '../../../assets/screenshots/workers-list-dark.png';
 import workersLight from '../../../assets/screenshots/workers-list-light.png';
 
-A **worker** is a machine that runs containers for CropsCode. It connects outbound to the orchestrator over WebSocket and executes container operations locally using Podman.
+A **worker** is a machine that runs containers for ClusterCode. It connects outbound to the orchestrator over WebSocket and executes container operations locally using Podman.
 
 The **Workers** page lists every machine connected to your orchestrator, with live CPU, memory, disk, and container counts:
 
@@ -33,9 +33,9 @@ Self-hosted workers are machines you control — your laptop, a spare desktop, a
 - Podman installed and running
 - Network access to the orchestrator (outbound WebSocket)
 
-## Greenhouse (Managed Compute)
+## Cloud worker (Managed Compute)
 
-Greenhouse is CropsCode's managed compute offering. Instead of running workers on your own machines, Greenhouse provides cloud workers that are always on, always available.
+Cloud worker is ClusterCode's managed compute offering. Instead of running workers on your own machines, Cloud worker provides cloud workers that are always on, always available.
 
 **Advantages:**
 - No hardware to maintain
@@ -43,13 +43,13 @@ Greenhouse is CropsCode's managed compute offering. Instead of running workers o
 - Scales with your plan
 - Supports both Linux and Windows containers
 
-**When to use Greenhouse:**
+**When to use Cloud worker:**
 - You don't have spare machines
 - You need Windows containers
 - You want zero infrastructure management
 - You need workers in specific geographic regions
 
-See the [Greenhouse guide](/guides/greenhouse) for setup details.
+See the [Cloud worker guide](/guides/cloud-worker) for setup details.
 
 ## How Workers Connect
 

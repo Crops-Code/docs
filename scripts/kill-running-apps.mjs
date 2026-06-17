@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Kill running instances of the CropsCode docs site (Astro dev / preview) on the
+ * Kill running instances of the ClusterCode docs site (Astro dev / preview) on the
  * local machine.
  *
  * What it kills:

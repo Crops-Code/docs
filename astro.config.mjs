@@ -2,10 +2,10 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  site: 'https://docs.cropscode.io',
+  site: 'https://docs.clustercode.io',
   integrations: [
     starlight({
-      title: 'CropsCode | Docs',
+      title: 'ClusterCode | Docs',
       favicon: '/favicon.png',
       logo: {
         dark: './src/assets/logo-dark.png',
@@ -23,7 +23,7 @@ export default defineConfig({
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/Crops-Code' },
         { icon: 'discord', label: 'Discord', href: 'https://discord.gg/BRPt2DXM' },
-        { icon: 'x.com', label: 'X', href: 'https://x.com/cropscode' },
+        { icon: 'x.com', label: 'X', href: 'https://x.com/clustercode' },
       ],
       customCss: ['./src/styles/custom.css'],
       sidebar: [
@@ -44,7 +44,7 @@ export default defineConfig({
             { label: 'Projects', slug: 'concepts/projects' },
             { label: 'Workers', slug: 'concepts/workers' },
             { label: 'Containers', slug: 'concepts/containers' },
-            { label: 'CropPilot', slug: 'concepts/croppilot' },
+            { label: 'Nucleus', slug: 'concepts/nucleus' },
             { label: 'Tickets', slug: 'concepts/tickets' },
             { label: 'Runtime Catalog', slug: 'concepts/runtime-catalog' },
             { label: 'Settings', slug: 'concepts/settings' },
@@ -58,7 +58,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { label: 'Overview', slug: 'concepts/automation' },
-            { label: 'CropRunner', slug: 'concepts/croprunner' },
+            { label: 'Nova', slug: 'concepts/nova' },
             { label: 'Schedules', slug: 'concepts/schedules' },
             { label: 'Runs', slug: 'concepts/runs' },
             { label: 'Engines', slug: 'concepts/subagents' },
@@ -74,7 +74,7 @@ export default defineConfig({
             { label: 'Custom Containerfile', slug: 'guides/custom-containerfile' },
             { label: 'Build from Container', slug: 'guides/build-image-from-container' },
             { label: 'Team Setup', slug: 'guides/team-setup' },
-            { label: 'Greenhouse', slug: 'guides/greenhouse' },
+            { label: 'Cloud worker', slug: 'guides/cloud-worker' },
             { label: 'VS Code Extension', slug: 'guides/vscode-extension' },
             { label: 'AI Credits', slug: 'guides/ai-credits' },
           ],
@@ -115,9 +115,9 @@ export default defineConfig({
           label: 'Links',
           collapsed: true,
           items: [
-            { label: 'Home', link: 'https://cropscode.io' },
-            { label: 'Console', link: 'https://console.cropscode.io' },
-            { label: 'Admin', link: 'https://cropscode.io/admin' },
+            { label: 'Home', link: 'https://clustercode.io' },
+            { label: 'Console', link: 'https://console.clustercode.io' },
+            { label: 'Admin', link: 'https://clustercode.io/admin' },
           ],
         },
       ],

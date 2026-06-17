@@ -1,6 +1,6 @@
 ---
 title: Requirements
-description: Hardware and software requirements for running CropsCode workers.
+description: Hardware and software requirements for running ClusterCode workers.
 ---
 
 ## Software
@@ -21,7 +21,7 @@ The worker agent auto-detects Podman and Docker via PATH — install either one 
 
 - **WSL2** is required for Podman on Windows
 - Run `wsl --install` if not already configured
-- The `cropscode doctor` command checks WSL status automatically
+- The `clustercode doctor` command checks WSL status automatically
 
 ## Hardware
 
@@ -73,5 +73,5 @@ Docker Desktop works but is not recommended for production workers due to licens
 Run the health check to verify all requirements:
 
 ```bash
-cropscode doctor
+clustercode doctor
 ```

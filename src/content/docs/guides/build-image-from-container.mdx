@@ -17,7 +17,7 @@ The source-container picker only lists containers that are **all** of:
 
 - **yours** — you launched it
 - **running**
-- **not part of a Greenhouse** — greenhouse-managed containers are excluded
+- **not part of a Cloud worker** — cloud-worker-managed containers are excluded
 
 If a container you expect isn't listed, check it against these three rules first.
 
@@ -88,7 +88,7 @@ The launch target picker works the same way in **Quick Launch** and the **Schedu
 |---|---|
 | Plan | Pro or Enterprise (`images.publish`) |
 | Role | owner, admin, or member |
-| Source container | yours · running · not in a Greenhouse |
+| Source container | yours · running · not in a Cloud worker |
 
 ### Validation limits
 
@@ -100,15 +100,15 @@ The launch target picker works the same way in **Quick Launch** and the **Schedu
 
 ### Image labels
 
-Every snapshot is tagged with these OCI labels, which CropsCode reads to render the image in the pickers:
+Every snapshot is tagged with these OCI labels, which ClusterCode reads to render the image in the pickers:
 
 | Label | Value | Meaning |
 |---|---|---|
-| `io.cropscode.managed` | `true` | Produced by CropsCode; shown in the pickers |
-| `io.cropscode.os` | `linux` or `windows` | Drives OS badges and size hints |
-| `io.cropscode.owner` | your user id | Who created the image |
-| `io.cropscode.source` | `container-commit` | Marks it as a snapshot (vs a built image) |
-| `io.cropscode.capabilities` | comma-separated list, including `custom:` entries | Renders as chips |
+| `io.clustercode.managed` | `true` | Produced by ClusterCode; shown in the pickers |
+| `io.clustercode.os` | `linux` or `windows` | Drives OS badges and size hints |
+| `io.clustercode.owner` | your user id | Who created the image |
+| `io.clustercode.source` | `container-commit` | Marks it as a snapshot (vs a built image) |
+| `io.clustercode.capabilities` | comma-separated list, including `custom:` entries | Renders as chips |
 
 <Aside type="tip">
   Image metadata lives in these labels on the image itself — there's no separate server-side image registry. An image is therefore only visible while the worker that holds it is online (you can't launch on an offline worker anyway).
@@ -119,5 +119,5 @@ Every snapshot is tagged with these OCI labels, which CropsCode reads to render 
 - [Containers](/concepts/containers)
 - [Custom Containerfile](/guides/custom-containerfile)
 - [Workers](/concepts/workers)
-- [Greenhouse](/guides/greenhouse)
+- [Cloud worker](/guides/cloud-worker)
 - [Plans & Limits](/reference/plans-and-limits)
