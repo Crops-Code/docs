@@ -45,6 +45,7 @@ export default defineConfig({
             { label: 'Workers', slug: 'concepts/workers' },
             { label: 'Containers', slug: 'concepts/containers' },
             { label: 'Nucleus', slug: 'concepts/nucleus' },
+            { label: 'Observatory', slug: 'concepts/observatory' },
             { label: 'Tickets', slug: 'concepts/tickets' },
             { label: 'Runtime Catalog', slug: 'concepts/runtime-catalog' },
             { label: 'Settings', slug: 'concepts/settings' },
@@ -69,6 +70,7 @@ export default defineConfig({
           collapsed: true,
           items: [
             { label: 'Launch from Ticket', slug: 'guides/launch-from-ticket' },
+            { label: 'Explore your fleet in the Observatory', slug: 'guides/explore-observatory' },
             { label: 'Run an agent on demand', slug: 'guides/run-on-demand' },
             { label: 'Automate recurring work', slug: 'guides/recurring-work' },
             { label: 'Custom Containerfile', slug: 'guides/custom-containerfile' },
