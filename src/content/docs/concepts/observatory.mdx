@@ -7,6 +7,8 @@ import { Aside } from '@astrojs/starlight/components';
 import ThemedImage from '../../../components/ThemedImage.astro';
 import observatoryDark from '../../../assets/screenshots/observatory-dark.png';
 import observatoryLight from '../../../assets/screenshots/observatory-light.png';
+import observatoryProjectsDark from '../../../assets/screenshots/observatory-projects-dark.png';
+import observatoryProjectsLight from '../../../assets/screenshots/observatory-projects-light.png';
 
 The **Observatory** is an immersive, navigable **galaxy** view of everything in your ClusterCode workspace — one living map of your whole fleet. Instead of scanning a dozen lists, you see your [workers](/concepts/workers), [containers](/concepts/containers), [runs](/concepts/runs), and [schedules](/concepts/schedules) at a glance, each rendered as a celestial body orbiting the things it belongs to.
 
@@ -44,6 +46,13 @@ A segmented toggle at the top right switches how the galaxy is grouped:
 
 - **Workers** — containers cluster under the worker that hosts them. This is the infrastructure-first view: "what is running where?"
 - **Projects** — bodies group by project, drawn as constellations. A worker that serves more than one project **repeats** in each, shown with a **×N badge** so you can tell it's the same machine.
+
+<ThemedImage
+  dark={observatoryProjectsDark}
+  light={observatoryProjectsLight}
+  title="Observatory — Projects lens"
+  alt="The Observatory in the Projects lens: resources grouped into project constellations (web-app, data-pipeline, ml-training, infra-automation). A worker that serves more than one project repeats inside each constellation, so you can see how a single project's work is spread across the fleet."
+/>
 
 ## How to Read It
 
