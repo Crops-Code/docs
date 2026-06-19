@@ -61,6 +61,12 @@ const { dark, light, alt, url = 'console.clustercode.io', title } = Astro.props;
     overflow: hidden;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
   }
+  /* Starlight's content auto-spacing (a 0-specificity :where() rule) adds a
+     top margin to flow elements, which lands on this div and opens a ~16px gap
+     between the chrome bar and the screenshot. Zero it so the image sits flush. */
+  .browser-body {
+    margin: 0;
+  }
   .browser-bar {
     display: flex;
     align-items: center;
