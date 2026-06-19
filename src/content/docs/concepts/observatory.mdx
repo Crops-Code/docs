@@ -4,20 +4,20 @@ description: An immersive, navigable galaxy view of your entire ClusterCode flee
 ---
 
 import { Aside } from '@astrojs/starlight/components';
+import ThemedImage from '../../../components/ThemedImage.astro';
+import observatoryDark from '../../../assets/screenshots/observatory-dark.png';
+import observatoryLight from '../../../assets/screenshots/observatory-light.png';
 
 The **Observatory** is an immersive, navigable **galaxy** view of everything in your ClusterCode workspace — one living map of your whole fleet. Instead of scanning a dozen lists, you see your [workers](/concepts/workers), [containers](/concepts/containers), [runs](/concepts/runs), and [schedules](/concepts/schedules) at a glance, each rendered as a celestial body orbiting the things it belongs to.
 
 You'll find it in the orchestrator's **Overview** nav. It follows your app theme (light or dark) and animates only the resources that are actually alive.
 
-{/* Screenshot pending — registered as the `observatory` shot in the
-clustercode:capture-screenshots skill (capture-docs.mjs + screenshots-registry.md).
-Generate observatory-dark.png / observatory-light.png on a fresh capture stack
-(`clustercode:run serve recipe=fresh worker=none driver=none auth=bypass` + TESTING=true,
-then `node scripts/capture-docs.mjs --shots observatory --theme both`) and re-add:
-import ThemedImage from '../../../components/ThemedImage.astro';
-import observatoryDark from '../../../assets/screenshots/observatory-dark.png';
-import observatoryLight from '../../../assets/screenshots/observatory-light.png';
-<ThemedImage dark={observatoryDark} light={observatoryLight} title="Observatory" alt="The Observatory galaxy view: the tenant at the center, workers as suns with containers orbiting as planets, runs as moons, a schedule on a dashed orbit, and a comet for an unassigned run, with the Workers/Projects lens selector and legend at the top." /> */}
+<ThemedImage
+  dark={observatoryDark}
+  light={observatoryLight}
+  title="Observatory"
+  alt="The Observatory galaxy view: the tenant ('My Workspace') sits at the center, with workers rendered as glowing suns — orange for bring-your-own-machine, blue for the cloud worker — and containers orbiting them as planets. Runs orbit as moons, schedules trace dashed orbits, and a comet streaks near the center for an unassigned run."
+/>
 
 <Aside type="tip">
   Want to drive it hands-on? The [Explore your fleet in the
