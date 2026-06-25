@@ -1,42 +1,58 @@
 ---
 title: Bring Your Own AI Subscription
-description: (Gated — pending issue #559) Run on your own machine and authenticate your AI subscription locally.
-draft: true
+description: Connect your own AI credentials — an API key or your Claude / Codex subscription login — so your agents draw on your account instead of platform credits.
 ---
 
-{/* GATED: requires #559 (zero-storage Field passthrough) before publish */}
+import { Aside } from '@astrojs/starlight/components';
 
-{/*
-  ⚠ DO NOT PUBLISH / DO NOT ADD TO NAV until issue #559 (zero-storage Field
-  passthrough) ships and is verified.
+You don't have to run on ClusterCode's platform AI credits. **Bring your own AI
+credentials** — either an **API key** or your **AI subscription** (your Claude or
+Codex OAuth login) — and your [Runs](/concepts/runs),
+[Schedules](/concepts/schedules), and [multi-agent
+orchestration](/guides/multi-agent-runs) will draw on **your** account.
 
-  The "never stored / never leaves your machine" claim below is NOT true today.
-  Today, BYOK credentials are stored encrypted (AES-256-GCM) in our database.
-  The zero-storage local passthrough — where your subscription/login authenticates
-  on your own machine and is never written to our DB — is deferred work tracked by
-  issue #559. Until that lands and is verified, this entire page stays gated inside
-  this comment block, is marked draft, and is NOT linked from the sidebar nav.
+## Connecting your credentials
 
-  See docs/business/competitor-analysis.md "Credential & subscription model" in the
-  core repo for the authoritative framing.
+Add your credentials in **Settings**:
 
-  --- DRAFT CONTENT (gated) ---
+- An **API key** (e.g. an Anthropic or OpenAI key), or
+- Your **AI subscription** — the OAuth login for an official CLI (Claude Code,
+  Codex).
 
-  Bring your own AI subscription. It never leaves your machine.
+Once connected, [Nova](/concepts/nova) uses them automatically when it runs your
+jobs.
 
-  On your own hardware (a BYOM / Field worker), your Claude or Codex login
-  authenticates locally through the official CLI — we never store it, never share
-  it. That is the compliant way to use a consumer subscription: genuinely the
-  individual, on their own machine, via the official CLI, exactly how the license
-  intends. Cloud-only platforms that capture and store consumer OAuth tokens
-  server-side structurally cannot say this.
+## How it's used — the credential cascade
 
-  --- END DRAFT CONTENT ---
-*/}
+When a job needs AI, ClusterCode resolves credentials in a defined order:
 
-{/*
-  TRUE-TODAY framing (the BYOM story) is shippable and lives on the marketing
-  surfaces directly: "Bring your own key, run on your own machine — your code never
-  leaves it." That live copy does NOT make the gated "subscription never stored"
-  claim, so it is not part of this gated page.
-*/}
+1. **Your connected subscription / OAuth login** is preferred first.
+2. **Your connected API key** is used next.
+3. **Platform AI credits** are the fallback when you haven't connected anything.
+
+So your own subscription or key is spent **instead of (or before)** the platform
+[AI credits](/guides/ai-credits) — the same cascade the
+[Nova / AI-credits note](/guides/ai-credits) describes. This lets you put your
+existing AI plan to work and keep your platform credits for everything else.
+
+## How your credentials are stored today
+
+Credentials you connect are stored **per user** and **encrypted at rest**
+(AES-256-GCM). They are **never shared across users** — your key or subscription
+authenticates only your own jobs. This applies to both Cloud workers and your own
+[BYOM workers](/concepts/workers).
+
+<Aside type="note" title="Coming soon — fully local, zero-storage passthrough">
+  We're building a path where, on your **own BYOM worker**, your existing **local
+  CLI login** will be used directly — so the token will **never leave your machine
+  and will never be stored in our database** at all. That fully zero-storage
+  local-passthrough model is a **planned** capability, not yet available. Until it
+  ships, connected credentials are stored encrypted at rest as described above.
+</Aside>
+
+## Related
+
+- [AI Credits](/guides/ai-credits) — platform credits and the billing cascade
+- [Nova](/concepts/nova) — the automation agent that runs your jobs
+- [Workers](/concepts/workers) — Cloud vs your own (BYOM) machines
+- [Runs](/concepts/runs) · [Schedules](/concepts/schedules)

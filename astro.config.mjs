@@ -50,6 +50,7 @@ export default defineConfig({
             { label: 'Observatory', slug: 'concepts/observatory' },
             { label: 'Tickets', slug: 'concepts/tickets' },
             { label: 'Runtime Catalog', slug: 'concepts/runtime-catalog' },
+            { label: 'Bring Your Own Subscription', slug: 'concepts/byo-subscription' },
             { label: 'Settings', slug: 'concepts/settings' },
           ],
         },
