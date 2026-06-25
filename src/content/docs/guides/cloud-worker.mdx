@@ -33,22 +33,22 @@ Cloud worker workers appear automatically in your dashboard. No CLI setup, no re
 
 ## Compute Allowance
 
-Each plan includes a monthly **compute allowance in dollars**, and how many hours
-that buys depends on the [tier](/concepts/cloud-workers#pricing) you run. The hours
-below are derived from each plan's included compute divided by the **Linux Small**
-rate ($0.06/hr) — i.e. the *most* hours the allowance buys, on the cheapest DevBox.
-Larger and Windows tiers cost more per hour, so the same allowance buys fewer hours
-there.
+Each plan includes a monthly allowance of **credits** (real dollars) toward
+compute, and **compute is metered by the second** — you pay only for the exact time
+a DevBox runs, at the [per-tier rate](/concepts/cloud-workers#pricing).
 
-| Plan | Included compute | Up to (Linux Small @ $0.06/hr) |
-|------|------------------|--------------------------------|
-| Starter | $2 / mo | ~33 hrs |
-| Pro | $6 / mo | ~100 hrs |
-| Enterprise | $10 / mo | ~166 hrs |
+| Plan | Included compute credits |
+|------|--------------------------|
+| Starter | $2 / mo |
+| Pro | $6 / mo |
+| Enterprise | $10 / mo |
 
-Each figure is `included compute ÷ $0.06/hr`. Top up a wallet to keep running past
-the allowance at the metered rate. For the full per-tier price table see
-[Cloud Workers](/concepts/cloud-workers#pricing).
+How long that lasts depends on the tier you run. As an *illustration only*, $2 of
+credit is roughly 33 hours on the cheapest tier (Linux Small at $0.06/hr) and
+proportionally less on larger or Windows tiers — but you're billed per second of
+real run time, not in hour blocks. Top up a wallet to keep running past the
+allowance at the same metered rate. For the full per-tier price table see
+[Cloud workers](/concepts/cloud-workers#pricing).
 
 ## Supported Container Types
 

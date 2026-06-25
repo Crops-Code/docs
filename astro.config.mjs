@@ -43,7 +43,7 @@ export default defineConfig({
           items: [
             { label: 'Projects', slug: 'concepts/projects' },
             { label: 'Workers', slug: 'concepts/workers' },
-            { label: 'Cloud Workers', slug: 'concepts/cloud-workers' },
+            { label: 'Cloud workers', slug: 'concepts/cloud-workers' },
             { label: 'Containers', slug: 'concepts/containers' },
             { label: 'Windows Containers', slug: 'concepts/windows-containers' },
             { label: 'Nucleus', slug: 'concepts/nucleus' },

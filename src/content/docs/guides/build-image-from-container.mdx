@@ -7,7 +7,7 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 You've tuned a container by hand — installed tools, cloned a repo, pasted credentials, finished the Windows first-boot install — and now you want every future launch to start from that exact state. **Building an image from a container** snapshots a running container into a reusable image (a "golden image") so you don't have to re-run a build or rewrite a Containerfile.
 
-Think of it as **replicating a tuned DevBox**: spend an afternoon getting one [DevBox](/concepts/runtime-catalog) exactly right — your toolchain, your deps, your weird internal CLI, your fixtures — then stamp out identical machines from it forever. Every DevBox you launch from the image comes up pre-built, with capabilities carried over automatically, and you can launch the clones on [Cloud Workers](/concepts/cloud-workers) or your own [BYOM machines](/concepts/workers) — same image, your choice of where.
+Think of it as **replicating a tuned DevBox**: spend an afternoon getting one [DevBox](/concepts/runtime-catalog) exactly right — your toolchain, your deps, your weird internal CLI, your fixtures — then stamp out identical machines from it forever. Every DevBox you launch from the image comes up pre-built, with capabilities carried over automatically, and you can launch the clones on [Cloud workers](/concepts/cloud-workers) or your own [BYOM workers](/concepts/workers) — same image, your choice of where.
 
 <Aside type="note">
   Building an image from a container requires a **Pro or Enterprise** plan and the **owner**, **admin**, or **member** role. Starter users see an upgrade prompt in place of the form.
@@ -127,7 +127,7 @@ Every snapshot is tagged with these OCI labels, which ClusterCode reads to rende
 - [Containers](/concepts/containers)
 - [Custom Containerfile](/guides/custom-containerfile)
 - [Workers](/concepts/workers)
-- [Cloud Workers](/concepts/cloud-workers)
+- [Cloud workers](/concepts/cloud-workers)
 - [Windows Containers](/concepts/windows-containers)
 - [Visual testing](/guides/visual-testing)
 - [Cloud worker](/guides/cloud-worker)
