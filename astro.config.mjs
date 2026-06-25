@@ -6,7 +6,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'ClusterCode | Docs',
-      favicon: '/favicon.png',
+      favicon: '/favicon.ico',
       logo: {
         dark: './src/assets/logo-dark.png',
         light: './src/assets/logo-light.png',
