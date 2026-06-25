@@ -13,6 +13,16 @@ single Run, on one DevBox.
 This works the same way in both [Runs](/concepts/runs) and
 [Schedules](/concepts/schedules).
 
+<Aside type="note">
+  Multi-agent orchestration is driven by **[Nova](/concepts/nova)**,
+  ClusterCode's automation agent — it's Nova that maps the names to engines,
+  threads the sessions, and routes the findings. Nova's coordination consumes
+  **AI credits**, or your **connected AI subscription or key** when you've wired
+  one up in your settings (the platform-credit vs bring-your-own cascade). See
+  [AI Credits](/guides/ai-credits). The in-container engines bill against their
+  own auth.
+</Aside>
+
 ## You write plain language, not pseudo-code
 
 You don't call APIs or write `start_subagent(...)` anything. You describe the
