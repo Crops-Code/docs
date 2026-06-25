@@ -1,0 +1,42 @@
+---
+title: Bring Your Own AI Subscription
+description: (Gated — pending issue #559) Run on your own machine and authenticate your AI subscription locally.
+draft: true
+---
+
+{/* GATED: requires #559 (zero-storage Field passthrough) before publish */}
+
+{/*
+  ⚠ DO NOT PUBLISH / DO NOT ADD TO NAV until issue #559 (zero-storage Field
+  passthrough) ships and is verified.
+
+  The "never stored / never leaves your machine" claim below is NOT true today.
+  Today, BYOK credentials are stored encrypted (AES-256-GCM) in our database.
+  The zero-storage local passthrough — where your subscription/login authenticates
+  on your own machine and is never written to our DB — is deferred work tracked by
+  issue #559. Until that lands and is verified, this entire page stays gated inside
+  this comment block, is marked draft, and is NOT linked from the sidebar nav.
+
+  See docs/business/competitor-analysis.md "Credential & subscription model" in the
+  core repo for the authoritative framing.
+
+  --- DRAFT CONTENT (gated) ---
+
+  Bring your own AI subscription. It never leaves your machine.
+
+  On your own hardware (a BYOM / Field worker), your Claude or Codex login
+  authenticates locally through the official CLI — we never store it, never share
+  it. That is the compliant way to use a consumer subscription: genuinely the
+  individual, on their own machine, via the official CLI, exactly how the license
+  intends. Cloud-only platforms that capture and store consumer OAuth tokens
+  server-side structurally cannot say this.
+
+  --- END DRAFT CONTENT ---
+*/}
+
+{/*
+  TRUE-TODAY framing (the BYOM story) is shippable and lives on the marketing
+  surfaces directly: "Bring your own key, run on your own machine — your code never
+  leaves it." That live copy does NOT make the gated "subscription never stored"
+  claim, so it is not part of this gated page.
+*/}
