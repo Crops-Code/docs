@@ -64,6 +64,10 @@ Re-declaring a capability the source already carries won't duplicate it — the 
 
 The payoff is large: launching from a Windows golden image skips the 20–30 minute first-boot Windows install and reaches a working desktop in seconds, because the post-install disk is baked into the image.
 
+<Aside type="note">
+  This self-snapshot flow is how you bake **your own** golden on a BYOM worker — pay the one-time Windows first-boot install once, snapshot, and every later launch on your worker comes up fast. Windows DevBoxes on [Cloud workers](/concepts/cloud-workers) already launch from **ClusterCode-maintained golden images**, so there's no first-boot install to wait through there. The same golden images run on both Cloud workers and nested-virt BYOM workers.
+</Aside>
+
 ## Launch from your golden image
 
 A snapshot lives on exactly **one** worker, so the launch has to land on that worker. The launch target picker handles this.

@@ -44,14 +44,30 @@ equivalent Linux tier.
 
 ## First boot vs golden image
 
-A fresh Windows DevBox has to run the Windows first-boot install before it's
-usable — that's a one-time **20–30 minute** install, the nature of booting a real
-Windows VM from scratch.
+A real Windows VM normally has to run the Windows install on first boot — a
+one-time **20–30 minute** install from scratch. Whether you ever see that wait
+depends on where the DevBox runs.
 
-You only pay that cost once. [Snapshot a configured Windows
-DevBox into a golden image](/guides/build-image-from-container) and every future
-launch from that image **skips the first-boot install** and comes up at a working
-desktop, because the post-install disk is baked into the image.
+### On Cloud workers — no first-boot install
+
+Windows DevBoxes on [Cloud workers](/concepts/cloud-workers) launch from
+**ClusterCode-maintained golden images**: Windows and the standard tooling are
+already installed and baked into the image layer. The post-install disk ships
+inside the image, so the DevBox comes up at a working desktop **in seconds** —
+you never wait through a Windows install. This is the default, and the only, path
+on Cloud workers.
+
+### On your own (BYOM) worker — pay it once, then bake your own golden
+
+On a [BYOM worker](/concepts/workers) with Windows-VM support, the **first** time
+you boot a fresh Windows DevBox from the base, it runs the one-time Windows
+first-boot install (~20–30 minutes — a genuine Windows install from scratch).
+
+You only pay that once. [Snapshot the configured Windows DevBox into your own
+golden image](/guides/build-image-from-container): every future launch on your
+worker then **skips the first-boot install** and comes up at a working desktop
+fast, because the post-install disk is baked into your image. The same golden
+images run on both Cloud workers and nested-virt BYOM workers.
 
 <Aside type="caution">
   Snapshotting a Windows DevBox stops it briefly to capture a consistent disk, so
