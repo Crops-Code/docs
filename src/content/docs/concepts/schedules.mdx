@@ -103,11 +103,21 @@ disabled schedules keep their config but never fire.
 
 ## Limits
 
-| Plan | Schedules |
-|------|-----------|
-| Starter | 1 |
-| Pro | 10 |
-| Enterprise | Unlimited |
+Two limits apply per plan: **how many** schedules you can have, and **how often**
+each one may run — the minimum gap between two runs, its *cadence floor*.
+
+| Plan | Schedules | Cadence floor (fastest a schedule may run) |
+|------|-----------|--------------------------------------------|
+| Free | 1 | every 6 hours |
+| Starter | 3 | every hour |
+| Pro | 10 | every 30 minutes |
+| Enterprise | Unlimited | any cadence (down to every minute) |
+
+A cron that fires more often than your plan's floor is rejected when you create or
+edit a schedule — both inline in the schedule form and on the server — with a prompt
+to upgrade. The floor is a configuration gate: if you **downgrade**, your existing
+schedules keep running at their current cadence (they're grandfathered); only new or
+edited schedules must meet the lower tier's floor.
 
 ## Use cases
 
