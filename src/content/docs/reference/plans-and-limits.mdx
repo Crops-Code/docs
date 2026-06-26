@@ -3,9 +3,13 @@ title: Plans & Limits
 description: ClusterCode pricing tiers, resource limits, and feature availability.
 ---
 
-All values on this page are kept in sync with the canonical source in core
-(`packages/shared/src/limits/plan-limits.ts` → `STATIC_PLAN_LIMITS`, and
-`plan-features.ts` → `PLAN_FEATURES`). "Unlimited" means no enforced cap.
+import { Aside } from '@astrojs/starlight/components';
+
+{/* Maintainer note (not rendered): the numbers below mirror core's
+    STATIC_PLAN_LIMITS (limits) and PLAN_FEATURES (feature flags) — update both
+    together whenever a plan's limits or gated features change. */}
+
+The limits enforced on each plan are listed below. "Unlimited" means no enforced cap.
 
 ## Plans
 
@@ -29,15 +33,15 @@ frequent) schedules, and managed compute.
 | Concurrent containers | 3 | 5 | 15 | Unlimited |
 | Cloud worker (cloud) containers | None | Unlimited | Unlimited | Unlimited |
 | Custom images | 3 | Unlimited | Unlimited | Unlimited |
-| Concurrent runs | 1 | 1 | 5 | 10 |
-| Parallel subagents per run | 0 | 3 | 5 | 10 |
+| Concurrent runs | 1 | 3 | 10 | 25 |
+| Parallel subagents per run | 1 | 3 | 10 | 25 |
 | Concurrent live sessions | 1 | 3 | 15 | Unlimited |
 | Cron schedules | 1 | 3 | 10 | Unlimited |
 | Schedule cadence floor (fastest a schedule may run) | every 6h | every hour | every 30 min | any |
 | [Projects](/concepts/projects) | 1 | 3 | 25 | Unlimited |
 | Container history | 1 day | 14 days | 90 days | 365 days |
 | Disk per container | 64 GB | 128 GB | 256 GB | 1024 GB |
-| Display idle timeout | 10 min | 30 min | 30 min | 30 min |
+| Display idle timeout | 3 min | 5 min | 10 min | 15 min |
 | Tenants | 1 | 1 | 5 | Unlimited |
 | Organizations | 1 | 1 | 1 | 10 |
 | Seats | 1 | 1 | 50 | Unlimited |
@@ -52,9 +56,9 @@ A few notes:
 - **Concurrent live sessions** is the total of terminal + display sessions across
   all your containers (not a per-container limit).
 - **Parallel subagents per run** is how many helper agents a single run may spawn;
-  Free runs are single-agent (`0`).
+  it scales by plan from `1` on Free up to `25` on Enterprise.
 - **Display idle timeout** auto-closes an idle VNC display to free a live-session
-  slot — shorter on Free (10 min) than paid tiers (30 min).
+  slot — it scales by plan, from 3 min on Free up to 15 min on Enterprise.
 - **[Projects](/concepts/projects)** group your containers, runs, and schedules and
   carry per-project environment variables. The cap counts **active** projects only —
   archived projects are inert and don't consume a slot, so you can keep history
@@ -91,14 +95,18 @@ A few notes:
 | Azure DevOps integration | — | — | ✓ | ✓ |
 | Trello integration | — | — | Coming soon | Coming soon |
 | Monday.com integration | — | — | Coming soon | Coming soon |
-| Workflow templates | — | — | ✓ | ✓ |
-| Workflow chaining | — | — | — | ✓ |
+| Workflow templates | — | — | Coming soon | Coming soon |
+| Workflow chaining | — | — | — | Coming soon |
 | Auto-open draft PR | — | — | ✓ | ✓ |
-| Auto-update ticket status | — | — | ✓ | ✓ |
-| SSO/SAML | — | — | — | ✓ |
+| Auto-update ticket status | — | — | Coming soon | Coming soon |
+| SSO/SAML | — | — | — | Coming soon |
 | RBAC | — | — | — | ✓ |
-| Audit log | — | — | — | ✓ |
-| Secrets management | — | — | — | ✓ |
-| VPN support | — | — | — | ✓ |
-| REST API | — | — | — | ✓ |
+| Audit log | — | — | — | Coming soon |
+| Secrets management | — | — | — | Coming soon |
+| VPN support | — | — | — | Coming soon |
+| REST API | — | — | — | Coming soon |
 | Dedicated support | — | — | — | ✓ |
+
+<Aside type="note" title="Integrations aren't limited to the ones we ship">
+The rows above are the integrations ClusterCode wires up **out of the box**. You're not limited to them — GitHub, Azure DevOps, Trello, Monday, or any other service can be connected by **baking the integration (its CLI, API client, and credentials) into your container image**. See [Build an image from a container](/guides/build-image-from-container) and [Custom Containerfile](/guides/custom-containerfile). Out-of-the-box support is a convenience, not a limit on what you can integrate.
+</Aside>
