@@ -16,9 +16,10 @@ All values on this page are kept in sync with the canonical source in core
 
 **Free** is a real plan tier, not a trial. It runs on your **own machine (BYOM)**
 using your **own Claude key (BYOK)** — there's no platform AI or compute
-allowance, no cloud/cloud-worker containers, and no schedules. It's the simplest
-way to self-host ClusterCode; upgrade to Starter+ for platform AI, scheduling, and
-managed compute.
+allowance and no cloud/cloud-worker containers. You do get **one schedule**
+(running at most every 6 hours) to taste automation. It's the simplest way to
+self-host ClusterCode; upgrade to Starter+ for platform AI, more (and more
+frequent) schedules, and managed compute.
 
 ## Resource Limits
 
@@ -31,7 +32,8 @@ managed compute.
 | Concurrent runs | 1 | 1 | 5 | 10 |
 | Parallel subagents per run | 0 | 3 | 5 | 10 |
 | Concurrent live sessions | 1 | 3 | 15 | Unlimited |
-| Cron schedules | 0 | 1 | 10 | Unlimited |
+| Cron schedules | 1 | 3 | 10 | Unlimited |
+| Schedule cadence floor (fastest a schedule may run) | every 6h | every hour | every 30 min | any |
 | [Projects](/concepts/projects) | 1 | 3 | 25 | Unlimited |
 | Container history | 1 day | 14 days | 90 days | 365 days |
 | Disk per container | 64 GB | 128 GB | 256 GB | 1024 GB |
@@ -82,7 +84,7 @@ A few notes:
 | AI catalog (Claude, Copilot, Codex) | ✓ | ✓ | ✓ | ✓ |
 | Platform AI pool | — | ✓ | ✓ | ✓ |
 | Live terminal & display | ✓ | ✓ | ✓ | ✓ |
-| Cron workflows | — | ✓ | ✓ | ✓ |
+| Cron workflows (schedules) | ✓ | ✓ | ✓ | ✓ |
 | BYOI (custom images) | — | — | ✓ | ✓ |
 | [Build image from container](/guides/build-image-from-container) | — | — | ✓ | ✓ |
 | GitHub Issues integration | ✓ | ✓ | ✓ | ✓ |
