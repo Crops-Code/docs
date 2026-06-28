@@ -21,7 +21,7 @@ export default defineConfig({
         MobileMenuToggle: './src/components/MobileMenuToggle.astro',
       },
       social: [
-        { icon: 'github', label: 'GitHub', href: 'https://github.com/Crops-Code' },
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/orgs/clustercodehq' },
         { icon: 'discord', label: 'Discord', href: 'https://discord.gg/BRPt2DXM' },
         { icon: 'x.com', label: 'X', href: 'https://x.com/clustercode' },
       ],

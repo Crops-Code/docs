@@ -5,12 +5,11 @@ description: A Schedule runs an AI agent on a recurring cron cadence — autonom
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 import ThemedImage from '../../../components/ThemedImage.astro';
-import schedulesDark from '../../../assets/screenshots/schedules-list-dark.png';
-import schedulesLight from '../../../assets/screenshots/schedules-list-light.png';
-import historyDark from '../../../assets/screenshots/schedule-run-history-dark.png';
-import historyLight from '../../../assets/screenshots/schedule-run-history-light.png';
-import schedTimelineDark from '../../../assets/screenshots/schedule-timeline-dark.png';
-import schedTimelineLight from '../../../assets/screenshots/schedule-timeline-light.png';
+import ThemedVideo from '../../../components/ThemedVideo.astro';
+import historyDark from '../../../assets/screenshots/schedule-run-history-dark-20260627.png';
+import historyLight from '../../../assets/screenshots/schedule-run-history-light-20260627.png';
+import schedTimelineDark from '../../../assets/screenshots/schedule-timeline-dark-20260627.png';
+import schedTimelineLight from '../../../assets/screenshots/schedule-timeline-light-20260627.png';
 
 A **Schedule** runs an AI agent on a recurring **cron cadence** — wake up to
 draft PRs every morning, sweep for flaky tests nightly, audit dependencies
@@ -25,11 +24,15 @@ ask a question. If you want a back-and-forth, use a [Run](/concepts/runs) instea
   flaky-test sweep). This page explains how Schedules work.
 </Aside>
 
-<ThemedImage
-  dark={schedulesDark}
-  light={schedulesLight}
+<ThemedVideo
+  darkWebm="/assets/media/schedules-timeline-dark-20260627.webm"
+  darkMp4="/assets/media/schedules-timeline-dark-20260627.mp4"
+  darkPoster="/assets/media/schedules-timeline-dark-poster-20260627.png"
+  lightWebm="/assets/media/schedules-timeline-light-20260627.webm"
+  lightMp4="/assets/media/schedules-timeline-light-20260627.mp4"
+  lightPoster="/assets/media/schedules-timeline-light-poster-20260627.png"
   title="Schedules"
-  alt="The Schedules page listing six recurring jobs — each row shows the name, engine (Claude Code, Codex, or Copilot), cron cadence, target worker, and the next run time; one schedule is disabled."
+  alt="The Schedules page switching from the list view — ten recurring jobs, each showing its name, engine, cron cadence, target worker and next run — to the timeline view, then stepping through the 24h, 3d and 7d ranges as past executions render as colored bars along each schedule's lane."
 />
 
 ## How it works
