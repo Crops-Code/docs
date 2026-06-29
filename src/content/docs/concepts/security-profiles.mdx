@@ -1,9 +1,9 @@
 ---
 title: Security Profiles
-description: Control container network access, filesystem permissions, and resource limits.
+description: Control DevBox network access, filesystem permissions, and resource limits.
 ---
 
-Every container in ClusterCode launches with a **security profile** that controls network egress, filesystem writability, and process-level hardening. Profiles give you a simple dial between "wide open for prototyping" and "fully locked down for sensitive repos."
+Every DevBox in ClusterCode launches with a **security profile** that controls network egress, filesystem writability, and process-level hardening. Profiles give you a simple dial between "wide open for prototyping" and "fully locked down for sensitive repos."
 
 ## The Four Profiles
 
@@ -20,13 +20,13 @@ No restrictions. Full host networking, writable filesystem, all Linux capabiliti
 
 ### Standard
 
-The default profile. Containers can reach common development services — GitHub, npm, PyPI, crates.io, AI provider APIs — but nothing else. Filesystem is writable. Linux capabilities are dropped and `no_new_privileges` is enforced.
+The default profile. DevBoxes can reach common development services — GitHub, npm, PyPI, crates.io, AI provider APIs — but nothing else. Filesystem is writable. Linux capabilities are dropped and `no_new_privileges` is enforced.
 
 Allowed domains include:
 - **Source control:** github.com, api.github.com, raw.githubusercontent.com
 - **Package registries:** registry.npmjs.org, pypi.org, crates.io, proxy.golang.org, rubygems.org
 - **AI providers:** api.anthropic.com, api.openai.com, api.githubcopilot.com
-- **Container registries:** registry-1.docker.io
+- **container registries:** registry-1.docker.io
 
 ### Strict
 
@@ -34,7 +34,7 @@ Tenant-managed allowlist only — no built-in domains are included. The filesyst
 
 ### Offline
 
-No internet access at all. Read-only filesystem. Environment variables (API keys, tokens) are **not injected** into the container. This is maximum isolation — the container can only work with what's already in the image and mounted workspace.
+No internet access at all. Read-only filesystem. Environment variables (API keys, tokens) are **not injected** into the DevBox. This is maximum isolation — the DevBox can only work with what's already in the image and mounted workspace.
 
 ## Resource Limits by Profile
 
@@ -47,14 +47,14 @@ No internet access at all. Read-only filesystem. Environment variables (API keys
 
 ## Tenant Default
 
-Each tenant has a **default security profile** that applies to all containers unless overridden at launch time. Tenant admins can configure this in the orchestrator Settings page, along with:
+Each tenant has a **default security profile** that applies to all DevBoxes unless overridden at launch time. Tenant admins can configure this in the orchestrator Settings page, along with:
 
 - **Custom allowlist** — additional domains to allow on top of the profile's built-in list (applies to Standard and Strict profiles)
 - **Custom tmpfs paths** — additional writable paths for read-only profiles (Strict and Offline)
 
 ## Overriding at Launch Time
 
-When launching a container from the UI, you can override the tenant default by selecting a different profile in the launch dialog. You can also add extra allowed domains and writable paths for that specific container.
+When launching a DevBox from the UI, you can override the tenant default by selecting a different profile in the launch dialog. You can also add extra allowed domains and writable paths for that specific DevBox.
 
 The resolution order is:
 
@@ -62,7 +62,7 @@ The resolution order is:
 2. **Tenant policy** — custom allowlist and tmpfs paths from tenant settings
 3. **Per-launch overrides** — extra domains and paths specified at launch time
 
-All three layers are merged. For example, a Strict profile container gets the tenant's custom allowlist plus any extra domains you specify at launch.
+All three layers are merged. For example, a Strict profile DevBox gets the tenant's custom allowlist plus any extra domains you specify at launch.
 
 ## Writable Paths on Read-Only Profiles
 
@@ -78,6 +78,6 @@ The workspace directory and agent configuration directories (`.claude`, `.config
 
 ## Security Floor
 
-Self-hosted workers can enforce a **minimum security profile** via the `SECURITY_FLOOR` environment variable. When set, containers cannot launch with a less restrictive profile than the floor. For example, setting `SECURITY_FLOOR=standard` prevents Open-profile containers on that worker.
+Self-hosted workers can enforce a **minimum security profile** via the `SECURITY_FLOOR` environment variable. When set, DevBoxes cannot launch with a less restrictive profile than the floor. For example, setting `SECURITY_FLOOR=standard` prevents Open-profile DevBoxes on that worker.
 
 See [Environment Variables](/reference/environment-variables) for configuration details.

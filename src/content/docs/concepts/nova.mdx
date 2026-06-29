@@ -8,7 +8,7 @@ import { Aside } from '@astrojs/starlight/components';
 **Nova** is ClusterCode's **automation agent** — the one that actually runs a
 [Run](/concepts/runs) or a [Schedule](/concepts/schedules). It works on your
 behalf in the background: it reads your job prompt, picks a host, launches a
-container, and **delegates the real coding to an in-container
+DevBox, and **delegates the real coding to an in-DevBox
 [engine](/concepts/subagents)**, then reports the result. It's the *coordinator*
 in the two-layer model — distinct from the engine that writes the code.
 
@@ -18,7 +18,7 @@ in the two-layer model — distinct from the engine that writes the code.
   allowance. To add usage beyond your plan — or run on your own account —
   **bring your own key** in
   [Settings → Secrets](/concepts/settings#bring-your-own-key-byok): an
-  **Anthropic API key** or a **Claude OAuth token**. (The in-container engines
+  **Anthropic API key** or a **Claude OAuth token**. (The in-DevBox engines
   may use their own credentials — see [Engines](/concepts/subagents).)
 </Aside>
 
@@ -27,7 +27,7 @@ in the two-layer model — distinct from the engine that writes the code.
 ClusterCode has two agents, both Anthropic-powered, with different jobs:
 
 - **[Nucleus](/concepts/nucleus)** — the **interactive assistant** in the
-  dashboard. You chat with it to manage your cluster (launch containers, run
+  dashboard. You chat with it to manage your cluster (launch DevBoxes, run
   commands, check status).
 - **Nova** — the **background automation agent**. You don't chat with it
   directly; you give it a job (a Run or a Schedule) and it executes that job
@@ -56,11 +56,11 @@ Nova is the same agent in both cases — only the **contract** changes:
 Whichever mode, a Nova execution follows the same arc:
 
 1. **Read** your instruction (and any [ticket](/concepts/tickets) context).
-2. **Launch** a container on the chosen [worker](/concepts/workers) or
+2. **Launch** a DevBox on the chosen [worker](/concepts/workers) or
    [cloud worker](/guides/cloud-worker).
 3. **Delegate** the coding to an [engine](/concepts/subagents) (Claude Code,
-   Codex, or Copilot) inside the container, and run quick checks itself.
-4. **Track** every container it touches, so the orchestrator knows what was
+   Codex, or Copilot) inside the DevBox, and run quick checks itself.
+4. **Track** every DevBox it touches, so the orchestrator knows what was
    created even if the run dies mid-job.
 5. **Report** the result — a completed/failed summary, a PR link, filed issues —
    on the [timeline](/concepts/runs#the-timeline--watch-it-work).

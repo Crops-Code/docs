@@ -1,23 +1,23 @@
 ---
 title: Engines
-description: The CLI engines that do the coding inside a container — Claude Code (Plan or API credits), Codex, and Copilot — and what each one can do.
+description: The CLI engines that do the coding inside a DevBox — Claude Code (Plan or API credits), Codex, and Copilot — and what each one can do.
 ---
 
 import { Aside } from '@astrojs/starlight/components';
 
 Every [Schedule](/concepts/schedules) and [Run](/concepts/runs) has two layers. The
 **engine** is the inner one — the CLI that does the actual coding inside the
-container.
+DevBox.
 
 ## Two layers: coordinator and engine
 
 - **Coordinator** — the agent that runs the job: it reads your instruction,
-  picks a host, launches the container, and delegates the coding. In an
+  picks a host, launches the DevBox, and delegates the coding. In an
   **interactive [Run](/concepts/runs)** the coordinator owns the **"ask the human"
   tool**, so it can pause and ask you a question *regardless of which engine you
   pick*. (A [Schedule](/concepts/schedules) — or an **autonomous** Run — has no
   human, so it never pauses.)
-- **Engine (subagent)** — the CLI that writes the code inside the container.
+- **Engine (subagent)** — the CLI that writes the code inside the DevBox.
   You choose it per Schedule or per Run.
 
 ## The engines

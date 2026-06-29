@@ -7,15 +7,15 @@ import ThemedImage from '../../../components/ThemedImage.astro';
 import workersDark from '../../../assets/screenshots/workers-list-dark-20260627.png';
 import workersLight from '../../../assets/screenshots/workers-list-light-20260627.png';
 
-A **worker** is a machine that runs containers for ClusterCode. It connects outbound to the orchestrator over WebSocket and executes container operations locally using Podman.
+A **worker** is a machine that runs DevBoxes for ClusterCode. It connects outbound to the orchestrator over WebSocket and executes DevBox operations locally using Podman.
 
-The **Workers** page lists every machine connected to your orchestrator, with live CPU, memory, disk, and container counts:
+The **Workers** page lists every machine connected to your orchestrator, with live CPU, memory, disk, and DevBox counts:
 
 <ThemedImage
   dark={workersDark}
   light={workersLight}
   title="Workers"
-  alt="The Workers page showing three connected self-hosted workers, each card listing tenant, CPU, memory, disk, container count, last heartbeat, and status."
+  alt="The Workers page showing three connected self-hosted workers, each card listing tenant, CPU, memory, disk, DevBox count, last heartbeat, and status."
 />
 
 ## Self-Hosted Workers
@@ -41,11 +41,11 @@ Cloud worker is ClusterCode's managed compute offering. Instead of running worke
 - No hardware to maintain
 - Always-on availability
 - Scales with your plan
-- Supports both Linux and Windows containers
+- Supports both Linux and Windows DevBoxes
 
 **When to use Cloud worker:**
 - You don't have spare machines
-- You need Windows containers
+- You need Windows DevBoxes
 - You want zero infrastructure management
 - You need workers in specific geographic regions
 
@@ -77,7 +77,7 @@ If the connection drops, the agent automatically reconnects with exponential bac
 
 ## Worker Limits by Plan
 
-| Plan | Self-Hosted Workers | Concurrent Containers |
+| Plan | Self-Hosted Workers | Concurrent DevBoxes |
 |------|--------------------|-----------------------|
 | Starter | 2 | 5 |
 | Pro | 10 | 15 |

@@ -13,7 +13,7 @@ import chatDark from '../../../assets/screenshots/run-chat-dark-20260627.png';
 import chatLight from '../../../assets/screenshots/run-chat-light-20260627.png';
 
 A **Run** is an on-demand agent job that fires **once**. You write a prompt, the
-coordinator spins up a container and gets to work, and — unlike a
+coordinator spins up a DevBox and gets to work, and — unlike a
 [Schedule](/concepts/schedules) — you can **watch its timeline, steer it, and
 answer its questions** as it goes.
 
@@ -34,7 +34,7 @@ From the orchestrator's **Runs** page, **+ New run** opens the composer:
 
 2. **Ticket URL** *(optional)* — paste a GitHub/Azure issue and the launch step
    resolves its repo/branch, clones it, and readies the issue context inside the
-   container.
+   DevBox.
 
 3. **Target** *(optional)* — pin a [worker](/concepts/workers) or
    [cloud worker](/guides/cloud-worker), **or leave it blank** — the agent will ask
@@ -46,7 +46,7 @@ From the orchestrator's **Runs** page, **+ New run** opens the composer:
 5. **Mode** — **Interactive** (default) or **Autonomous** (see
    [below](#interactive-or-autonomous)).
 
-6. **Start Run** — the coordinator launches a container and begins.
+6. **Start Run** — the coordinator launches a DevBox and begins.
 
 </Steps>
 
@@ -84,19 +84,19 @@ final summary.
   dark={timelineDark}
   light={timelineLight}
   title="Runs"
-  alt="A completed Run's timeline: assistant messages interleaved with tool steps — launching a container, running the test suite, then opening a PR — with a Run details panel showing the engine (Claude Code — Plan), duration, and summary."
+  alt="A completed Run's timeline: assistant messages interleaved with tool steps — launching a DevBox, running the test suite, then opening a PR — with a Run details panel showing the engine (Claude Code — Plan), duration, and summary."
 />
 
 The timeline interleaves the agent's **messages** with its **tool steps** —
 each one expandable to see the exact call and result:
 
-- **launch container** — a container is created on the chosen host.
-- **exec in container** — a command runs inside it (tests, a build, `gh pr create`).
+- **launch DevBox** — a DevBox is created on the chosen host.
+- **exec in DevBox** — a command runs inside it (tests, a build, `gh pr create`).
 - **report job result** — the agent finalizes the Run as completed or failed.
 
 The **Run details** panel alongside it shows the status, engine, started/completed
-times, duration, the container(s) used, and a one-paragraph summary of everything
-the Run did. A finished Run can leave its container up so a follow-up continues
+times, duration, the DevBox(s) used, and a one-paragraph summary of everything
+the Run did. A finished Run can leave its DevBox up so a follow-up continues
 where it left off.
 
 ## It can pause and ask you
@@ -121,7 +121,7 @@ How questions are asked:
   example above is the first of three).
 
 This works for **any [engine](/concepts/subagents)** you pick — the question
-comes from the coordinator, not the engine. The container and its session stay
+comes from the coordinator, not the engine. The DevBox and its session stay
 alive while paused, so it's safe to answer minutes — or hours — later.
 
 <Aside type="note">
@@ -137,7 +137,7 @@ A Run is a conversation. Below the timeline is a **chat composer**:
   at the next turn boundary, so you can redirect without stopping the Run.
 - **Answer a question** — when the status is **Needs you**, your reply resumes
   the Run from where it paused.
-- **Continue a finished Run** — if the container is still up, a new message picks
+- **Continue a finished Run** — if the DevBox is still up, a new message picks
   the work back up in the same workspace.
 
 <ThemedImage

@@ -19,7 +19,7 @@ a pull request — no babysitting. Copy the prompt, pin a host, and let it go.
 
 ```text
 Find the highest-priority open issue labeled `ready-for-dev` in this repo.
-Implement it in a fresh container, run the full test suite, and open a pull
+Implement it in a fresh DevBox, run the full test suite, and open a pull
 request. If the tests fail after your change, keep iterating on the fix until
 they pass. Report the PR link when done.
 ```
@@ -44,7 +44,7 @@ they pass. Report the PR link when done.
 [timeline](/concepts/runs#the-timeline--watch-it-work) you watch it:
 
 1. list the open issues (`gh issue list --label ready-for-dev`) and pick the top one;
-2. launch a container and implement the change;
+2. launch a DevBox and implement the change;
 3. run the suite — red — then iterate on the fix until it's green;
 4. open the PR (`gh pr create`) and report **completed** with the link.
 
@@ -104,7 +104,7 @@ pausing to ask you whenever the expected behavior is ambiguous.
 **Ticket URL** field:
 
 ```text
-Reproduce the bug described in this issue in a fresh container. Find the root
+Reproduce the bug described in this issue in a fresh DevBox. Find the root
 cause, add a failing test that captures it, then fix it until that test and the
 rest of the suite pass, and open a PR linking the issue. If the expected
 behavior is ambiguous, ask me before deciding.
@@ -115,7 +115,7 @@ behavior is ambiguous, ask me before deciding.
 <Steps>
 
 1. **+ New run**, paste the prompt, and put the issue URL in **Ticket URL** so
-   the repo and issue context are cloned into the container.
+   the repo and issue context are cloned into the DevBox.
 
 2. Leave the **Target** blank (answer when it asks) or pin one. Keep
    **Mode: Interactive** so it can pause.

@@ -1,12 +1,12 @@
 ---
 title: Automation
-description: Hand work to an AI agent that spins up a container, does the task, and tears down — on a schedule or on demand, all on infrastructure you own.
+description: Hand work to an AI agent that spins up a DevBox, does the task, and tears down — on a schedule or on demand, all on infrastructure you own.
 ---
 
 import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 **Automation** is ClusterCode handing a task to an AI agent that spins up a
-container, does the work, and tears down — either on a recurring **Schedule**
+DevBox, does the work, and tears down — either on a recurring **Schedule**
 or as an on-demand **Run**. Every execution happens on **infrastructure you
 own and control**: your own [workers](/concepts/workers) and
 [cloud workers](/guides/cloud-worker), never a black-box cloud.
@@ -21,7 +21,7 @@ own and control**: your own [workers](/concepts/workers) and
 | Best for | Recurring maintenance, periodic checks | Exploratory work, anything ambiguous |
 
 Both run the same way under the hood: a **coordinator** plans the job and
-delegates the actual coding to an in-container **[engine](/concepts/subagents)**
+delegates the actual coding to an in-DevBox **[engine](/concepts/subagents)**
 (Claude Code, Codex, or Copilot).
 
 A Schedule is always autonomous. A [Run](/concepts/runs) can be either
@@ -38,7 +38,7 @@ A few recipes to make it concrete:
 - **Flaky-test sweep** — a Schedule that re-runs the e2e suite three times,
   finds flaky specs, and files issues with traces.
 - **"Refactor this and open a PR"** — a Run you start from a ticket; it works
-  in a container, runs the tests, and opens the PR. → [Runs](/concepts/runs)
+  in a DevBox, runs the tests, and opens the PR. → [Runs](/concepts/runs)
 - **A brainstorm that asks you questions** — a Run where the agent pauses
   mid-task to confirm a decision before continuing. → [Runs](/concepts/runs)
 

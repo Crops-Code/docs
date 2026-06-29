@@ -1,9 +1,9 @@
 ---
 title: Runtime Catalog
-description: Available AI agent runtimes for your containers.
+description: Available AI agent runtimes for your DevBoxes.
 ---
 
-ClusterCode supports multiple AI coding agents. Each runtime is a container image with a specific agent pre-installed and configured.
+ClusterCode supports multiple AI coding agents. Each runtime is a DevBox image with a specific agent pre-installed and configured.
 
 ## Available Agents
 
@@ -13,7 +13,7 @@ ClusterCode supports multiple AI coding agents. Each runtime is a container imag
 | **GitHub Copilot** | GitHub Copilot CLI agent | Starter+ |
 | **Codex** | OpenAI Codex CLI agent | Starter+ |
 
-All agents are available on all plans. The difference between plans is resource limits (concurrent containers, workers), not agent access.
+All agents are available on all plans. The difference between plans is resource limits (concurrent DevBoxes, workers), not agent access.
 
 ## Authentication
 
@@ -29,7 +29,7 @@ Credentials are configured in the orchestrator. See [Environment Variables](/ref
 
 ## Default Tools
 
-Every container includes these tools:
+Every DevBox includes these tools:
 - GitHub CLI (`gh`)
 - Oh My Posh (shell prompt)
 - Nerd Font (terminal icons)
@@ -41,7 +41,7 @@ Infrastructure dependencies (always present):
 
 ## Custom Runtimes (BYOI)
 
-On Pro and Enterprise plans, you can build your own container images (Bring Your Own Image). This lets you:
+On Pro and Enterprise plans, you can build your own DevBox images (Bring Your Own Image). This lets you:
 - Add project-specific dependencies
 - Pre-install language runtimes
 - Include proprietary tools

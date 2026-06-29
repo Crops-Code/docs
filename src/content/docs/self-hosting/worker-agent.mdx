@@ -3,7 +3,7 @@ title: Worker Agent
 description: How the ClusterCode worker agent works internally.
 ---
 
-The worker agent is a lightweight Go binary that runs on each machine and bridges the orchestrator to local Podman (or Docker) containers. It requires no runtime dependencies — just download and run.
+The worker agent is a lightweight Go binary that runs on each machine and bridges the orchestrator to local Podman (or Docker) DevBoxes. It requires no runtime dependencies — just download and run.
 
 ## Architecture
 
@@ -17,7 +17,7 @@ Worker Agent (your machine)
     │  child_process / Podman API
     │
     ▼
-Podman Containers
+Podman containers
 ```
 
 ## Lifecycle
@@ -26,7 +26,7 @@ Podman Containers
 2. **Registers** itself with system info (see below)
 3. **Sends heartbeats** every 10 seconds (see below)
 4. **Receives commands** from the orchestrator
-5. **Executes** container operations locally via Podman or Docker
+5. **Executes** DevBox operations locally via Podman or Docker
 
 ### Registration
 
@@ -53,7 +53,7 @@ Every 10 seconds the agent sends a `worker.heartbeat` with:
 | `memoryFree` | uint64 | Free RAM in bytes |
 | `diskTotal` | uint64? | Total disk in bytes |
 | `diskFree` | uint64? | Free disk in bytes |
-| `containersRunning` | int | Number of running containers |
+| `containersRunning` | int | Number of running DevBoxes |
 | `gatewayStatus` | string? | Gateway connectivity status |
 | `gatewayStatusDetail` | string? | Additional gateway info |
 
@@ -61,21 +61,21 @@ Every 10 seconds the agent sends a `worker.heartbeat` with:
 
 | Command | Action |
 |---------|--------|
-| `container.create` | Create a new container from image |
-| `container.setup` | Run initial setup (clone repo, generate CLAUDE.md) |
-| `container.start` | Start a stopped container |
-| `container.stop` | Stop a running container |
-| `container.remove` | Remove a container |
-| `container.list` | List containers for a tenant |
-| `container.list-all` | List all containers across tenants |
-| `container.exec` | Execute a command inside a container |
-| `container.exec.background` | Run a background command in a container |
-| `container.exec.background.kill` | Kill a background command |
-| `container.exec.background.capture` | Capture background command output |
-| `images.list` | List available container images |
+| `DevBox.create` | Create a new DevBox from image |
+| `DevBox.setup` | Run initial setup (clone repo, generate CLAUDE.md) |
+| `DevBox.start` | Start a stopped DevBox |
+| `DevBox.stop` | Stop a running DevBox |
+| `DevBox.remove` | Remove a DevBox |
+| `DevBox.list` | List DevBoxes for a tenant |
+| `DevBox.list-all` | List all DevBoxes across tenants |
+| `DevBox.exec` | Execute a command inside a DevBox |
+| `DevBox.exec.background` | Run a background command in a DevBox |
+| `DevBox.exec.background.kill` | Kill a background command |
+| `DevBox.exec.background.capture` | Capture background command output |
+| `images.list` | List available DevBox images |
 | `image.check` | Check if an image exists |
-| `image.delete` | Delete a container image |
-| `image.build` | Build a container image from Dockerfile |
+| `image.delete` | Delete a DevBox image |
+| `image.build` | Build a DevBox image from Dockerfile |
 | `terminal.open` | Start an interactive shell session |
 | `terminal.input` | Forward keystrokes to a terminal |
 | `terminal.resize` | Resize terminal dimensions |
@@ -85,7 +85,7 @@ Every 10 seconds the agent sends a `worker.heartbeat` with:
 
 ## Terminal Streaming
 
-Terminal output from containers is streamed back through the worker agent to the orchestrator, which relays it to the browser via WebSocket. This gives you a live web terminal with full xterm.js rendering.
+Terminal output from DevBoxes is streamed back through the worker agent to the orchestrator, which relays it to the browser via WebSocket. This gives you a live web terminal with full xterm.js rendering.
 
 ## Reconnection
 
@@ -95,7 +95,7 @@ If the WebSocket connection drops, the agent reconnects automatically with expon
 1s → 2s → 4s → 8s → 16s → 30s (max)
 ```
 
-Containers continue running during disconnection — they're not affected by the agent's connection state.
+DevBoxes continue running during disconnection — they're not affected by the agent's connection state.
 
 ## Configuration
 
@@ -132,4 +132,4 @@ clustercode worker
 clustercode worker
 ```
 
-The agent is designed to be restarted safely — it picks up existing containers on reconnection.
+The agent is designed to be restarted safely — it picks up existing DevBoxes on reconnection.

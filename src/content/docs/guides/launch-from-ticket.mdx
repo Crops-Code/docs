@@ -1,9 +1,9 @@
 ---
 title: Launch from Ticket
-description: End-to-end guide for launching a container from a ticket URL.
+description: End-to-end guide for launching a DevBox from a ticket URL.
 ---
 
-The core ClusterCode workflow: paste a ticket, get a container working on it.
+The core ClusterCode workflow: paste a ticket, get a DevBox working on it.
 
 ## Steps
 
@@ -11,7 +11,7 @@ The core ClusterCode workflow: paste a ticket, get a container working on it.
 
 From the orchestrator dashboard, click **Launch** or ask Nucleus:
 
-> "Launch a container for https://github.com/org/repo/issues/42"
+> "Launch a DevBox for https://github.com/org/repo/issues/42"
 
 ### 2. Paste the ticket URL
 
@@ -37,7 +37,7 @@ Click **Launch**. Within 30 seconds:
 
 1. Ticket details are fetched from the provider
 2. A `CLAUDE.md` is generated with full context
-3. The repository is cloned into the container
+3. The repository is cloned into the DevBox
 4. The AI agent starts working
 
 ### 6. Monitor
@@ -57,5 +57,5 @@ When the agent completes:
 ## Tips
 
 - Use specific, well-written tickets — the AI agent's output quality depends on the input context
-- Enable host networking if the container needs to expose ports for local testing
-- You can launch multiple containers in parallel across different workers
+- Enable host networking if the DevBox needs to expose ports for local testing
+- You can launch multiple DevBoxes in parallel across different workers

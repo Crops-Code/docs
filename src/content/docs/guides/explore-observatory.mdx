@@ -11,13 +11,13 @@ The [Observatory](/concepts/observatory) turns your whole ClusterCode fleet into
 
 1. ### Open the Observatory
 
-   From the orchestrator, open the **Overview** nav and choose **Observatory**. Your tenant appears at the center, with your [workers](/concepts/workers) as glowing suns and their [containers](/concepts/containers) orbiting as planets. The view follows your app theme automatically.
+   From the orchestrator, open the **Overview** nav and choose **Observatory**. Your tenant appears at the center, with your [workers](/concepts/workers) as glowing suns and their [DevBoxes](/concepts/containers) orbiting as planets. The view follows your app theme automatically.
 
 2. ### Switch between the Workers and Projects lenses
 
    Use the segmented toggle at the top right to change how the galaxy is grouped:
 
-   - **Workers** clusters containers under the worker that hosts them — best for "what's running where?"
+   - **Workers** clusters DevBoxes under the worker that hosts them — best for "what's running where?"
    - **Projects** groups bodies by [project](/concepts/projects) as constellations. A worker serving more than one project repeats in each, with a **×N badge** so you know it's the same machine.
 
    <Aside type="tip">
@@ -35,17 +35,17 @@ The [Observatory](/concepts/observatory) turns your whole ClusterCode fleet into
    **Click** a body to open its **detail card**. The card lazily fetches live telemetry the moment it opens:
 
    - A **worker** shows live **CPU% and cores** plus **used / total memory**.
-   - A **running container** shows live **CPU% and memory usage**.
+   - A **running DevBox** shows live **CPU% and memory usage**.
 
-   Every card carries a **deep link** into the full page for that resource — worker, container, [run](/concepts/runs), [schedule](/concepts/schedules), or project — so the Observatory is a fast way to *find* something and jump straight to it.
+   Every card carries a **deep link** into the full page for that resource — worker, DevBox, [run](/concepts/runs), [schedule](/concepts/schedules), or project — so the Observatory is a fast way to *find* something and jump straight to it.
 
 5. ### Spot unassigned work as comets
 
-   Look for **comets** streaking through the **holding belt** around the center. Each comet is a run or schedule that has **no worker or container yet**. If work isn't getting picked up, this is the first place to check.
+   Look for **comets** streaking through the **holding belt** around the center. Each comet is a run or schedule that has **no worker or DevBox yet**. If work isn't getting picked up, this is the first place to check.
 
    <Aside type="note">
      Remember that only **active** resources orbit — offline workers and stopped
-     containers sit still. A moving galaxy is a busy fleet; a quiet one is idle.
+     DevBoxes sit still. A moving galaxy is a busy fleet; a quiet one is idle.
    </Aside>
 
 </Steps>
@@ -53,4 +53,4 @@ The [Observatory](/concepts/observatory) turns your whole ClusterCode fleet into
 ## Next steps
 
 - Learn the full legend on the [Observatory](/concepts/observatory) concept page.
-- Dig into the resources you'll see orbiting: [Workers](/concepts/workers), [Containers](/concepts/containers), [Projects](/concepts/projects), and [Schedules](/concepts/schedules).
+- Dig into the resources you'll see orbiting: [Workers](/concepts/workers), [DevBoxes](/concepts/containers), [Projects](/concepts/projects), and [Schedules](/concepts/schedules).

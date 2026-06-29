@@ -24,7 +24,7 @@ When Nucleus receives a message, it loads your NUCLEUS.md content as mandatory i
 
 ### Auto-Launch
 
-By default, Nucleus shows a launch summary and waits for your confirmation before creating a container. Add the `auto-launch` directive to skip the confirmation:
+By default, Nucleus shows a launch summary and waits for your confirmation before creating a DevBox. Add the `auto-launch` directive to skip the confirmation:
 
 ```markdown
 ## Launch Settings
@@ -36,12 +36,12 @@ With auto-launch enabled, Nucleus still resolves all values (worker, image, name
 
 ### Post-Launch Workflow
 
-Define what Nucleus should do automatically after launching a container. Without a workflow, Nucleus asks if you'd like to open a terminal. With a workflow, it executes your steps instead:
+Define what Nucleus should do automatically after launching a DevBox. Without a workflow, Nucleus asks if you'd like to open a terminal. With a workflow, it executes your steps instead:
 
 ```markdown
 ## Post-Launch Workflow
 
-1. Start Claude Code in the container with `--dangerously-skip-permissions`
+1. Start Claude Code in the DevBox with `--dangerously-skip-permissions`
 2. Open the terminal so I can watch
 ```
 
@@ -49,7 +49,7 @@ Nucleus will follow these steps sequentially after a successful launch, loading 
 
 ## Example
 
-Here's a complete NUCLEUS.md that auto-launches containers and starts the AI agent automatically:
+Here's a complete NUCLEUS.md that auto-launches DevBoxes and starts the AI agent automatically:
 
 ```markdown
 ## Launch Settings
@@ -64,7 +64,7 @@ auto-launch
 ## Preferences
 
 - Always use terminal images, not display images
-- Default to 8 GB memory for containers
+- Default to 8 GB memory for DevBoxes
 - When I say "go", treat it as a launch request
 ```
 

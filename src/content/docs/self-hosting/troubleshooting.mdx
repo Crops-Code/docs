@@ -44,9 +44,9 @@ podman machine start
 systemctl --user start podman.socket
 ```
 
-### Container launch fails with "image not found"
+### DevBox launch fails with "image not found"
 
-**Cause:** The container image hasn't been built on this worker.
+**Cause:** The DevBox image hasn't been built on this worker.
 
 **Fix:**
 
@@ -58,14 +58,14 @@ Or pull from the registry if available.
 
 ### "Insufficient disk space"
 
-**Cause:** Container images and layers consume significant disk.
+**Cause:** DevBox images and layers consume significant disk.
 
 **Fix:**
 ```bash
 # Remove unused images
 podman image prune -a
 
-# Remove stopped containers
+# Remove stopped DevBoxes
 podman container prune
 
 # Check current usage

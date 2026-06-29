@@ -1,18 +1,18 @@
 ---
 title: Custom Containerfile
-description: Build custom container images for specialized development environments.
+description: Build custom DevBox images for specialized development environments.
 ---
 
 import { Aside } from '@astrojs/starlight/components';
 
-The default ClusterCode container image covers general development. For specialized needs, build your own.
+The default ClusterCode DevBox image covers general development. For specialized needs, build your own.
 
 <Aside type="note">
   Custom images (BYOI) require a Pro or Enterprise plan.
 </Aside>
 
 <Aside type="tip">
-  Prefer to capture a container you've already set up by hand? See [Build an Image from a Container](/guides/build-image-from-container).
+  Prefer to capture a DevBox you've already set up by hand? See [Build an Image from a DevBox](/guides/build-image-from-container).
 </Aside>
 
 ## Base image
@@ -60,4 +60,4 @@ Or trigger a build from the orchestrator dashboard / Nucleus:
 
 ## Using your image
 
-When launching a container, select your custom image from the runtime dropdown in the orchestrator dashboard.
+When launching a DevBox, select your custom image from the runtime dropdown in the orchestrator dashboard.

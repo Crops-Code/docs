@@ -43,7 +43,7 @@ export default defineConfig({
           items: [
             { label: 'Projects', slug: 'concepts/projects' },
             { label: 'Workers', slug: 'concepts/workers' },
-            { label: 'Containers', slug: 'concepts/containers' },
+            { label: 'DevBoxes', slug: 'concepts/containers' },
             { label: 'Nucleus', slug: 'concepts/nucleus' },
             { label: 'Observatory', slug: 'concepts/observatory' },
             { label: 'Tickets', slug: 'concepts/tickets' },
@@ -74,7 +74,7 @@ export default defineConfig({
             { label: 'Run an agent on demand', slug: 'guides/run-on-demand' },
             { label: 'Automate recurring work', slug: 'guides/recurring-work' },
             { label: 'Custom Containerfile', slug: 'guides/custom-containerfile' },
-            { label: 'Build from Container', slug: 'guides/build-image-from-container' },
+            { label: 'Build from DevBox', slug: 'guides/build-image-from-container' },
             { label: 'Team Setup', slug: 'guides/team-setup' },
             { label: 'Cloud worker', slug: 'guides/cloud-worker' },
             { label: 'VS Code Extension', slug: 'guides/vscode-extension' },

@@ -1,18 +1,18 @@
 ---
 title: Projects
-description: A Project groups the containers, runs, and schedules behind one effort into a single dashboard — with a scoped inbox, project-level env vars, and a project lens you carry through the app.
+description: A Project groups the DevBoxes, runs, and schedules behind one effort into a single dashboard — with a scoped inbox, project-level env vars, and a project lens you carry through the app.
 ---
 
 import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 A **Project** is the workspace dashboard for one thing you're working on — *the
 billing refactor*, *the v2 migration*, *the flaky-test cleanup*. Instead of
-viewing all your containers, runs, and schedules globally, a Project gathers the
+viewing all your DevBoxes, runs, and schedules globally, a Project gathers the
 ones that belong to a single effort into one landing page that acts as its
 dashboard: what needs you, what's running, and the levers to start more.
 
 A Project is a lightweight **grouping**, not a hierarchy. Every
-[container](/concepts/containers), [run](/concepts/runs), and
+[DevBox](/concepts/containers), [run](/concepts/runs), and
 [schedule](/concepts/schedules) can optionally belong to **at most one**
 project — and resources are perfectly happy with no project at all. You reach
 for a Project when an effort grows enough moving parts that a dedicated
@@ -26,14 +26,14 @@ puts everything for that effort on one screen:
 
 - **Inbox** — the project's notifications, scoped to
   *this* effort: a run needs your input, a run completed or failed, a schedule
-  was skipped, a container was created or started. This is the "what needs me,
+  was skipped, a DevBox was created or started. This is the "what needs me,
   here" view, without the noise of every other thing you're running.
-- **Containers / Runs / Schedules** — three collapsible sections listing the
+- **DevBoxes / Runs / Schedules** — three collapsible sections listing the
   project's resources, each with **create** and **view** actions. Start a new
-  run, add a schedule, or launch a container right from the dashboard and it's
+  run, add a schedule, or launch a DevBox right from the dashboard and it's
   linked to the project automatically.
 - **Environment variables** — project-level env vars injected into every
-  container launched in the project (see [below](#environment-variables)).
+  DevBox launched in the project (see [below](#environment-variables)).
 
 The point is *one page, one effort*: you see what's happening and you act on it
 without leaving.
@@ -43,7 +43,7 @@ without leaving.
 Linking is **optional** and **at most one** project per resource. There's no
 forced ownership — a project is just a grouping key.
 
-The create forms — **new run**, **new schedule**, **launch container** — each
+The create forms — **new run**, **new schedule**, **launch DevBox** — each
 have a **Project** selector:
 
 - **From the project dashboard** — the selector is **pre-selected** to that
@@ -52,18 +52,18 @@ have a **Project** selector:
 
 | A project groups | What you see / do from the dashboard |
 |---|---|
-| **Containers** | List the project's containers; launch a new one, pre-linked |
+| **DevBoxes** | List the project's DevBoxes; launch a new one, pre-linked |
 | **Runs** | List the project's runs; start a new run, pre-linked |
 | **Schedules** | List the project's schedules; create one, pre-linked |
 | **Inbox** | Notifications scoped to this project's activity |
-| **Env vars** | Project-level variables injected at container launch |
+| **Env vars** | Project-level variables injected at DevBox launch |
 
 ## Environment variables
 
-Project-level **environment variables** are injected into every container
+Project-level **environment variables** are injected into every DevBox
 launched in the project, **at launch time**. Set `DATABASE_URL`,
 `STRIPE_TEST_KEY`, or a feature flag once on the project, and every run,
-schedule, or container you start there inherits it — no copy-pasting into each
+schedule, or DevBox you start there inherits it — no copy-pasting into each
 launch.
 
 <Aside type="note">
@@ -80,7 +80,7 @@ shape is the same: configure it once on the project, inherit it everywhere.
 ## Scoped navigation
 
 A Project is a **lens you carry**, not a mode you enter and exit. When you open a
-resource from a project — a run, a schedule, a container — the project travels
+resource from a project — a run, a schedule, a DevBox — the project travels
 with you in the URL as `?project=<id>`, and a clickable **project badge** appears
 in the breadcrumb.
 
@@ -118,5 +118,5 @@ See [Plans & Limits](/reference/plans-and-limits) for the full per-tier table.
 <CardGrid>
   <LinkCard title="Runs" href="/concepts/runs" description="On-demand, interactive agent jobs — link them to a project." />
   <LinkCard title="Schedules" href="/concepts/schedules" description="Recurring cron jobs — group them under one effort." />
-  <LinkCard title="Containers" href="/concepts/containers" description="The environments agents work in, inheriting project env vars." />
+  <LinkCard title="DevBoxes" href="/concepts/containers" description="The environments agents work in, inheriting project env vars." />
 </CardGrid>

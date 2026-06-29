@@ -5,7 +5,7 @@ description: The in-platform AI assistant that manages your farm.
 
 import { Aside } from '@astrojs/starlight/components';
 
-**Nucleus** is ClusterCode's built-in AI assistant. It lives in the orchestrator dashboard and helps you manage workers, launch containers, execute commands, and monitor your cluster — all through natural conversation.
+**Nucleus** is ClusterCode's built-in AI assistant. It lives in the orchestrator dashboard and helps you manage workers, launch DevBoxes, execute commands, and monitor your cluster — all through natural conversation.
 
 <Aside type="caution" title="Nucleus runs on Anthropic models">
   Nucleus is powered internally by **Anthropic (Claude)** models. Each plan
@@ -19,11 +19,11 @@ import { Aside } from '@astrojs/starlight/components';
 
 ## What Nucleus Can Do
 
-- **Launch containers from tickets** — "Launch a container for github.com/org/repo/issues/42"
-- **Execute commands** — "Run npm start in container X" or start long-running processes in the background
-- **Open terminals and displays** — "Open a terminal on container X" or open a VNC display for GUI interaction
+- **Launch DevBoxes from tickets** — "Launch a DevBox for github.com/org/repo/issues/42"
+- **Execute commands** — "Run npm start in DevBox X" or start long-running processes in the background
+- **Open terminals and displays** — "Open a terminal on DevBox X" or open a VNC display for GUI interaction
 - **Build images** — "Build the claude-code-terminal image" with composable capabilities
-- **Monitor status** — "What's running on worker-1?" or get details on a specific container
+- **Monitor status** — "What's running on worker-1?" or get details on a specific DevBox
 - **Fetch tickets** — Pull details from GitHub Issues or Azure DevOps work items
 - **Navigate the UI** — Nucleus can direct you to any page in the dashboard
 - **Read docs** — Nucleus can look up ClusterCode documentation to answer your questions
@@ -41,20 +41,20 @@ Nucleus is an AI agent with access to MCP (Model Context Protocol) tools that co
 
 | Tool | Description |
 |------|-------------|
-| `get_infrastructure_state` | Get current workers and containers |
-| `get_container` | Container details by ID or name |
-| `launch_container` | Launch a container from a ticket URL, empty, or from an existing container |
-| `start_container` | Start a stopped container |
-| `stop_container` | Stop a running container |
-| `remove_container` | Remove a container permanently |
-| `exec_in_container` | Execute a bash command in a running container |
+| `get_infrastructure_state` | Get current workers and DevBoxes |
+| `get_container` | DevBox details by ID or name |
+| `launch_container` | Launch a DevBox from a ticket URL, empty, or from an existing DevBox |
+| `start_container` | Start a stopped DevBox |
+| `stop_container` | Stop a running DevBox |
+| `remove_container` | Remove a DevBox permanently |
+| `exec_in_container` | Execute a bash command in a running DevBox |
 | `exec_in_container_background` | Start a long-running command via tmux (returns immediately) |
 | `list_images` | List available images on a worker |
 | `list_capabilities` | List composable image capabilities available on your plan |
 | `open_terminal` | Open a terminal session in the UI with optional auto-execute commands |
 | `open_display` | Open a VNC display session for GUI interaction |
 | `navigate` | Navigate to a page in the dashboard UI |
-| `build_image` | Build a composable container image with selected agents and capabilities |
+| `build_image` | Build a composable DevBox image with selected agents and capabilities |
 | `fetch_ticket` | Fetch ticket details from a URL (GitHub Issues, Azure DevOps) |
 | `read_docs` | Read ClusterCode documentation pages |
 | `load_skill` | Load a Nucleus skill by name |
@@ -73,7 +73,7 @@ You can also **bring your own key** in [Settings → Secrets](/concepts/settings
 
 ## Tips
 
-- Ask Nucleus to launch a container from a GitHub issue or Azure DevOps ticket
+- Ask Nucleus to launch a DevBox from a GitHub issue or Azure DevOps ticket
 - Enable host networking when launching to test from your phone at host-ip:port
-- Try: "Open a terminal on container X" to get a live shell
-- Nucleus will confirm launch details with you before creating a container
+- Try: "Open a terminal on DevBox X" to get a live shell
+- Nucleus will confirm launch details with you before creating a DevBox

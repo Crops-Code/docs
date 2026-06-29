@@ -1,28 +1,28 @@
 ---
 title: What is ClusterCode?
-description: A self-hosted platform for orchestrating agentic AI development containers across multiple machines.
+description: A self-hosted platform for orchestrating agentic AI development DevBoxes across multiple machines.
 ---
 
-ClusterCode is a **self-hosted platform** for orchestrating agentic development containers across multiple machines. It provides a centralized dashboard to launch, monitor, and interact with AI coding agents running inside containers on your worker machines.
+ClusterCode is a **self-hosted platform** for orchestrating agentic development DevBoxes across multiple machines. It provides a centralized dashboard to launch, monitor, and interact with AI coding agents running inside DevBoxes on your worker machines.
 
 ## The Cluster
 
 ClusterCode ties your machines into one cluster:
 
-- **Workers** — your machines, with Podman installed, that run containers
-- **Containers** — isolated dev environments where AI agents work on tickets
-- **Launching** — paste a ticket URL and a container spins up to work on it
+- **Workers** — your machines, with Podman installed, that run DevBoxes
+- **DevBoxes** — isolated dev environments where AI agents work on tickets
+- **Launching** — paste a ticket URL and a DevBox spins up to work on it
 - **The output** — a draft PR, a passing test suite, a working branch
 
 You provide the machines. ClusterCode orchestrates the work.
 
 ## What It Does
 
-- **Launch dev containers from tickets** — paste a GitHub issue or Azure DevOps work item (Trello and Monday.com coming soon), and ClusterCode spins up a container with an AI agent ready to work on it
+- **Launch dev DevBoxes from tickets** — paste a GitHub issue or Azure DevOps work item (Trello and Monday.com coming soon), and ClusterCode spins up a DevBox with an AI agent ready to work on it
 - **Manage multiple workers** — connect any number of machines as worker agents; they phone home to the orchestrator over WebSocket
-- **Live terminal access** — open a web-based terminal to any running container directly from the dashboard
-- **Monitor resources** — see CPU, memory, and disk usage per container in real time
-- **Build container images** — trigger and monitor image builds on your workers from the UI
+- **Live terminal access** — open a web-based terminal to any running DevBox directly from the dashboard
+- **Monitor resources** — see CPU, memory, and disk usage per DevBox in real time
+- **Build DevBox images** — trigger and monitor image builds on your workers from the UI
 - **Schedule cron workflows** — automate recurring tasks: wake up to draft PRs every morning
 
 ## Architecture
@@ -37,7 +37,7 @@ Orchestrator (Next.js + WS server)
 Worker Agents (one per machine)
     │  child_process
     ▼
-Podman Containers (Claude Code, Copilot, Codex)
+Podman containers (Claude Code, Copilot, Codex)
 ```
 
 Workers connect **outbound** to the orchestrator — they work behind NAT and firewalls with zero port forwarding. All communication happens over WebSocket.

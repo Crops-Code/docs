@@ -1,20 +1,20 @@
 ---
 title: VS Code Extension
-description: Connect VS Code to a running ClusterCode container for full IDE access.
+description: Connect VS Code to a running ClusterCode DevBox for full IDE access.
 ---
 
-Open a ClusterCode container in Visual Studio Code to browse files, edit code, and use the integrated terminal as if working locally.
+Open a ClusterCode DevBox in Visual Studio Code to browse files, edit code, and use the integrated terminal as if working locally.
 
 ## Prerequisites
 
 - **VS Code** (or VS Code Insiders) installed
-- **Dev Containers** extension installed
-- A running ClusterCode container
+- **Dev DevBoxes** extension installed
+- A running ClusterCode DevBox
 
 Install the extension:
 
 ```bash
-code --install-extension ms-vscode-remote.remote-containers
+code --install-extension ms-vscode-remote.remote-DevBoxes
 ```
 
 ## Configure for Podman
@@ -33,8 +33,8 @@ podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}'
 
 ```json
 {
-  "dev.containers.dockerPath": "podman",
-  "dev.containers.dockerSocketPath": "<your-socket-path>"
+  "dev.DevBoxes.dockerPath": "podman",
+  "dev.DevBoxes.dockerSocketPath": "<your-socket-path>"
 }
 ```
 
@@ -56,8 +56,8 @@ podman machine inspect --format '{{.ConnectionInfo.PodmanPipe.Path}}'
 
 ```json
 {
-  "dev.containers.dockerPath": "podman",
-  "dev.containers.dockerSocketPath": "<your-pipe-path>"
+  "dev.DevBoxes.dockerPath": "podman",
+  "dev.DevBoxes.dockerSocketPath": "<your-pipe-path>"
 }
 ```
 
@@ -65,29 +65,29 @@ podman machine inspect --format '{{.ConnectionInfo.PodmanPipe.Path}}'
 
 No configuration needed — VS Code detects Docker automatically.
 
-## Attach to a Container
+## Attach to a DevBox
 
 ### From the UI
 
 1. Open VS Code
-2. `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) → **Dev Containers: Attach to Running Container...**
-3. Select your container (e.g. `claude-code-terminal-github-...`)
-4. A new window opens connected to the container
-5. `Ctrl+O` (or `Cmd+O`) to open a folder inside the container
+2. `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) → **Dev DevBoxes: Attach to Running DevBox...**
+3. Select your DevBox (e.g. `claude-code-terminal-github-...`)
+4. A new window opens connected to the DevBox
+5. `Ctrl+O` (or `Cmd+O`) to open a folder inside the DevBox
 
 ### From the command line
 
 **macOS/Linux:**
 
 ```bash
-code --folder-uri "vscode-remote://attached-container+$(printf '<container-id>' | xxd -p)/workspace"
+code --folder-uri "vscode-remote://attached-DevBox+$(printf '<DevBox-id>' | xxd -p)/workspace"
 ```
 
 **Windows (PowerShell):**
 
 ```powershell
-$hexId = -join ([System.Text.Encoding]::UTF8.GetBytes("<container-id>") | ForEach-Object { '{0:x2}' -f $_ })
-code --folder-uri "vscode-remote://attached-container+$hexId/workspace"
+$hexId = -join ([System.Text.Encoding]::UTF8.GetBytes("<DevBox-id>") | ForEach-Object { '{0:x2}' -f $_ })
+code --folder-uri "vscode-remote://attached-DevBox+$hexId/workspace"
 ```
 
 Use `podman ps` or `docker ps` to find the container ID.
@@ -100,12 +100,12 @@ Use `podman ps` or `docker ps` to find the container ID.
 - **Docker:** Make sure Docker Desktop is running
 - Verify the socket/pipe path in your VS Code settings
 
-### Container doesn't appear in the list
+### DevBox doesn't appear in the list
 
-- Verify the container is running: `podman ps`
-- Check `dev.containers.dockerPath` is set correctly
-- Check `dev.containers.dockerSocketPath` points to the right socket
+- Verify the DevBox is running: `podman ps`
+- Check `dev.DevBoxes.dockerPath` is set correctly
+- Check `dev.DevBoxes.dockerSocketPath` points to the right socket
 
 ### VS Code shows "Installing server..." for a long time
 
-First-time attachment installs the VS Code server inside the container. Subsequent connections reuse the cache and are much faster.
+First-time attachment installs the VS Code server inside the DevBox. Subsequent connections reuse the cache and are much faster.
