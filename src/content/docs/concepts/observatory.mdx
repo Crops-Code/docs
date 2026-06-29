@@ -10,7 +10,7 @@ import observatoryLight from '../../../assets/screenshots/observatory-light-2026
 import observatoryProjectsDark from '../../../assets/screenshots/observatory-projects-dark-20260627.png';
 import observatoryProjectsLight from '../../../assets/screenshots/observatory-projects-light-20260627.png';
 
-The **Observatory** is an immersive, navigable **galaxy** view of everything in your ClusterCode workspace — one living map of your whole fleet. Instead of scanning a dozen lists, you see your [workers](/concepts/workers), [DevBoxes](/concepts/containers), [runs](/concepts/runs), and [schedules](/concepts/schedules) at a glance, each rendered as a celestial body orbiting the things it belongs to.
+The **Observatory** is an immersive, navigable **galaxy** view of everything in your ClusterCode workspace — one living map of your whole fleet. Instead of scanning a dozen lists, you see your [workers](/concepts/workers), [DevBoxes](/concepts/devboxes), [runs](/concepts/runs), and [schedules](/concepts/schedules) at a glance, each rendered as a celestial body orbiting the things it belongs to.
 
 You'll find it in the orchestrator's **Overview** nav. It follows your app theme (light or dark) and animates only the resources that are actually alive.
 
@@ -34,7 +34,7 @@ Every resource in your fleet maps to a celestial body. Once you learn the legend
 |------|-----------|
 | **Center** | **You** — your tenant, the root of everything you can access. |
 | **Sun** | A [Worker](/concepts/workers). **Orange** = a BYOM worker (your own machine); **blue** = a Cloud worker (managed). |
-| **Planet** | A [DevBox](/concepts/containers), orbiting its worker. Its **fill colour** is its status; its **ring** marks its [project](/concepts/projects). |
+| **Planet** | A [DevBox](/concepts/devboxes), orbiting its worker. Its **fill colour** is its status; its **ring** marks its [project](/concepts/projects). |
 | **Moon** | A [Run](/concepts/runs), orbiting its DevBox. **Amber** = triggered by a schedule. |
 | **Clock / dashed orbit** | A [Schedule](/concepts/schedules), circling its worker. |
 | **Comet** | An **unassigned** run or schedule — one with no worker or DevBox yet — orbiting you in the **holding belt**. |
