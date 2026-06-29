@@ -3,6 +3,11 @@ import starlight from '@astrojs/starlight';
 
 export default defineConfig({
   site: 'https://docs.clustercode.io',
+  // The DevBoxes concept page slug was renamed concepts/containers → concepts/devboxes
+  // (matching the product rename). Keep the old URL resolving for bookmarks/external links.
+  redirects: {
+    '/concepts/containers': '/concepts/devboxes',
+  },
   integrations: [
     starlight({
       title: 'ClusterCode | Docs',
@@ -43,7 +48,7 @@ export default defineConfig({
           items: [
             { label: 'Projects', slug: 'concepts/projects' },
             { label: 'Workers', slug: 'concepts/workers' },
-            { label: 'DevBoxes', slug: 'concepts/containers' },
+            { label: 'DevBoxes', slug: 'concepts/devboxes' },
             { label: 'Nucleus', slug: 'concepts/nucleus' },
             { label: 'Observatory', slug: 'concepts/observatory' },
             { label: 'Tickets', slug: 'concepts/tickets' },
