@@ -41,9 +41,9 @@ export default defineConfig({
           label: 'Concepts',
           collapsed: true,
           items: [
-            { label: 'Projects', slug: 'concepts/projects' },
             { label: 'Workers', slug: 'concepts/workers' },
             { label: 'DevBoxes', slug: 'concepts/containers' },
+            { label: 'Projects', slug: 'concepts/projects' },
             { label: 'Nucleus', slug: 'concepts/nucleus' },
             { label: 'Observatory', slug: 'concepts/observatory' },
             { label: 'Tickets', slug: 'concepts/tickets' },
