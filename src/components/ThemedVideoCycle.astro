@@ -43,18 +43,28 @@
 interface Clip {
   /** Short pill label, e.g. "Observatory". */
   label: string;
-  darkWebm: string;
-  darkMp4: string;
-  darkPoster: string;
-  lightWebm: string;
-  lightMp4: string;
-  lightPoster: string;
   /** Required alt / aria-label — every embed describes itself. */
   alt: string;
   /** URL-bar text in the faux browser chrome. */
   url?: string;
   /** Page title shown on the right of the chrome bar. */
   title?: string;
+
+  /* A slide is EITHER a motion clip (the six video fields) OR a static themed
+     screenshot (dark + light). Motion clips on the homepage exist only for a
+     few screens; everything else is a still, so the cycle mixes both. */
+
+  /** Motion: webm/mp4/poster per theme. Provide all six for a video slide. */
+  darkWebm?: string;
+  darkMp4?: string;
+  darkPoster?: string;
+  lightWebm?: string;
+  lightMp4?: string;
+  lightPoster?: string;
+
+  /** Still: theme-paired image URLs. Provide both for an image slide. */
+  dark?: string;
+  light?: string;
 }
 
 interface Props {
@@ -79,33 +89,42 @@ const { clips, intervalMs = 7000 } = Astro.props;
             {clip.title && <span class="title">{clip.title}</span>}
           </div>
           <div class="browser-body">
-            <video
-              class="tv tv-dark"
-              muted
-              loop
-              playsinline
-              preload={i === 0 ? 'metadata' : 'none'}
-              poster={clip.darkPoster}
-              aria-label={clip.alt}
-            >
-              <source src={clip.darkWebm} type="video/webm" />
-              <source src={clip.darkMp4} type="video/mp4" />
-            </video>
-            <img class="tv-poster tv-dark" src={clip.darkPoster} alt={clip.alt} loading="lazy" />
+            {clip.darkWebm ? (
+              <>
+                <video
+                  class="tv tv-dark"
+                  muted
+                  loop
+                  playsinline
+                  preload={i === 0 ? 'metadata' : 'none'}
+                  poster={clip.darkPoster}
+                  aria-label={clip.alt}
+                >
+                  <source src={clip.darkWebm} type="video/webm" />
+                  <source src={clip.darkMp4} type="video/mp4" />
+                </video>
+                <img class="tv-poster tv-dark" src={clip.darkPoster} alt={clip.alt} loading="lazy" />
 
-            <video
-              class="tv tv-light"
-              muted
-              loop
-              playsinline
-              preload={i === 0 ? 'metadata' : 'none'}
-              poster={clip.lightPoster}
-              aria-label={clip.alt}
-            >
-              <source src={clip.lightWebm} type="video/webm" />
-              <source src={clip.lightMp4} type="video/mp4" />
-            </video>
-            <img class="tv-poster tv-light" src={clip.lightPoster} alt={clip.alt} loading="lazy" />
+                <video
+                  class="tv tv-light"
+                  muted
+                  loop
+                  playsinline
+                  preload={i === 0 ? 'metadata' : 'none'}
+                  poster={clip.lightPoster}
+                  aria-label={clip.alt}
+                >
+                  <source src={clip.lightWebm} type="video/webm" />
+                  <source src={clip.lightMp4} type="video/mp4" />
+                </video>
+                <img class="tv-poster tv-light" src={clip.lightPoster} alt={clip.alt} loading="lazy" />
+              </>
+            ) : (
+              <>
+                <img class="tvi tv-dark" src={clip.dark} alt={clip.alt} loading="lazy" />
+                <img class="tvi tv-light" src={clip.light} alt={clip.alt} loading="lazy" />
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -130,6 +149,10 @@ const { clips, intervalMs = 7000 } = Astro.props;
 <script>
   // Progressive enhancement: with JS off the first slide just stays visible.
   function initCycle(fig: HTMLElement) {
+    // Guard against double-init (HMR re-runs, view transitions) — two timers
+    // would fight and desync the active pill from the visible slide.
+    if (fig.dataset.tvcInit) return;
+    fig.dataset.tvcInit = '1';
     const slides = Array.from(fig.querySelectorAll<HTMLElement>('.tvc-slide'));
     const pills = Array.from(fig.querySelectorAll<HTMLButtonElement>('.tvc-pill'));
     if (slides.length < 2) {
@@ -251,6 +274,12 @@ const { clips, intervalMs = 7000 } = Astro.props;
   .tv-poster {
     display: none;
   }
+  /* Static screenshot slides — always shown (theme-switched below), and NOT
+     hidden by the reduced-motion rule (they don't move, so there's nothing to
+     opt out of). */
+  .tvi {
+    display: block;
+  }
   @media (prefers-reduced-motion: reduce) {
     .tv {
       display: none;
@@ -260,7 +289,8 @@ const { clips, intervalMs = 7000 } = Astro.props;
     }
   }
   /* Theme switch — higher specificity than the motion rules wins, so the
-     inactive theme is fully hidden (video + poster) regardless of motion pref. */
+     inactive theme is fully hidden (video + poster + still) regardless of
+     motion pref. .tv-dark / .tv-light sit on videos, posters, and images. */
   :global([data-theme='light']) .tv-dark {
     display: none;
   }
@@ -268,17 +298,29 @@ const { clips, intervalMs = 7000 } = Astro.props;
     display: none;
   }
 
-  /* Pills — mirror the marketing showcase: rounded, mono, green when active. */
+  /* Pills — mirror the marketing showcase: rounded, mono, accent when active.
+     They're a toggle group, so every pill must be the same height: an
+     inline-flex box with `white-space: nowrap` keeps each label on one line
+     (otherwise the active pill's text can wrap and grow taller than the rest). */
   .tvc-pills {
     margin-top: 0.85rem;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 0.5rem;
     flex-wrap: wrap;
   }
   .tvc-pill {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    /* Starlight's content auto-spacing (`:where(* + *)`) adds a 1rem top margin
+       to every flow sibling, which lands on pills 2..n and drops them ~8px below
+       the first one — a clear misalignment. Zero it so all pills share a row. */
+    margin: 0;
     font-family: var(--sl-font-mono, ui-monospace, monospace);
     font-size: 0.75rem;
+    line-height: 1.4;
     padding: 0.2rem 0.7rem;
     border-radius: 999px;
     cursor: pointer;
