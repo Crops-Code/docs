@@ -234,12 +234,15 @@ const { clips, intervalMs = 7000 } = Astro.props;
     line-height: 1.4;
     white-space: nowrap;
   }
+  /* No `display` here — display is owned by the .tv / .tv-poster + theme rules
+     below so it can be toggled cleanly. Setting display:block here would have
+     higher specificity than `.tv-poster` and leak the poster in next to the
+     playing video. */
   .browser-body :global(video),
   .browser-body :global(img) {
     width: 100%;
     height: auto;
     margin: 0;
-    display: block;
   }
   /* Motion default: the moving clip shows, the still poster is hidden. */
   .tv {

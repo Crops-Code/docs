@@ -63,18 +63,18 @@ You provide the machines. ClusterCode orchestrates the work.
 
 ```
 Browser (dashboard)
-    │  HTTPS + WebSocket
+    │
     ▼
-Orchestrator (Next.js + WS server)
-    │  WebSocket (outbound phone-home)
+Orchestrator
+    │  WebSocket (outbound)
     ▼
 Worker Agents (one per machine)
-    │  child_process
+    │
     ▼
 Podman DevBoxes (Claude Code, Copilot, Codex)
 ```
 
-Workers connect **outbound** to the orchestrator — they work behind NAT and firewalls with zero port forwarding. All communication happens over WebSocket.
+Each worker connects to the orchestrator over an **outbound WebSocket**, authenticated with **Clerk** — so your machines work behind NAT and firewalls with zero port forwarding.
 
 ## Next Steps
 
