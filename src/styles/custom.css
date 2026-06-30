@@ -824,7 +824,7 @@ header.header {
 }
 
 .collapsed-icon-item.active {
-  color: var(--sl-color-text);
+  color: var(--sl-color-accent);
 }
 
 .collapsed-icon-item.active::before {
@@ -992,6 +992,7 @@ sl-sidebar-state-persist > ul > li:nth-child(8) > details > summary .group-label
   text-decoration: none;
 }
 
+/* Active = icon + text blue, no border (mobile pattern). */
 .bottom-nav-item.active {
   color: #005fb8;
 }
@@ -1081,14 +1082,14 @@ sl-sidebar-state-persist > ul > li:nth-child(8) > details > summary .group-label
   text-decoration: none;
 }
 
+/* Active = icon + text blue, no border, no bg tint (mobile pattern). */
 .bottom-nav-menu-item.active {
   color: #005fb8;
-  background: rgba(0, 95, 184, 0.1);
+  background: transparent;
 }
 
 :root[data-theme='dark'] .bottom-nav-menu-item.active {
   color: #569cd6;
-  background: rgba(86, 156, 214, 0.1);
 }
 
 .bottom-nav-menu-item svg {
