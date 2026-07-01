@@ -75,6 +75,7 @@ export default defineConfig({
             { label: 'Automate recurring work', slug: 'guides/recurring-work' },
             { label: 'Custom Containerfile', slug: 'guides/custom-containerfile' },
             { label: 'Build from DevBox', slug: 'guides/build-image-from-container' },
+            { label: 'Windows Golden Image', slug: 'guides/windows-golden-image' },
             { label: 'Team Setup', slug: 'guides/team-setup' },
             { label: 'Cloud worker', slug: 'guides/cloud-worker' },
             { label: 'VS Code Extension', slug: 'guides/vscode-extension' },
